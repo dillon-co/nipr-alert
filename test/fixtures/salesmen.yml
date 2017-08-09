@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: salesmen
+#
+#  id          :integer          not null, primary key
+#  npn         :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  position_id :string(255)
+#  first_name  :string(255)
+#  last_name   :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  npn: MyString
+
+two:
+  npn: MyString

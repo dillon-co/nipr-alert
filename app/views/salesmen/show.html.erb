@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+
+  <h1> <%= "#{@salesman.first_name} #{@salesman.last_name}" %> </h1>
+  <h4> Npn: <%= @salesman.npn %> </h4>
+  <%= link_to "Update PDB Report", update_salesman_report_path(@salesman.id), class: 'btn btn-danger' %>
+  <br><br>
+
+  <h3>States Licensed In</h3>
+  <div class="row">
+    <% @states.each do |state| %>
+      <div class="col-md-4">
+        <h3><%= link_to "#{state.name}", state_path(state) %> </h3>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Back', salesmen_path %>

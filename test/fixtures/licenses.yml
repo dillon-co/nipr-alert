@@ -1,0 +1,53 @@
+# == Schema Information
+#
+# Table name: licenses
+#
+#  id                         :integer          not null, primary key
+#  salesman_id                :integer
+#  producer_id                :integer
+#  license_certification_code :string(255)
+#  license_submitted_date     :date
+#  license_certification_id   :string(255)
+#  effective_date             :date
+#  expiration_date            :date
+#  renewal_submitted_date     :date
+#  renewal_confirmed_date     :date
+#  appointed_submitted_date   :date
+#  appointed_approved_date    :date
+#  location_description       :string(255)
+#  job_title_description      :string(255)
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  salesman: one
+  producer: one
+  license_certification_code: MyString
+  license_submitted_date: 2017-07-20
+  license_certification_id: MyString
+  effective_date: 2017-07-20
+  expiration_date: 2017-07-20
+  renewal_submitted_date: 2017-07-20
+  renewal_confirmed_date: 2017-07-20
+  appointed_submitted_date: 2017-07-20
+  appointed_approved_date: 2017-07-20
+  location_description: MyString
+  job_title_description: MyString
+
+two:
+  salesman: two
+  producer: two
+  license_certification_code: MyString
+  license_submitted_date: 2017-07-20
+  license_certification_id: MyString
+  effective_date: 2017-07-20
+  expiration_date: 2017-07-20
+  renewal_submitted_date: 2017-07-20
+  renewal_confirmed_date: 2017-07-20
+  appointed_submitted_date: 2017-07-20
+  appointed_approved_date: 2017-07-20
+  location_description: MyString
+  job_title_description: MyString

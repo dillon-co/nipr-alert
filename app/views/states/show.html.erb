@@ -1,0 +1,29 @@
+<%= link_to 'Back', salesman_path(@salesman) %>
+
+<p id="notice"><%= notice %></p>
+<h1> State: <%= @state.name %> </h1>
+<div class="container jumbotron">
+  <div class="row">
+    <% @license.each do |attribute| %>
+      <div class='col-md-3'>
+        <div class="">
+          <h4><strong><%= label_tag attribute[0] %> </strong></h4> <h5>f<%= attribute[1].present? ? attribute[1] : "Nil" %> </h5><br>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <h3>Appointments</h3><br>
+  <% @appointments.each do |appointment| %>
+    <div class="">
+      <div class="jumbotron row">
+        <% appointment.attributes.except!("created_at", "updated_at", "state_id", "id", "salesman_id").each do |attribute| %>
+            <div class="col-md-4">
+              <h5><strong><%= label_tag attribute[0] %> </strong><br> <%= attribute[1].present? ? attribute[1] : "Nil" %> </h5><br>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

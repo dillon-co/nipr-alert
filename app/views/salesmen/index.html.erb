@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Agents</h1>
+    <% @salesmen.each do |salesman| %>
+          <%= link_to salesman do %>
+              <div class="col-4">
+                  <div class="jumbotron">
+                      <h3> <strong> <%= "#{salesman.first_name} #{salesman.last_name}" %>  </strong></h3>
+                       <h4> <%= salesman.npn %> </h4>
+                  </div>
+              </div>
+            <% end %>
+        <!-- <td><%#= link_to 'Destroy', salesman, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Salesman', new_salesman_path %>

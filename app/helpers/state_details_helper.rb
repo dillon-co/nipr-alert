@@ -1,0 +1,2 @@
+module StateDetailsHelper
+end
