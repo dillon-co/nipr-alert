@@ -1,0 +1,2 @@
+class StagAdpEmployeeinfosController < ApplicationController
+end

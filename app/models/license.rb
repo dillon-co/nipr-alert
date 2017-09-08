@@ -2,24 +2,21 @@
 #
 # Table name: licenses
 #
-#  id                         :integer          not null, primary key
-#  salesman_id                :integer
-#  producer_id                :integer
-#  license_certification_code :string(255)
-#  license_submitted_date     :date
-#  license_certification_id   :string(255)
-#  effective_date             :date
-#  expiration_date            :date
-#  renewal_submitted_date     :date
-#  renewal_confirmed_date     :date
-#  appointed_submitted_date   :date
-#  appointed_approved_date    :date
-#  location_description       :string(255)
-#  job_title_description      :string(255)
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-
-
+#  id                      :integer          not null, primary key
+#  salesman_id             :integer
+#  license_num             :string(255)
+#  date_updated            :date
+#  date_issue_license_orig :date
+#  date_expire_license     :date
+#  license_class           :string(255)
+#  license_class_code      :string(255)
+#  residency_status        :string(255)
+#  active                  :string(255)
+#  adhs                    :string(255)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  state_id                :integer
+#
 
 class License < ApplicationRecord
   belongs_to :salesman

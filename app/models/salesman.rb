@@ -2,18 +2,40 @@
 #
 # Table name: salesmen
 #
-#  id          :integer          not null, primary key
-#  npn         :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  position_id :string(255)
-#  first_name  :string(255)
-#  last_name   :string(255)
+#  id                  :integer          not null, primary key
+#  npn                 :string(255)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  position_id         :string(255)
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  associate_oid       :string(255)
+#  associate_id        :string(255)
+#  adp_position_id     :string(255)
+#  job_title           :string(255)
+#  department_name     :string(255)
+#  department_id       :string(255)
+#  agent_indicator     :integer
+#  hire_date           :date
+#  position_start_date :date
+#  class_start_date    :date
+#  class_end_date      :date
+#  trainer             :string(255)
+#  uptraining_class    :string(255)
+#  compliance_status   :integer
+#  deleted             :integer
+#  agent_supervisor    :string(255)
+#  pod                 :string(255)
+#  agent_site          :string(255)
+#  client              :string(255)
+#  username            :string(255)
+#  cxp_employee_id     :string(255)
 #
 
+require 'csv'
 class Salesman < ApplicationRecord
   has_many :states
-  after_create :update_states_licensing_info
+  has_many :state_agent_appointeds
 
   def api_path
     "https://pdb-services-beta.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=beta83connpt&pin_number=Nipr1234&report_type=1&id_entity=#{self.npn}"
@@ -23,6 +45,11 @@ class Salesman < ApplicationRecord
     res = open(api_path)
     data = Hash.from_xml(res.read)
     return data
+  end
+
+  def update_npn_and_get_data(npn)
+    self.update(npn: npn)
+    update_states_licensing_info
   end
 
   def update_states_licensing_info
@@ -86,6 +113,107 @@ class Salesman < ApplicationRecord
       self.update(name_info)
     end
   end
+
+  def self.read_csv
+    csv_data = CSV.read("#{Rails.root}/../../Downloads/adp_sample_data.csv")
+    all_data_as_array_of_hashes, data_types = [], csv_data.shift
+    csv_data.each do |row|
+      all_data_as_array_of_hashes << self.reformat_row_to_hash(row, data_types)
+    end
+    all_data_as_array_of_hashes
+  end
+
+  def self.reformat_row_to_hash(row, data_types)
+    hashie = {}
+    row.each_with_index do |item, row_index|
+      unless data_types[row_index] == 'created' || data_types[row_index] == 'last_updated'
+        hashie["#{data_types[row_index]}"] = item
+      end
+    end
+    hashie
+  end
+
+  def self.save_csv_data(data_hash_array)
+    self.create!(data_hash_array)
+  end
+
+  def self.get_employee_data_and_save
+    data_hash_array = self.read_csv
+    self.save_csv_data(data_hash_array)
+  end
+
+  def self.as
+    #This is a command line method that runs the current method needed for debugging, short to speed up dev time
+    # binding.pry
+    self.get_employee_data_and_save
+    # binding.pry
+  end
+
+  def self.get_csv_and_save_data
+    array_of_data = self.read_csv
+    array_of_data.each do |person|
+      self.find_or_create_by(associate_oid: person["associate_oid"]).update(cxp_employee_id: person["cxp_employee_id"], username: person["username"])
+    end
+  end
+
+  def self.read_csv
+    csv_data = CSV.read("#{Rails.root}/../../Downloads/cXp_ID_Table.csv")
+    all_data_as_array_of_hashes, data_types = [], csv_data.shift
+    csv_data.each do |row|
+      all_data_as_array_of_hashes << self.reformat_row_to_hash(row, data_types)
+    end
+    all_data_as_array_of_hashes
+  end
+
+  def self.reformat_row_to_hash(row, data_types)
+    hashie = {}
+    row.each_with_index do |item, row_index|
+      unless data_types[row_index] == 'created' || data_types[row_index] == 'last_updated'
+        hashie["#{data_types[row_index]}"] = item
+      end
+    end
+    hashie
+  end
+
+  def add_needed_states
+    self.update(jit_sites_not_appointed_in: get_needed_states.join(", "))
+  end
+
+  def get_needed_states
+    states_needed_per_site[agent_site.titleize] - states.all.map(&:name)
+  end
+
+  def states_needed_per_site
+    {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
+      "Sandy" => all_states_names,
+      "Memphis" => all_states_names,
+      "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
+      "Sunrise" => ["AL", "LA"],
+      "Sawgrass" => all_states_names
+    }
+  end
+
+  def all_states_names
+    "AK,AL,AR,AZ,CA,CO,CT,DC,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,ME,MD,MI,MN,MS,MO,MT,NB,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,ON,OR,PA,PR,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY".split(',')
+  end  
+
+  def sites_with_just_in_time_states
+    {"Provo" =>  ["CA", "NV", "VA", "WY"],
+      "Sunrise" => ["GA", "MS", "NC", "SC", "TN"],
+      "Sandy" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
+      "Memphis" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
+      "San Antonio" => ["IA", "KS", "NE", "OK", "SD", "TX"],
+      "Sawgrass" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"]}
+  end
+
+  # def self.add_appointed_data_to_agent
+  #   appointed_states = 'AK, AR, AZ, CA, CO, CT, DC, DE, FL, GA, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, MT, NC, ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VA, VT, WA, WI, WV, WY'
+  #   the_npn = "17319593"
+  #   state_liscense_data = "20181031,NULL,20171008,20191031,20180930,20171031,20171008,20181031,20190228,99991231,20181031,20181016,20191031,20181031,20181031,20181031,20181008,20181031,29991231,20181008,99991231,20181031,99991231,20171031,20171031,20180913,20181031,NULL,99991231,20181031,20181031,20171031,20181031,99991231,20191001,20181008,20181031,20181031,NULL,20181031,20181031,NULL,20181031,99991231,20171031,20181031,20181008,20181031,99991231,20190331,20171008,20181031,20181031,20181031"
+  #   #This is crappy code
+  # end
+
+
 
 #################################################################################
   # def find_all_the_values

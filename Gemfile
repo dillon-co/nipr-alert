@@ -8,6 +8,8 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.4'
+
+gem 'devise'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -21,7 +23,11 @@ gem 'coffee-rails', '~> 4.2'
 
 gem "rubyXL"
 
+gem 'will_paginate', '~> 3.1.0'
+
 gem 'bootstrap', '~> 4.0.0.alpha6'
+
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'sidekiq'

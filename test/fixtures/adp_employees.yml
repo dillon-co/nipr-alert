@@ -1,0 +1,79 @@
+# == Schema Information
+#
+# Table name: adp_employees
+#
+#  id                  :integer          not null, primary key
+#  associate_oid       :string(255)
+#  associate_id        :string(255)
+#  position_id         :string(255)
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  job_title           :string(255)
+#  department_name     :string(255)
+#  department_id       :string(255)
+#  agent_indicator     :integer
+#  hire_date           :date
+#  position_start_date :date
+#  class_start_date    :date
+#  class_end_date      :date
+#  trainer             :string(255)
+#  uptraining_class    :string(255)
+#  compliance_status   :integer
+#  deleted             :integer
+#  agent_supervisor    :string(255)
+#  pod                 :string(255)
+#  agent_site          :string(255)
+#  client              :string(255)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  salesman_id         :integer
+#  npn                 :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  associate_oid: MyString
+  associate_id: MyString
+  position_id: MyString
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  department_name: MyString
+  department_id: MyString
+  agent_indicator: 1
+  hire_date: 2017-08-11
+  position_start_date: 2017-08-11
+  class_start_date: 2017-08-11
+  class_end_date: 2017-08-11
+  trainer: MyString
+  uptraining_class: MyString
+  compliance_status: 1
+  deleted: 1
+  agent_supervisor: MyString
+  pod: MyString
+  agent_site: MyString
+  client: MyString
+
+two:
+  associate_oid: MyString
+  associate_id: MyString
+  position_id: MyString
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  department_name: MyString
+  department_id: MyString
+  agent_indicator: 1
+  hire_date: 2017-08-11
+  position_start_date: 2017-08-11
+  class_start_date: 2017-08-11
+  class_end_date: 2017-08-11
+  trainer: MyString
+  uptraining_class: MyString
+  compliance_status: 1
+  deleted: 1
+  agent_supervisor: MyString
+  pod: MyString
+  agent_site: MyString
+  client: MyString

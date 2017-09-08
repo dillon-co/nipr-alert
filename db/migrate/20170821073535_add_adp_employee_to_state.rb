@@ -1,0 +1,5 @@
+class AddAdpEmployeeToState < ActiveRecord::Migration[5.0]
+  def change
+    add_reference :states, :adp_employee, foreign_key: true
+  end
+end

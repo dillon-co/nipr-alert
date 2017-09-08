@@ -1,0 +1,16 @@
+<form class="" id="agentSearchForm" >
+    <input type="text" name="NPN" value="" placeholder="Search NPN" id='npnField'>
+    <br><br>
+    <input type="submit" name="" value="Search" class='btn btn-primary'>
+</form>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#agentSearchForm").submit(function(e){
+      var npn = $("#npnField").val();
+      e.preventDefault();
+      console.log(npn);
+      window.location = ("/agent/"+npn)
+    })
+  })
+</script>

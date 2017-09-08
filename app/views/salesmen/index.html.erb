@@ -1,20 +1,205 @@
-<p id="notice"><%= notice %></p>
+<% if admin_signed_in?  %>
+  <h1>Agents</h1>
+  <div class="row">
+    <div class="col-md-8 ">
+      <input type="text" name="NPN" value="" onkeyup='textSearch(0)' placeholder="Search First Name" id='npnField0'>
+      <input type="text" name="NPN" value="" onkeyup='textSearch(1)' placeholder="Search Last Name" id='npnField1'>
+      <input type="text" name="NPN" value="" onkeyup='textSearch(2)' placeholder="Search Superviser" id='npnField2'>
+      <input type="text" name="NPN" value="" onkeyup='textSearch(3)' placeholder="Search Site" id='npnField3'>
+      <input type="text" name="NPN" value="" onkeyup='textSearch(5)' placeholder="Search NPN" id='npnField5'>
+    </div>
+    <div class="col-md-2">
+      <input type="date" name="NPN" value="" placeholder="Search Date" id='dateField'><br>
+      <input type="radio" name="dateSearchRadio" value="before" id='radioBefore'>Before
+      <input type="radio" name="dateSearchRadio" value="After" id='radioAfter'>After
+      <button type="button" class='btn btn-primary' name="button" onclick='dateSearch()'>Search Date</button>
+    </div>
+  </div>
 
-<h1>Agents</h1>
-    <% @salesmen.each do |salesman| %>
-          <%= link_to salesman do %>
-              <div class="col-4">
-                  <div class="jumbotron">
-                      <h3> <strong> <%= "#{salesman.first_name} #{salesman.last_name}" %>  </strong></h3>
-                       <h4> <%= salesman.npn %> </h4>
-                  </div>
-              </div>
+<%= will_paginate @salesmen, class: "digg_pagination" %>
+
+  <table id='myTable'>
+      <thead>
+        <tr>
+          <th class='sortable'><h5>First Name</h5></th>
+          <th class='sortable'><h5>Last Name</h5></th>
+          <th class='sortable'><h5>Superviser</h5></th>
+          <th class='sortable'><h5>Site</h5></th>
+          <th class='sortable'><h5>Start Date</h5></th>
+          <th class='sortable'> <h5>Active</h5> </th>
+          <th class='sortable'><h5>NPN</h5></th>
+          <th class='sortable'><h5>Liscenses</h5></th>
+          <th class='sortable'><h5>Expired Liscenses</h5></th>
+          <th class='sortable'><h5>JIT Appointed??</h5></th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+      </form>
+        <% @salesmen.each do |salesman| %>
+          <tr>
+            <%= link_to salesman do %>
+              <td><%= salesman.first_name %></td>
+              <td> <%= salesman.last_name %> </td>
+              <td> <%= salesman.agent_supervisor %> </td>
+              <td> <%= salesman.agent_site %> </td>
+              <td> <%= salesman.position_start_date %> </td>
+              <td> <%= salesman.deleted == 0 ? "Active" : "Terminated" %> </td>
+              <% if salesman.npn.present? %>
+                <td> <%= salesman.npn %> </td>
+                <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'yes').references(:licenses).count %></td>
+                <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'no').references(:licenses).count %></td>
+                <% if salesman.jit_sites_not_appointed_in == ""  %>
+                  <td><i class="jit-done material-icons done">done</i></td>
+                <% else %>
+                  <td><i class="jit-not-done material-icons clear">clear</i></td>
+                <% end %>
+              <td> <%= link_to "View Agent", salesman, class:'btn btn-warning' %></td>
+              <% else %>
+                <%= form_for salesman, url: "update_npn_and_licensing_info/#{salesman.id}" do |f| %>
+                  <td> <%= f.text_field :npn %> </td>
+                  <td>Add NPN</td>
+                  <td>To See Data</td>
+                  <td></td>
+                  <td> <%= f.submit "Add NPN And View", class: 'btn btn-warning' %> </td>
+                <% end %>
+              <% end %>
             <% end %>
-        <!-- <td><%#= link_to 'Destroy', salesman, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-    <% end %>
-  </tbody>
-</table>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= will_paginate @salesmen, class: "digg_pagination" %>
 
 <br>
+<br>
+<br><br>
 
-<%= link_to 'New Salesman', new_salesman_path %>
+
+
+<% else %>
+  <%= link_to "Sign In To See This Page", new_admin_session_path %>
+<% end %>
+
+
+<script type="text/javascript">
+
+function textSearch(rowIndex) {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("npnField"+rowIndex);
+  console.log(input.value)
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[parseInt(rowIndex)];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function dateSearch(){
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("dateField");
+  beforeOrAfter = document.getElementById("")
+  filter = input.value;
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  if (document.getElementById("radioBefore").checked){
+    for (i = 0; i < tr.length; i++){
+      td = tr[i].getElementsByTagName("td")[4]
+      if (td){
+        console.log(""+td.innerHTML +" : " + filter)
+        if (td.innerHTML < filter){
+          console.log("Yes")
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }else{
+    for (i = 0; i < tr.length; i++){
+      td = tr[i].getElementsByTagName("td")[4]
+      // console.log("MEOW")
+      if (td){
+        if (td.innerHTML > filter){
+          console.log("Yes")
+          tr[i].style.display = "";
+        } else {
+          console.log("no")
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
+
+
+
+
+$(document).ready(function () {
+// TODO rewrite this from scratch to learn shiit
+
+        //grab all header rows
+        $('th').each(function (column) {
+            $(this).addClass('sortable').click(function () {
+                    var findSortKey = function ($cell) {
+                        return $cell.find('.sort-key').text().toUpperCase()+ ' ' + $cell.text().toUpperCase();
+
+                    };
+                    var sortDirection = $(this).is('.sorted-asc') ? -1 : 1;
+                    var $rows = $(this).parent().parent().parent().find('tbody tr').get();
+                    var bob = 0;
+                    //loop through all the rows and find
+                    $.each($rows, function (index, row) {
+                        row.sortKey = findSortKey($(row).children('td').eq(column));
+                    });
+
+                    //compare and sort the rows alphabetically or numerically
+                    $rows.sort(function (a, b) {
+                        if (a.sortKey.indexOf('-') == -1 && (!isNaN(a.sortKey) && !isNaN(a.sortKey))) {
+                             //Rough Numeracy check
+
+                                if (parseInt(a.sortKey) < parseInt(b.sortKey)) {
+                                    return -sortDirection;
+                                }
+                                if (parseInt(a.sortKey) > parseInt(b.sortKey)) {
+                                    return sortDirection;
+                                }
+
+                        } else {
+                            if (a.sortKey < b.sortKey) {
+                                return -sortDirection;
+                            }
+                            if (a.sortKey > b.sortKey) {
+                                return sortDirection;
+                            }
+                        }
+                        return 0;
+                    });
+
+                    //add the rows in the correct order to the bottom of the table
+                    $.each($rows, function (index, row) {
+                        $('tbody').append(row);
+                        row.sortKey = null;
+                    });
+
+                    //identify the collumn sort order
+                    $('th').removeClass('sorted-asc sorted-desc');
+                    var $sortHead = $('th').filter(':nth-child(' + (column + 1) + ')');
+                    sortDirection == 1 ? $sortHead.addClass('sorted-asc') : $sortHead.addClass('sorted-desc');
+
+                    //identify the collum to be sorted by
+                    $('td').removeClass('sorted').filter(':nth-child(' + (column + 1) + ')').addClass('sorted');
+                });
+            });
+        });
+</script>

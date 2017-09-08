@@ -1,18 +1,130 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
 
-  <h1> <%= "#{@salesman.first_name} #{@salesman.last_name}" %> </h1>
+
+  <h1> <%= "#{@salesman.first_name} #{@salesman.last_name}" %>
+
+      <% if @salesman.jit_sites_not_appointed_in == "" %>
+        <i class="jit-done material-icons done">done</i>
+      <% else %>
+        <i class="jit-not-done material-icons clear">clear</i><br>
+      <% end %>
+     </h1>
+  <h3>Site: <%= @salesman.agent_site %> </h3>
   <h4> Npn: <%= @salesman.npn %> </h4>
-  <%= link_to "Update PDB Report", update_salesman_report_path(@salesman.id), class: 'btn btn-danger' %>
+  <% if admin_signed_in?  %>
+    <%= link_to "Update PDB Report", update_salesman_report_path(@salesman.id), class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to "Sign In To Update PDB Report", new_admin_session_path, class: 'btn btn-danger' %>
+  <% end %>
+  <br>
+  States Needed:
+  <%= @salesman.jit_sites_not_appointed_in %>
+
   <br><br>
 
   <h3>States Licensed In</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="sortable">State</th>
+        <th class="sortable">License Number/ID</th>
+        <th class="sortable">Effective Date</th>
+        <th class="sortable">Expiration Date</th>
+        <th class="sortable">Licensed?</th>
+        <th class="sortable">Appointed?</th>
+        <th class="sortable">JIT state?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @states_needed.each do |state| %>
+      <% s = @salesman.states.find_by(name: state) %>
+      <% (@salesman.states.map(&:name).include?(state) && s.licenses.first.present?) ? l = s.licenses.first : l = nil %>
+      <tr>
+          <% if @all_salesman_states.include?(state) %>
+            <td><%= link_to state, state_path(s)  %></td>
+          <% else %>
+            <td> <%= state %> </td>
+          <% end %>
+
+          <td> <%= l ? l.license_num : "N/A" %> </td>
+          <td> <%= l ? l.date_issue_license_orig : "N/A" %> </td>
+          <td> <%= l ? l.date_expire_license : "N/A" %> </td>
+
+          <%if l %>
+            <td><i class="jit-done material-icons done">done</i> - Yes</td>
+          <% else %>
+            <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
+           <% end %>
+
+          <% if @licensed_states_names.include?(state) %>
+            <td>
+              <i class="jit-done material-icons done">done</i> - Yes
+            </td>
+          <% elsif @all_salesman_states.include?(state) %>
+            <td>
+              <i class="jit-not-done material-icons clear">clear</i> - No
+            </td>
+          <% else %>
+            <td><i class="jit-not-done material-icons clear">clear</i> - Not Licensed</td>
+          <% end %>
+
+          <% if @jit_states.include?(state) %>
+            <td><i class="jit-done material-icons done">done</i> - Yes</td>
+          <% else %>
+            <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
+          <% end %>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <br>
+
   <div class="row">
-    <% @states.each do |state| %>
-      <div class="col-md-4">
-        <h3><%= link_to "#{state.name}", state_path(state) %> </h3>
+    <div class="col-lg-6">
+      <div class="jumbotron">
+
+        <h1>Appointed States</h1>
+        <div class="row">
+
+          <% @licensed_states.each do |state| %>
+            <div class="col-md-4">
+              <h6><%= link_to "#{state.name}", state_path(state) %> </h6>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
+    <div class="col-lg-6">
+      <div class="jumbotron">
+        <h1>Non Appointed States</h1>
+        <div class="row">
+          <% @expired_states.each do |state| %>
+            <div class="col-md-4">
+              <h6><%= link_to "#{state.name}", state_path(state) %> </h6>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="jumbotron">
+        <h1>States Not Licensed</h1>
+        <div class="row">
+          <% @non_licensed_states.each do |state| %>
+            <div class="col-md-4">
+              <h6> <%= state %> </h6>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>
 

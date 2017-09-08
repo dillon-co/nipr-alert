@@ -7,7 +7,7 @@
     <% @license.each do |attribute| %>
       <div class='col-md-3'>
         <div class="">
-          <h4><strong><%= label_tag attribute[0] %> </strong></h4> <h5>f<%= attribute[1].present? ? attribute[1] : "Nil" %> </h5><br>
+          <h4><strong><%= label_tag attribute[0] %> </strong></h4> <h5><%= attribute[1].present? ? attribute[1] : "Nil" %> </h5><br>
         </div>
       </div>
     <% end %>
