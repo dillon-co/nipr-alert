@@ -38,7 +38,7 @@ class Salesman < ApplicationRecord
   has_many :state_agent_appointeds
 
   def api_path
-    "https://pdb-services.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=dcortez&pin_number=poop&report_type=1&id_entity=#{self.npn}"
+    "https://pdb-services.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=dcortez&pin_number=p3anutpingpong&report_type=1&id_entity=#{self.npn}"
   end
 
   def grab_info
