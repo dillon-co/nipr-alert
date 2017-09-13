@@ -1,17 +1,22 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
+<div class="">
 
 
   <h1> <%= "#{@salesman.first_name} #{@salesman.last_name}" %>
-
       <% if @salesman.jit_sites_not_appointed_in == "" %>
         <i class="jit-done material-icons done">done</i>
       <% else %>
         <i class="jit-not-done material-icons clear">clear</i><br>
       <% end %>
      </h1>
-  <h3>Site: <%= @salesman.agent_site %> </h3>
-  <h4> Npn: <%= @salesman.npn %> </h4>
+     <div class="row">
+       <div class="col-md-6">
+         <h3>Site: <%= @salesman.agent_site %> </h3>
+       </div>
+       <div class="col-md-6">
+         <h4> Npn: <%= @salesman.npn %> </h4>
+       </div>
+     </div>
   <% if admin_signed_in?  %>
     <%= link_to "Update PDB Report", update_salesman_report_path(@salesman.id), class: 'btn btn-danger' %>
   <% else %>
@@ -23,7 +28,7 @@
 
   <br><br>
 
-  <h3>States Licensed In</h3>
+  <h3>States Needed For Agent's Site</h3>
 
   <table>
     <thead>
@@ -40,7 +45,7 @@
     <tbody>
       <% @states_needed.each do |state| %>
       <% s = @salesman.states.find_by(name: state) %>
-      <% (@salesman.states.map(&:name).include?(state) && s.licenses.first.present?) ? l = s.licenses.first : l = nil %>
+      <% (@salesman.states.map(&:name).include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
       <tr>
           <% if @all_salesman_states.include?(state) %>
             <td><%= link_to state, state_path(s)  %></td>
@@ -58,7 +63,7 @@
             <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
            <% end %>
 
-          <% if @licensed_states_names.include?(state) %>
+          <% if @licensed_states_names.include?(state) || @jit_states.include?(state) %>
             <td>
               <i class="jit-done material-icons done">done</i> - Yes
             </td>
@@ -71,9 +76,9 @@
           <% end %>
 
           <% if @jit_states.include?(state) %>
-            <td><i class="jit-done material-icons done">done</i> - Yes</td>
+            <td>Yes</td>
           <% else %>
-            <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
+            <td> No</td>
           <% end %>
 
       </tr>

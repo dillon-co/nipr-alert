@@ -15,6 +15,7 @@ class SalesmenController < ApplicationController
   # GET /salesmen/1
   # GET /salesmen/1.json
   def show
+
     @salesman = Salesman.find(params[:id])
     @licensed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @expired_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
@@ -140,7 +141,57 @@ class SalesmenController < ApplicationController
   end
 
   def all_states_names
-    "AK,AL,AR,AZ,CA,CO,CT,DC,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,ME,MD,MI,MN,MS,MO,MT,NB,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,ON,OR,PA,PR,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY".split(',')
+    ["AK",
+    "AL",
+    "AR",
+    "AZ",
+    "CA",
+    "CO",
+    "CT",
+    "DC",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "IA",
+    "ID",
+    "IL",
+    "IN",
+    "KS",
+    "KY",
+    "LA",
+    "MA",
+    "MD",
+    "ME",
+    "MI",
+    "MN",
+    "MO",
+    "MS",
+    "MT",
+    "NC",
+    "ND",
+    "NE",
+    "NH",
+    "NJ",
+    "NM",
+    "NV",
+    "NY",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VA",
+    "VT",
+    "WA",
+    "WI",
+    "WV",
+    "WY"]
   end
 
   def sites_with_just_in_time_states

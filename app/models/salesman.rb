@@ -38,7 +38,7 @@ class Salesman < ApplicationRecord
   has_many :state_agent_appointeds
 
   def api_path
-    "https://pdb-services-beta.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=beta83connpt&pin_number=Nipr1234&report_type=1&id_entity=#{self.npn}"
+    "https://pdb-services.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=dcortez&pin_number=poop&report_type=1&id_entity=#{self.npn}"
   end
 
   def grab_info
@@ -56,6 +56,7 @@ class Salesman < ApplicationRecord
     data = grab_info
     update_name_if_nil(data)
     all_states = data["PDB"]['PRODUCER']['INDIVIDUAL']["PRODUCER_LICENSING"]["LICENSE_INFORMATION"]["STATE"]
+    binding.pry
     all_states.each do |state_info|
       db_state = self.states.find_or_create_by(name: state_info["name"])
       db_state.save!
@@ -72,6 +73,9 @@ class Salesman < ApplicationRecord
     s_info = downcased(state_info)
     license_info = s_info.except("details")
     license = state.licenses.find_or_create_by(license_num: s_info['license_info'], salesman_id: self.id)
+    license_info["date_updated"] = Date.strptime(license_info["date_updated"], "%m/%d/%Y") unless license_info["date_updated"] == nil
+    license_info["date_issue_license_orig"] = Date.strptime(license_info["date_issue_license_orig"], "%m/%d/%Y") unless license_info["date_issue_license_orig"] == nil
+    license_info["date_expire_license"] = Date.strptime(license_info["date_expire_license"], "%m/%d/%Y") unless license_info["date_expire_license"] == nil
     license.update!(license_info)
     license.save!
     save_license_details(license, [s_info["details"]["DETAIL"]].flatten)
@@ -194,11 +198,61 @@ class Salesman < ApplicationRecord
   end
 
   def all_states_names
-    "AK,AL,AR,AZ,CA,CO,CT,DC,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,ME,MD,MI,MN,MS,MO,MT,NB,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,ON,OR,PA,PR,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY".split(',')
-  end  
+    ["AK",
+    "AL",
+    "AR",
+    "AZ",
+    "CA",
+    "CO",
+    "CT",
+    "DC",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "IA",
+    "ID",
+    "IL",
+    "IN",
+    "KS",
+    "KY",
+    "LA",
+    "MA",
+    "MD",
+    "ME",
+    "MI",
+    "MN",
+    "MO",
+    "MS",
+    "MT",
+    "NC",
+    "ND",
+    "NE",
+    "NH",
+    "NJ",
+    "NM",
+    "NV",
+    "NY",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VA",
+    "VT",
+    "WA",
+    "WI",
+    "WV",
+    "WY"]
+  end
 
   def sites_with_just_in_time_states
-    {"Provo" =>  ["CA", "NV", "VA", "WY"],
+    {"Provo" =>  ["CA","NV", "VA", "WY"],
       "Sunrise" => ["GA", "MS", "NC", "SC", "TN"],
       "Sandy" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
       "Memphis" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
