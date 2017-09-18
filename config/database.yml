@@ -10,7 +10,7 @@
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   pool: 5
   username: root
@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['CLEARDB_DATABASE_URL'] %>
+  # database: <%= ENV['CLEARDB_DATABASE_URL'] %>
+  database: <%= app_name %>_production
   username: nipr-slip
   password: <%= ENV['NIPR-SLIP_DATABASE_PASSWORD'] %>
