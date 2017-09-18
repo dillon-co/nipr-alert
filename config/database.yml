@@ -50,6 +50,6 @@ test:
 production:
   <<: *default
   # database: <%= ENV['CLEARDB_DATABASE_URL'] %>
-  database: <%= app_name %>_production
+  database: nipr_slip_production
   username: nipr-slip
   password: <%= ENV['NIPR-SLIP_DATABASE_PASSWORD'] %>
