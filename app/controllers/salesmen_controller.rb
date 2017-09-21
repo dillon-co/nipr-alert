@@ -22,10 +22,10 @@ class SalesmenController < ApplicationController
     @check_or_naw = get_check_mark_for_agent(@salesman, @licensed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
-
+    @can_sell_states = [@licensed_states, @jit_states].flatten.uniq.compact.map(&:name)
+    @expired_states_names = @expired_states.compact.map(&:name)
     @licensed_states_names = @licensed_states.map(&:name)
     @jit_states = sites_with_just_in_time_states[@salesman.agent_site]
-
     @states_needed = states_needed_per_site[@salesman.agent_site]
   end
 
