@@ -15,7 +15,6 @@ class SalesmenController < ApplicationController
   # GET /salesmen/1
   # GET /salesmen/1.json
   def show
-
     @salesman = Salesman.find(params[:id])
     @licensed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @expired_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
@@ -26,7 +25,7 @@ class SalesmenController < ApplicationController
     @expired_states_names = @expired_states.compact.map(&:name)
     @licensed_states_names = @licensed_states.map(&:name)
     @jit_states = sites_with_just_in_time_states[@salesman.agent_site]
-    @states_needed = states_needed_per_site[@salesman.agent_site]
+    @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
   end
 
   # GET /salesmen/new

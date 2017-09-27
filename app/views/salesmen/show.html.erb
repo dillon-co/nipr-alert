@@ -23,6 +23,8 @@
     <%= link_to "Sign In To Update PDB Report", new_admin_session_path, class: 'btn btn-danger' %>
   <% end %>
   <br>
+  <div id="mapid"></div>
+  <br>
   States Needed:
   <%= @salesman.jit_sites_not_appointed_in %>
 
@@ -133,7 +135,6 @@
   </div>
 </div>
 
-<div id="mapid"></div>
 
 <%= link_to 'Back', salesmen_path %>
 

@@ -30,9 +30,11 @@
 #  client              :string(255)
 #  username            :string(255)
 #  cxp_employee_id     :string(255)
-#
+
 
 require 'csv'
+require 'net/ssh'
+
 class Salesman < ApplicationRecord
   has_many :states
   has_many :state_agent_appointeds
@@ -146,11 +148,29 @@ class Salesman < ApplicationRecord
     self.save_csv_data(data_hash_array)
   end
 
-  def self.as
-    #This is a command line method that runs the current method needed for debugging, short to speed up dev time
-    # binding.pry
-    self.get_employee_data_and_save
-    # binding.pry
+  def self.get_data_from_sandbox_reporting
+    self.connect_to_sandbox_reporting
+    stag_adp = StagAdpEmployeeinfo.all.as_json
+    ActiveRecord::Base.establish_connection(:development)
+    stag_adp.each do |employee|
+      e = self.find_or_create_by(npn: employee[:npn]).update!(employee)
+      e.update_states_licensing_info
+    end  
+  end
+
+  def self.connect_to_sandbox_reporting
+    @hostname = "10.0.35.34"
+    @username = "diorg"
+    @password = "SuperHappy123!"
+    # 10.0.35.34
+    ActiveRecord::Base.establish_connection(
+      :adapter => 'mysql2',
+      :database => 'Sandbox_Reporting',
+      # :database => 'CXP_ODS',
+      :host => localhost,
+      :username => @username,
+      :password => @password
+    )
   end
 
   def self.get_csv_and_save_data
