@@ -268,6 +268,7 @@ class Salesman < ApplicationRecord
       :username => @username,
       :password => @password
     )
+      binding.pry
   end
 
   def self.get_csv_and_save_data
