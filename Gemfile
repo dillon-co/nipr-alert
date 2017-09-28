@@ -28,7 +28,8 @@ gem "rubyXL"
 gem 'will_paginate', '~> 3.1.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'bootstrap-datepicker-rails'
+gem 'chardinjs-rails'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

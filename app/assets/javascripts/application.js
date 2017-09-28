@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require filterrific/filterrific-jquery
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
+//= require chardinjs
 //= require_tree .
 
 

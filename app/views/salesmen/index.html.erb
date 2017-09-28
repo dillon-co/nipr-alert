@@ -177,4 +177,10 @@ $(document).ready(function () {
                 });
             });
         });
+
+        $('.js-datepicker').datepicker();
+        $('#overlayTrigger').click(function(event) {
+          event.preventDefault();
+          $('body').chardinJs('start');
+        });
 </script>
