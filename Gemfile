@@ -27,7 +27,7 @@ gem "rubyXL"
 
 gem 'will_paginate', '~> 3.1.0'
 
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes

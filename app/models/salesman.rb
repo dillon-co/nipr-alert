@@ -33,6 +33,8 @@
 #
 
 require 'csv'
+require 'nokogiri'
+require 'open-uri'
 class Salesman < ApplicationRecord
   has_many :states
   has_many :state_agent_appointeds

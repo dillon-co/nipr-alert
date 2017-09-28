@@ -25,8 +25,8 @@ class SalesmenController < ApplicationController
     @can_sell_states = [@licensed_states, @jit_states].flatten.uniq.compact.map(&:name)
     @expired_states_names = @expired_states.compact.map(&:name)
     @licensed_states_names = @licensed_states.map(&:name)
-    @jit_states = sites_with_just_in_time_states[@salesman.agent_site]
-    @states_needed = states_needed_per_site[@salesman.agent_site]
+    @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states[@salesman.agent_site] : @jit_states = []
+    @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
   end
 
   # GET /salesmen/new
@@ -80,6 +80,7 @@ class SalesmenController < ApplicationController
 
     respond_to do |format|
       if @salesman.save
+       	@salesman.update_npn_and_get_data(@salesman.npn) if @salesman.npn.present?
         format.html { redirect_to @salesman, notice: 'Agent was successfully created.' }
         format.json { render :show, status: :created, location: @salesman }
       else
@@ -114,7 +115,6 @@ class SalesmenController < ApplicationController
   end
 
 
-  private
     # Use callbacks to share common setup or constraints between actions.
   def set_salesman
     @salesman = Salesman.find(params[:id])
@@ -126,7 +126,11 @@ class SalesmenController < ApplicationController
   end
 
   def get_check_mark_for_agent(agent, states)
-    sites_with_just_in_time_states[agent.agent_site.titleize] - states
+    if agent.agent_site.present?
+        sites_with_just_in_time_states[agent.agent_site.titleize] - states
+    else
+        all_states_names - states
+    end
   end
 
   def states_needed_per_site

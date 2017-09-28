@@ -1,0 +1,553 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install', 'bootstrap' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file /root/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+verbose cache add [ 'bootstrap', null ]
+silly cache add: name, spec, args [ undefined, 'bootstrap', [ 'bootstrap', null ] ]
+verbose parsed url { pathname: 'bootstrap', path: 'bootstrap', href: 'bootstrap' }
+verbose caching bootstrap/package.json
+verbose loadDefaults bootstrap@4.0.0-beta
+verbose pack /home/mgonzales/nipr-alert/bootstrap
+verbose pack /home/mgonzales/nipr-alert/bootstrap /tmp/npm-1506029192778/1506029192778-0.05031745880842209/tmp.tgz
+silly makeList /home/mgonzales/nipr-alert/bootstrap
+silly dir, dirLen [ '/home/mgonzales/nipr-alert/bootstrap', 37 ]
+verbose tarball /tmp/npm-1506029192778/1506029192778-0.05031745880842209/tmp.tgz
+verbose parent /home/mgonzales/nipr-alert/bootstrap
+verbose mkdir (expected) error ENOENT, no such file or directory '/root/.npm'
+verbose mkdir done: /root/.npm 755
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm'
+verbose mkdir done: /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm 755
+verbose unpack_ uid, gid [ 3015, 3015 ]
+verbose unpackTarget /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.eslintignore
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/LICENSE
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/Gemfile
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.travis.yml
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.houndignore
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/package.json
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.editorconfig
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.gitattributes
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.npmignore
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/Gruntfile.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.scss-lint.yml
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.hound.yml
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/.babelrc.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/lint-vars.sh
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/upload-preview.sh
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/postcss.config.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/workbox.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/sauce_browsers.yml
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/.htmllintrc
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/rollup.config.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/uglifyjs.config.json
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/change-version.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/gcp-key.json.enc
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/build/workbox.config.json
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-grid.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-reboot.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-grid.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap.min.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-reboot.min.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-grid.min.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap.min.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-grid.min.css
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-reboot.min.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/css/bootstrap-reboot.css.map
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/js/bootstrap.bundle.min.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/js/bootstrap.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/js/bootstrap.bundle.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/dist/js/bootstrap.min.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_grid.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_code.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/bootstrap.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_tooltip.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_forms.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_jumbotron.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_reboot.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_popover.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_button-group.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_badge.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/bootstrap-reboot.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_type.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_pagination.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_progress.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_mixins.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_navbar.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_images.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_buttons.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_variables.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_carousel.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_breadcrumb.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_custom-forms.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_close.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_input-group.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_functions.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_alert.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_modal.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/bootstrap-grid.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_list-group.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_dropdown.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_utilities.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_tables.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_media.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_transitions.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_print.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_card.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/_nav.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_grid.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_background-variant.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_text-emphasis.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_forms.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_lists.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_float.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_text-hide.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_transition.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_size.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_table-row.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_text-truncate.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_nav-divider.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_badge.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_reset-text.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_pagination.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_breakpoints.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_buttons.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_navbar-align.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_gradients.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_resize.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_grid-framework.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_alert.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_list-group.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_visibility.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_screen-reader.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_image.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_box-shadow.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_hover.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_clearfix.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/mixins/_border-radius.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_spacing.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_background.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_sizing.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_position.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_float.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_embed.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_align.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_display.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_visibility.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_flex.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_screenreaders.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_text.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_borders.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/scss/utilities/_clearfix.scss
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/.eslintrc.json
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/tooltip.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/popover.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/collapse.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/tab.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/modal.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/button.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/util.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/dropdown.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/alert.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/scrollspy.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/carousel.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/src/index.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/tooltip.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/popover.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/collapse.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/tab.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/modal.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/button.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/util.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/dropdown.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/alert.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/scrollspy.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/carousel.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/dist/index.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/.eslintrc.json
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/tooltip.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/popover.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/collapse.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/tab.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/modal.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/button.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/dropdown.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/alert.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/scrollspy.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/unit/carousel.js
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/vendor
+silly asyncMap in gTP /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap/js/tests/vendor/qunit.js
+verbose gunzed /tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap
+verbose rm'ed /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package
+verbose renamed [ '/tmp/npm-1506029192778/1506029192778-0.05031745880842209/___package.npm/bootstrap',
+verbose renamed   '/tmp/npm-1506029192778/1506029192778-0.05031745880842209/package' ]
+verbose caching /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package/package.json
+verbose loadDefaults bootstrap@4.0.0-beta
+verbose tarball contents [ 'tmp.tgz', 'package' ]
+verbose from cache /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package/package.json
+verbose pack /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package
+verbose pack /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package /root/.npm/bootstrap/4.0.0-beta/package.tgz
+silly makeList /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package
+silly dir, dirLen [ '/tmp/npm-1506029192778/1506029192778-0.05031745880842209/package',
+silly dir, dirLen   65 ]
+verbose tarball /root/.npm/bootstrap/4.0.0-beta/package.tgz
+verbose parent /tmp/npm-1506029192778/1506029192778-0.05031745880842209/package
+verbose mkdir (expected) error ENOENT, no such file or directory '/root/.npm/bootstrap/4.0.0-beta/___package.npm'
+verbose mkdir done: /root/.npm/bootstrap/4.0.0-beta/___package.npm 755
+verbose unpack_ uid, gid [ 3015, 3015 ]
+verbose unpackTarget /root/.npm/bootstrap/4.0.0-beta/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.eslintignore
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/LICENSE
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/Gemfile
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.travis.yml
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.houndignore
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/package.json
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.editorconfig
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.gitattributes
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.npmignore
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/Gruntfile.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.scss-lint.yml
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.hound.yml
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/.babelrc.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/lint-vars.sh
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/upload-preview.sh
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/postcss.config.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/workbox.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/sauce_browsers.yml
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/.htmllintrc
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/rollup.config.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/uglifyjs.config.json
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/change-version.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/gcp-key.json.enc
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/build/workbox.config.json
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-grid.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-reboot.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-grid.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap.min.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-reboot.min.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-grid.min.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap.min.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-grid.min.css
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-reboot.min.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/css/bootstrap-reboot.css.map
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/js/bootstrap.bundle.min.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/js/bootstrap.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/js/bootstrap.bundle.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/dist/js/bootstrap.min.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_grid.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_code.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/bootstrap.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_tooltip.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_forms.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_jumbotron.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_reboot.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_popover.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_button-group.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_badge.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/bootstrap-reboot.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_type.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_pagination.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_progress.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_mixins.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_navbar.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_images.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_buttons.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_variables.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_carousel.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_breadcrumb.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_custom-forms.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_close.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_input-group.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_functions.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_alert.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_modal.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/bootstrap-grid.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_list-group.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_dropdown.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_utilities.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_tables.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_media.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_transitions.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_print.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_card.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/_nav.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_grid.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_background-variant.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_text-emphasis.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_forms.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_lists.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_float.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_text-hide.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_transition.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_size.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_table-row.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_text-truncate.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_nav-divider.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_badge.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_reset-text.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_pagination.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_breakpoints.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_buttons.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_navbar-align.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_gradients.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_resize.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_grid-framework.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_alert.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_list-group.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_visibility.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_screen-reader.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_image.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_box-shadow.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_hover.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_clearfix.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/mixins/_border-radius.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_spacing.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_background.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_sizing.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_position.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_float.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_embed.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_align.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_display.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_visibility.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_flex.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_screenreaders.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_text.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_borders.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/scss/utilities/_clearfix.scss
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/.eslintrc.json
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/tooltip.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/popover.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/collapse.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/tab.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/modal.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/button.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/util.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/dropdown.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/alert.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/scrollspy.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/carousel.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/src/index.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/tooltip.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/popover.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/collapse.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/tab.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/modal.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/button.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/util.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/dropdown.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/alert.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/scrollspy.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/carousel.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/dist/index.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/.eslintrc.json
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/tooltip.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/popover.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/collapse.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/tab.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/modal.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/button.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/dropdown.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/alert.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/scrollspy.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/unit/carousel.js
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/vendor
+silly asyncMap in gTP /root/.npm/bootstrap/4.0.0-beta/___package.npm/package/js/tests/vendor/qunit.js
+verbose gunzed /root/.npm/bootstrap/4.0.0-beta/___package.npm/package
+verbose rm'ed /root/.npm/bootstrap/4.0.0-beta/package
+verbose renamed [ '/root/.npm/bootstrap/4.0.0-beta/___package.npm/package',
+verbose renamed   '/root/.npm/bootstrap/4.0.0-beta/package' ]
+verbose caching /root/.npm/bootstrap/4.0.0-beta/package/package.json
+verbose loadDefaults bootstrap@4.0.0-beta
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 38728
+info shasum 5d7a1ef49aa2fe1f20b0a918ceda3930b1534413
+info shasum /root/.npm/bootstrap/4.0.0-beta/package.tgz
+verbose from cache /root/.npm/bootstrap/4.0.0-beta/package/package.json
+verbose chmod /root/.npm/bootstrap/4.0.0-beta/package.tgz 644
+verbose chown [ '/root/.npm/bootstrap/4.0.0-beta/package.tgz', 3015, 3015 ]
+silly resolved [ { name: 'bootstrap',
+silly resolved     description: 'The most popular front-end framework for developing responsive, mobile first projects on the web.',
+silly resolved     version: '4.0.0-beta',
+silly resolved     keywords: 
+silly resolved      [ 'css',
+silly resolved        'sass',
+silly resolved        'mobile-first',
+silly resolved        'responsive',
+silly resolved        'front-end',
+silly resolved        'framework',
+silly resolved        'web' ],
+silly resolved     homepage: 'https://getbootstrap.com',
+silly resolved     author: 
+silly resolved      { name: 'The Bootstrap Authors',
+silly resolved        url: 'https://github.com/twbs/bootstrap/graphs/contributors' },
+silly resolved     contributors: [ { name: 'Twitter, Inc.' } ],
+silly resolved     scripts: 
+silly resolved      { bash: 'bash',
+silly resolved        css: 'npm-run-all css-lint css-compile css-prefix css-minify',
+silly resolved        'css-docs': 'npm-run-all css-lint-docs css-compile-docs css-prefix-docs css-minify-docs',
+silly resolved        'css-lint': 'bundle exec scss-lint --config .scss-lint.yml scss/*.scss',
+silly resolved        'css-lint-docs': 'bundle exec scss-lint --config .scss-lint.yml --exclude assets/scss/docs.scss assets/scss/*.scss',
+silly resolved        'css-compile': 'node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap.scss dist/css/bootstrap.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-grid.scss dist/css/bootstrap-grid.css && node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/bootstrap-reboot.scss dist/css/bootstrap-reboot.css',
+silly resolved        'css-compile-docs': 'node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 assets/scss/docs.scss assets/css/docs.min.css',
+silly resolved        'css-prefix': 'postcss --config build/postcss.config.js --replace dist/css/*.css',
+silly resolved        'css-prefix-docs': 'postcss --config build/postcss.config.js --no-map --replace assets/css/docs.min.css',
+silly resolved        'css-minify': 'cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap.min.css dist/css/bootstrap.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-grid.min.css dist/css/bootstrap-grid.css && cleancss --level 1 --source-map --source-map-inline-sources --output dist/css/bootstrap-reboot.min.css dist/css/bootstrap-reboot.css',
+silly resolved        'css-minify-docs': 'cleancss --level 1 --source-map --source-map-inline-sources --output assets/css/docs.min.css assets/css/docs.min.css',
+silly resolved        js: 'npm-run-all js-lint* js-compile js-minify',
+silly resolved        'js-docs': 'npm-run-all js-lint-docs js-minify-docs',
+silly resolved        'js-lint': 'eslint js/ && eslint --config js/tests/.eslintrc.json --env node build/ Gruntfile.js',
+silly resolved        'js-lint-docs': 'eslint --config js/tests/.eslintrc.json assets/js/ sw.js',
+silly resolved        'js-compile': 'npm-run-all --parallel js-compile-*',
+silly resolved        'js-compile-standalone': 'cross-env ROLLUP=true rollup --environment BUNDLE:false --config build/rollup.config.js',
+silly resolved        'js-compile-bundle': 'cross-env ROLLUP=true rollup --environment BUNDLE:true --config build/rollup.config.js',
+silly resolved        'js-compile-plugins': 'cross-env PLUGINS=true babel js/src/ --out-dir js/dist/ --source-maps',
+silly resolved        'js-minify': 'npm-run-all --parallel js-minify-standalone js-minify-bundle',
+silly resolved        'js-minify-standalone': 'uglifyjs --config-file build/uglifyjs.config.json --output dist/js/bootstrap.min.js dist/js/bootstrap.js',
+silly resolved        'js-minify-bundle': 'uglifyjs --config-file build/uglifyjs.config.json --output dist/js/bootstrap.bundle.min.js dist/js/bootstrap.bundle.js',
+silly resolved        'js-minify-docs': 'uglifyjs --config-file build/uglifyjs.config.json --output assets/js/docs.min.js assets/js/vendor/anchor.min.js assets/js/vendor/clipboard.min.js assets/js/vendor/holder.min.js assets/js/src/application.js assets/js/src/pwa.js',
+silly resolved        'js-test': 'phantomjs ./node_modules/qunit-phantomjs-runner/runner.js js/tests/index.html 60',
+silly resolved        'js-test-cloud': 'ruby -r webrick -e "s = WEBrick::HTTPServer.new(:Port => 3000, :DocumentRoot => Dir.pwd, :Logger => WEBrick::Log.new(\'/dev/null\'), :AccessLog => []); trap(\'INT\') { s.shutdown }; s.start" & grunt saucelabs-qunit',
+silly resolved        docs: 'npm-run-all docs-compile docs-lint',
+silly resolved        'docs-lint': 'htmllint --rc build/.htmllintrc _gh_pages/*.html _gh_pages/**/*.html js/tests/visual/*.html',
+silly resolved        'docs-compile': 'bundle exec jekyll build && npm run docs-workbox-precache',
+silly resolved        'docs-serve': 'bundle exec jekyll serve',
+silly resolved        'docs-github': 'shx echo "github: true" > twbsconfig.yml && npm run docs-compile -- --config _config.yml,twbsconfig.yml && shx rm ./twbsconfig.yml',
+silly resolved        'docs-upload-preview': 'build/upload-preview.sh',
+silly resolved        'docs-workbox-precache': 'node build/workbox.js',
+silly resolved        'maintenance-dependencies': 'ncu -a -x jquery && npm update && bundle update && shx echo \'Manually update assets/js/vendor/*, js/tests/vendor/* and .travis.yml\'',
+silly resolved        'release-version': 'node build/change-version.js',
+silly resolved        'release-zip': 'cd dist/ && zip -r9 bootstrap-$npm_package_version-dist.zip * && shx mv bootstrap-$npm_package_version-dist.zip ..',
+silly resolved        dist: 'npm-run-all --parallel css js css-docs',
+silly resolved        test: 'npm-run-all dist js-test docs',
+silly resolved        watch: 'npm-run-all --parallel watch-css watch-js',
+silly resolved        'watch-css': 'nodemon --ignore js/ --ignore dist/ -e scss -x "npm run css && npm run css-docs"',
+silly resolved        'watch-js': 'nodemon --ignore scss/ --ignore js/dist/ --ignore dist/ -e js -x "npm run js-compile-plugins"' },
+silly resolved     style: 'dist/css/bootstrap.css',
+silly resolved     sass: 'scss/bootstrap.scss',
+silly resolved     main: 'dist/js/bootstrap',
+silly resolved     repository: { type: 'git', url: 'git://github.com/twbs/bootstrap.git' },
+silly resolved     bugs: { url: 'https://github.com/twbs/bootstrap/issues' },
+silly resolved     license: 'MIT',
+silly resolved     dependencies: {},
+silly resolved     peerDependencies: { jquery: '^3.0.0', 'popper.js': '^1.12.3' },
+silly resolved     devDependencies: 
+silly resolved      { autoprefixer: '^7.1.2',
+silly resolved        'babel-cli': '^7.0.0-beta.0',
+silly resolved        'babel-eslint': '^8.0.0',
+silly resolved        'babel-plugin-external-helpers': '^7.0.0-beta.0',
+silly resolved        'babel-plugin-transform-es2015-modules-strip': '^0.1.1',
+silly resolved        'babel-preset-env': '^2.0.0-beta.0',
+silly resolved        'clean-css-cli': '^4.1.6',
+silly resolved        'cross-env': '^5.0.5',
+silly resolved        eslint: '^4.2.0',
+silly resolved        grunt: '^1.0.1',
+silly resolved        'grunt-cli': '^1.2.0',
+silly resolved        'grunt-saucelabs': '^9.0.0',
+silly resolved        'htmllint-cli': '^0.0.6',
+silly resolved        'node-sass': '^4.5.3',
+silly resolved        nodemon: '^1.11.0',
+silly resolved        'npm-run-all': '^4.0.2',
+silly resolved        'phantomjs-prebuilt': '^2.1.14',
+silly resolved        'popper.js': '^1.12.5',
+silly resolved        'postcss-cli': '^4.1.0',
+silly resolved        'qunit-phantomjs-runner': '^2.3.0',
+silly resolved        qunitjs: '^2.4.0',
+silly resolved        rollup: '^0.50.0',
+silly resolved        'rollup-plugin-babel': '^3.0.2',
+silly resolved        'rollup-plugin-node-resolve': '^3.0.0',
+silly resolved        shelljs: '^0.7.8',
+silly resolved        shx: '^0.2.2',
+silly resolved        'uglify-js': '^3.0.24',
+silly resolved        'workbox-build': '^2.0.1' },
+silly resolved     engines: { node: '>=4' },
+silly resolved     files: 
+silly resolved      [ '.babelrc',
+silly resolved        '.eslintignore',
+silly resolved        'Gruntfile.js',
+silly resolved        'Gemfile',
+silly resolved        'dist',
+silly resolved        'build',
+silly resolved        'js/.eslintrc.json',
+silly resolved        'js/**/*.js',
+silly resolved        '.scss-lint.yml',
+silly resolved        'scss/**/*.scss',
+silly resolved        'LICENSE' ],
+silly resolved     jspm: 
+silly resolved      { registry: 'npm',
+silly resolved        main: 'js/bootstrap',
+silly resolved        directories: { lib: 'dist' },
+silly resolved        shim: { 'js/bootstrap': { deps: [Object], exports: '$' } },
+silly resolved        dependencies: {},
+silly resolved        peerDependencies: { jquery: '^3.0.0', 'popper.js': '^1.12.3' } },
+silly resolved     _id: 'bootstrap@4.0.0-beta',
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: false,
+silly resolved     _npmVersion: '1.1.4',
+silly resolved     _nodeVersion: 'v0.6.12',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: { shasum: '5d7a1ef49aa2fe1f20b0a918ceda3930b1534413' },
+silly resolved     _from: 'bootstrap' } ]
+info into /home/mgonzales/nipr-alert bootstrap@4.0.0-beta
+info installOne bootstrap@4.0.0-beta
+verbose installOne cb bootstrap@4.0.0-beta
+ERR! Unsupported
+ERR! Not compatible with your version of node/npm: bootstrap@4.0.0-beta
+ERR! Required: {"node":">=4"}
+ERR! Actual:   {"npm":"1.1.4","node":"0.6.12"}
+ERR! 
+ERR! System Linux 3.13.0-32-generic
+ERR! command "node" "/usr/bin/npm" "install" "bootstrap"
+ERR! cwd /home/mgonzales/nipr-alert
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! code ENOTSUP
+ERR! message Unsupported
+ERR! errno {}
+verbose exit [ 1, true ]

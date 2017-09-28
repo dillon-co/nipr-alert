@@ -15,7 +15,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
+  password: P)p0I*i8T%t5
   host: localhost
 
 development:
