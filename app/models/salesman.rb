@@ -137,7 +137,6 @@ class Salesman < ApplicationRecord
     data = grab_info
     update_name_if_nil(data)
     all_states = data["PDB"]['PRODUCER']['INDIVIDUAL']["PRODUCER_LICENSING"]["LICENSE_INFORMATION"]["STATE"]
-    binding.pry
     all_states.each do |state_info|
       db_state = self.states.find_or_create_by(name: state_info["name"])
       db_state.save!
@@ -229,7 +228,9 @@ class Salesman < ApplicationRecord
 
   def self.get_data_from_sandbox_reporting
     self.connect_to_sandbox_reporting
-    stag_adp = StagAdpEmployeeinfo.all.as_json
+    sql = "Select * from stag_adp_employeeinfo"
+    # stag_adp = StagAdpEmployeeinfo.all.as_json
+    stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
     appointment_data = StagAgentAppointed.all.as_json
     ActiveRecord::Base.establish_connection(:development)
     stag_adp.each do |employee|
@@ -263,7 +264,6 @@ class Salesman < ApplicationRecord
     ActiveRecord::Base.establish_connection(
       :adapter => 'mysql2',
       :database => 'Sandbox_Reporting',
-      # :database => 'CXP_ODS',
       :host => @hostname,
       :username => @username,
       :password => @password
