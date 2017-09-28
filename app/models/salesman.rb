@@ -256,7 +256,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.connect_to_sandbox_reporting
-    @hostname = "10.0.35.34"
+    @hostname = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com"
     @username = "diorg"
     @password = "SuperHappy123!"
     # 10.0.35.34
