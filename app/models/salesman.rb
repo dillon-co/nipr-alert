@@ -255,8 +255,8 @@ class Salesman < ApplicationRecord
 
   def self.connect_to_sandbox_reporting
     @hostname = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com"
-    @username = "diorg"
-    @password = "SuperHappy123!"
+    @username = "sgautam"
+    @password = "6N1J$rCFU(PxmU[I"
     # 10.0.35.34
     ActiveRecord::Base.establish_connection(
       :adapter => 'mysql2',
