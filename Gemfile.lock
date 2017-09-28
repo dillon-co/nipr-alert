@@ -52,10 +52,9 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.0.0.beta)
-      autoprefixer-rails (>= 6.0.3)
-      popper_js (~> 1.11.1)
-      sass (>= 3.4.19)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.1.0)
     choice (0.2.0)
@@ -69,6 +68,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    crass (1.0.2)
     debug_inspector (0.0.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -82,6 +82,7 @@ GEM
       tzinfo
     execjs (2.7.0)
     ffi (1.9.18)
+    filterrific (2.1.2)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.6)
@@ -95,7 +96,8 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    loofah (2.0.3)
+    loofah (2.1.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
@@ -113,7 +115,6 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
-    popper_js (1.11.1)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -171,6 +172,8 @@ GEM
     redis-activesupport (5.0.3)
       activesupport (>= 3, < 6)
       redis-store (~> 1.3.0)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     redis-rack (2.0.2)
       rack (>= 1.5, < 3)
       redis-store (>= 1.2, < 1.4)
@@ -252,10 +255,11 @@ DEPENDENCIES
   annotate
   better_errors
   binding_of_caller
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap-sass (~> 3.3.6)
   byebug
   coffee-rails (~> 4.2)
   devise
+  filterrific
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -266,6 +270,7 @@ DEPENDENCIES
   rails (~> 5.0.4)
   rails-erd
   rails_12factor
+  redis-namespace
   redis-rails
   rubyXL
   sass-rails (~> 5.0)

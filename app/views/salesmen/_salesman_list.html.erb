@@ -1,0 +1,58 @@
+<div id="filterrific_results">
+  <%= will_paginate salesmen, class: "digg_pagination" %>
+  <table id='myTable'>
+      <thead>
+        <tr>
+          <th class='sortable'><h5>Position ID</h5></th>
+          <th class='sortable'><h5>First Name</h5></th>
+          <th class='sortable'><h5>Last Name</h5></th>
+
+          <th class='sortable'><h5>Superviser</h5></th>
+          <th class='sortable'><h5>Site</h5></th>
+          <th class='sortable'><h5>Start Date</h5></th>
+          <th class='sortable'> <h5>Active</h5> </th>
+          <th class='sortable'><h5>NPN</h5></th>
+          <th class='sortable'><h5>Liscenses</h5></th>
+          <th class='sortable'><h5>Expired Liscenses</h5></th>
+          <th class='sortable'><h5> Appointed??</h5></th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% salesmen.each do |salesman| %>
+          <tr>
+            <%= link_to salesman do %>
+            <td> <%= salesman.position_id %> </td>
+              <td><%= salesman.first_name %></td>
+              <td> <%= salesman.last_name %> </td>
+              <td> <%= salesman.agent_supervisor %> </td>
+              <td> <%= salesman.agent_site %> </td>
+              <td> <%= salesman.position_start_date %> </td>
+              <td> <%= salesman.deleted == 0 ? "Active" : "Terminated" %> </td>
+              <% if salesman.npn.present? %>
+                <td> <%= salesman.npn %> </td>
+                <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'yes').references(:licenses).count %></td>
+                <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'no').references(:licenses).count %></td>
+                <% if salesman.jit_sites_not_appointed_in == ""  %>
+                  <td><i class="jit-done material-icons done">done</i></td>
+                <% else %>
+                  <td><i class="jit-not-done material-icons clear">clear</i></td>
+                <% end %>
+              <td> <%= link_to "View Agent", salesman, class:'btn btn-warning' %></td>
+              <% else %>
+                <%= form_for salesman, url: "update_npn_and_licensing_info/#{salesman.id}" do |f| %>
+                  <td> <%= f.text_field :npn %> </td>
+                  <td>Add NPN</td>
+                  <td>To See Data</td>
+                  <td></td>
+                  <td> <%= f.submit "Add NPN And View", class: 'btn btn-warning' %> </td>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= will_paginate @salesmen, class: "digg_pagination" %>
+</div>

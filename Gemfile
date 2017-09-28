@@ -27,7 +27,7 @@ gem "rubyXL"
 
 gem 'will_paginate', '~> 3.1.0'
 
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -37,6 +37,9 @@ gem "sidekiq-cron"
 gem 'sinatra', :require => nil
 gem 'redis-rails'
 gem 'rails_12factor', group: :production
+gem 'redis-namespace'
+
+gem 'filterrific'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

@@ -1,15 +1,12 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+<nav class="navbar navbar-default">
+  <div class="container fluid" id="navbarNav">
+    <ul class="nav navbar-nav">
       <li> <%= link_to "Look Up Agent", root_path, class: 'nav-link' %> </li>
       <% if admin_signed_in? %>
-        <li class="nav-item active">
+        <li class=" active">
           <%= link_to "View Agents", salesmen_path, class: "nav-link"%>
         </li>
-        <li class="nav-item">
+        <li class="">
           <%= link_to "New Agent", new_salesman_path, class:'nav-link' %>
         </li>
       <% else %>

@@ -5,8 +5,20 @@ class SalesmenController < ApplicationController
   # GET /salesmen
   # GET /salesmen.json
   def index
-    @salesmen = Salesman.paginate(:page => params[:page], :per_page => 30)
+    @filterrific = initialize_filterrific(
+      Salesman,
+      params[:filterrific],
+      :select_options => {
+        sorted_by: Salesman.options_for_sorted_by
+      }
 
+    ) or return
+    @salesmen = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
     # TODO @salesman.includes(:states).includes(:licenses)
     # Based off loation licensing stragety
     # Get sample data from adp
@@ -16,16 +28,22 @@ class SalesmenController < ApplicationController
   # GET /salesmen/1.json
   def show
     @salesman = Salesman.find(params[:id])
-    @licensed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
-    @expired_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
+    @licensed_states = @salesman.states.all.compact
+    @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
+    @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
+    @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
+    @expired_states_names = @expired_states.map(&:name)
     @check_or_naw = get_check_mark_for_agent(@salesman, @licensed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
-    @can_sell_states = [@licensed_states, @jit_states].flatten.uniq.compact.map(&:name)
-    @expired_states_names = @expired_states.compact.map(&:name)
+    @can_sell_states = [@appointed_states, @jit_states].flatten.uniq.compact.map(&:name)
+    @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @licensed_states_names = @licensed_states.map(&:name)
-    @jit_states = sites_with_just_in_time_states[@salesman.agent_site]
+    @appointed_states_names = @appointed_states.map(&:name)
+    @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states.include?(s)}
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
+    @all_states_names = all_states_names
+
   end
 
   # GET /salesmen/new
@@ -193,12 +211,50 @@ class SalesmenController < ApplicationController
     "WY"]
   end
 
+  def jit_states
+    ["AK",
+     "AR",
+     "CA",
+     "CT",
+     "DE",
+     "DC",
+     "FL",
+     "GA",
+     "HI",
+     "ID",
+     "IA",
+     "KS",
+     "ME",
+     "MD",
+     "MA",
+     "MI",
+     "MN",
+     "MS",
+     "MO",
+     "NE",
+     "NV",
+     "NH",
+     "NJ",
+     "NM",
+     "NY",
+     "NC",
+     "ND",
+     "OK",
+     "SC",
+     "SD",
+     "TN",
+     "TX",
+     "VA",
+     "WV",
+     "WY"]
+  end
+
   def sites_with_just_in_time_states
-    {"Provo" =>  ["CA", "NV", "VA", "WY"],
-      "Sunrise" => ["GA", "MS", "NC", "SC", "TN"],
-      "Sandy" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
-      "Memphis" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
-      "San Antonio" => ["IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sawgrass" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"]}
+    {"Provo" =>  jit_states,
+      "Sunrise" => jit_states,
+      "Sandy" => jit_states,
+      "Memphis" => jit_states,
+      "San Antonio" => jit_states,
+      "Sawgrass" => jit_states}
   end
 end
