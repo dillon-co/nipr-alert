@@ -4506,3 +4506,257 @@ Processing by SalesmenController#index as HTML
 Completed 200 OK in 1463ms (Views: 1442.5ms | ActiveRecord: 9.4ms)
 
 
+/usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:345:in `rescue in establish_connection': Error connecting to Redis on 127.0.0.1:6379 (Errno::ECONNREFUSED) (Redis::CannotConnectError)
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:331:in `establish_connection'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:101:in `block in connect'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:293:in `with_reconnect'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:100:in `connect'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:364:in `ensure_connected'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:221:in `block in process'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:306:in `logging'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:220:in `process'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis/client.rb:120:in `call'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis.rb:2009:in `block in hget'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis.rb:58:in `block in synchronize'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/monitor.rb:214:in `mon_synchronize'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis.rb:58:in `synchronize'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-3.3.5/lib/redis.rb:2008:in `hget'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-namespace-1.5.3/lib/redis/namespace.rb:435:in `call_with_namespace'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/redis-namespace-1.5.3/lib/redis/namespace.rb:321:in `method_missing'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-cron-0.6.3/lib/sidekiq/cron/job.rb:354:in `block in status_from_redis'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-5.0.4/lib/sidekiq.rb:95:in `block in redis'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/connection_pool-2.2.1/lib/connection_pool.rb:64:in `block (2 levels) in with'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/connection_pool-2.2.1/lib/connection_pool.rb:63:in `handle_interrupt'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/connection_pool-2.2.1/lib/connection_pool.rb:63:in `block in with'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/connection_pool-2.2.1/lib/connection_pool.rb:60:in `handle_interrupt'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/connection_pool-2.2.1/lib/connection_pool.rb:60:in `with'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-5.0.4/lib/sidekiq.rb:92:in `redis'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-cron-0.6.3/lib/sidekiq/cron/job.rb:353:in `status_from_redis'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-cron-0.6.3/lib/sidekiq/cron/job.rb:272:in `initialize'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-cron-0.6.3/lib/sidekiq/cron/job.rb:241:in `new'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/sidekiq-cron-0.6.3/lib/sidekiq/cron/job.rb:241:in `create'
+	from /home/mgonzales/nipr-alert/config/initializers/cron_jobs.rb:1:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/activesupport-5.0.6/lib/active_support/dependencies.rb:287:in `load'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/activesupport-5.0.6/lib/active_support/dependencies.rb:287:in `block in load'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/activesupport-5.0.6/lib/active_support/dependencies.rb:259:in `load_dependency'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/activesupport-5.0.6/lib/active_support/dependencies.rb:287:in `load'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/engine.rb:648:in `block in load_config_initializer'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/activesupport-5.0.6/lib/active_support/notifications.rb:166:in `instrument'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/engine.rb:647:in `load_config_initializer'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/engine.rb:612:in `block (2 levels) in <class:Engine>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/engine.rb:611:in `each'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/engine.rb:611:in `block in <class:Engine>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:30:in `instance_exec'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:30:in `run'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:55:in `block in run_initializers'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:228:in `block in tsort_each'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:350:in `block (2 levels) in each_strongly_connected_component'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:422:in `block (2 levels) in each_strongly_connected_component_from'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:431:in `each_strongly_connected_component_from'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:421:in `block in each_strongly_connected_component_from'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:44:in `each'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:44:in `tsort_each_child'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:415:in `call'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:415:in `each_strongly_connected_component_from'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:349:in `block in each_strongly_connected_component'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:347:in `each'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:347:in `call'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:347:in `each_strongly_connected_component'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:226:in `tsort_each'
+	from /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/tsort.rb:205:in `tsort_each'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/initializable.rb:54:in `run_initializers'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/application.rb:352:in `initialize!'
+	from /home/mgonzales/nipr-alert/config/environment.rb:5:in `<top (required)>'
+	from /home/mgonzales/nipr-alert/config.ru:3:in `require_relative'
+	from /home/mgonzales/nipr-alert/config.ru:3:in `block in <main>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/builder.rb:55:in `instance_eval'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/builder.rb:55:in `initialize'
+	from /home/mgonzales/nipr-alert/config.ru:in `new'
+	from /home/mgonzales/nipr-alert/config.ru:in `<main>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/builder.rb:49:in `eval'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/builder.rb:49:in `new_from_string'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/builder.rb:40:in `parse_file'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/server.rb:319:in `build_app_and_options_from_config'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/server.rb:219:in `app'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/server.rb:84:in `app'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/rack-2.0.3/lib/rack/server.rb:354:in `wrapped_app'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/server.rb:148:in `log_to_stdout'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/server.rb:102:in `start'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/commands_tasks.rb:90:in `block in server'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/commands_tasks.rb:85:in `tap'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/commands_tasks.rb:85:in `server'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands/commands_tasks.rb:49:in `run_command!'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/railties-5.0.6/lib/rails/commands.rb:18:in `<top (required)>'
+	from /home/mgonzales/nipr-alert/bin/rails:9:in `require'
+	from /home/mgonzales/nipr-alert/bin/rails:9:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/client/rails.rb:28:in `load'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/client/rails.rb:28:in `call'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/client/command.rb:7:in `call'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/client.rb:30:in `run'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/bin/spring:49:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/binstub.rb:31:in `load'
+	from /usr/local/rvm/gems/ruby-2.4.1/gems/spring-2.0.2/lib/spring/binstub.rb:31:in `<top (required)>'
+	from /home/mgonzales/nipr-alert/bin/spring:15:in `require'
+	from /home/mgonzales/nipr-alert/bin/spring:15:in `<top (required)>'
+	from bin/rails:3:in `load'
+	from bin/rails:3:in `<main>'
+=> Booting Puma
+=> Rails 5.0.6 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+Exiting
+Started GET "/" for 10.1.69.50 at 2017-09-28 14:07:27 -0600
+Cannot render console from 10.1.69.50! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.0.6) lib/active_record/migration.rb:573:in `check_pending!'
+activerecord (5.0.6) lib/active_record/migration.rb:549:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+better_errors (2.3.0) lib/better_errors/middleware.rb:59:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (171.0ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (49.1ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (9.2ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (295.0ms)
+A server is already running. Check /home/mgonzales/nipr-alert/tmp/pids/server.pid.
+=> Booting Puma
+=> Rails 5.0.6 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+Exiting
+A server is already running. Check /home/mgonzales/nipr-alert/tmp/pids/server.pid.
+=> Booting Puma
+=> Rails 5.0.6 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+Exiting
+Started GET "/" for 10.1.69.50 at 2017-09-28 14:09:30 -0600
+Cannot render console from 10.1.69.50! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+DEPRECATION WARNING: skip_before_filter is deprecated and will be removed in Rails 5.1. Use skip_before_action instead. (called from <class:SalesmenController> at /home/mgonzales/nipr-alert/app/controllers/salesmen_controller.rb:3)
+Processing by SalesmenController#find_agent as HTML
+  Rendering salesmen/find_agent.html.erb within layouts/application
+  Rendered salesmen/find_agent.html.erb within layouts/application (3.4ms)
+Completed 500 Internal Server Error in 56535ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'filterrific/filterrific-jquery' with type 'application/javascript'
+Checked in these paths: 
+  /home/mgonzales/nipr-alert/app/assets/config
+  /home/mgonzales/nipr-alert/app/assets/images
+  /home/mgonzales/nipr-alert/app/assets/javascripts
+  /home/mgonzales/nipr-alert/app/assets/stylesheets
+  /home/mgonzales/nipr-alert/vendor/assets/javascripts
+  /home/mgonzales/nipr-alert/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-2.3.3/gems/jquery-rails-4.3.1/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/actioncable-5.0.6/lib/assets/compiled
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/stylesheets
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/fonts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/images):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+     8:     <%= javascript_include_tag 'application' %>
+     9:     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    10:     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    11:       integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  
+app/assets/javascripts/application.js:15
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__1617461279752503835_70067129197180'
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (584.4ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (137.0ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.1ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (778.8ms)
+Started GET "/" for 10.1.69.50 at 2017-09-28 14:15:52 -0600
+Cannot render console from 10.1.69.50! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SalesmenController#find_agent as HTML
+  Rendering salesmen/find_agent.html.erb within layouts/application
+  Rendered salesmen/find_agent.html.erb within layouts/application (3.1ms)
+Completed 500 Internal Server Error in 472ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (couldn't find file 'filterrific/filterrific-jquery' with type 'application/javascript'
+Checked in these paths: 
+  /home/mgonzales/nipr-alert/app/assets/config
+  /home/mgonzales/nipr-alert/app/assets/images
+  /home/mgonzales/nipr-alert/app/assets/javascripts
+  /home/mgonzales/nipr-alert/app/assets/stylesheets
+  /home/mgonzales/nipr-alert/vendor/assets/javascripts
+  /home/mgonzales/nipr-alert/vendor/assets/stylesheets
+  /usr/local/rvm/gems/ruby-2.3.3/gems/jquery-rails-4.3.1/vendor/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/coffee-rails-4.2.2/lib/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/actioncable-5.0.6/lib/assets/compiled
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/stylesheets
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/javascripts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/fonts
+  /usr/local/rvm/gems/ruby-2.3.3/gems/bootstrap-sass-3.3.7/assets/images):
+     5:     <%= csrf_meta_tags %>
+     6: 
+     7:     <%= stylesheet_link_tag    'application', media: 'all' %>
+     8:     <%= javascript_include_tag 'application' %>
+     9:     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    10:     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    11:       integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  
+app/assets/javascripts/application.js:15
+app/views/layouts/application.html.erb:8:in `_app_views_layouts_application_html_erb__1617461279752503835_70067145487920'
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (598.8ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (129.5ms)
+  Rendering /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.1ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.3/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (793.2ms)
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2017-09-28 14:16:19 -0600 ===
+- Goodbye!
+Exiting

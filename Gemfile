@@ -28,7 +28,8 @@ gem "rubyXL"
 gem 'will_paginate', '~> 3.1.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'bootstrap-datepicker-rails'
+gem 'chardinjs-rails'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -37,6 +38,9 @@ gem "sidekiq-cron"
 gem 'sinatra', :require => nil
 gem 'redis-rails'
 gem 'rails_12factor', group: :production
+gem 'redis-namespace'
+
+gem 'filterrific'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -68,3 +72,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'rails-erd'
+gem 'net-ssh'

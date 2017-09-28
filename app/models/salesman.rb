@@ -30,14 +30,93 @@
 #  client              :string(255)
 #  username            :string(255)
 #  cxp_employee_id     :string(255)
-#
+
 
 require 'csv'
 require 'nokogiri'
 require 'open-uri'
+require 'net/ssh'
+
 class Salesman < ApplicationRecord
   has_many :states
   has_many :state_agent_appointeds
+
+  filterrific :default_filter_params => {sorted_by: 'created_at_desc' },
+              available_filters:[
+                :sorted_by,
+                :search_query,
+                :with_created_at_gte
+              ]
+
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    # condition query, parse into individual keywords
+    terms = query.to_s.downcase.split(/\s+/)
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    # configure number of OR conditions for provision
+    # of interpolation arguments. Adjust this if you
+    # change the number of OR conditions.
+    num_or_conditions = 5
+    where(
+      terms.map {
+        or_clauses = [
+          "LOWER(salesmen.first_name) LIKE ?",
+          "LOWER(salesmen.last_name) LIKE ?",
+          "LOWER(salesmen.agent_supervisor) LIKE ?",
+          "LOWER(salesmen.agent_site) LIKE ?",
+          "LOWER(salesmen.npn) LIKE ?"
+        ].join(' OR ')
+        "(#{ or_clauses })"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conditions }.flatten
+    )
+  }
+
+  scope :with_created_at_gte, lambda { |ref_date|
+    where('salesmen.position_start_date >= ?', ref_date)
+    # where('salesmen.position_start_date BETWEEN ? AND ?', ref_date1, ref_date2)
+  }
+
+  scope :sorted_by, lambda { |sort_option|
+      # extract the sort direction from the param value.
+      direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+      case sort_option.to_s
+      when /^created_at_/
+        order("salesmen.created_at #{ direction }")
+      when /^position_start_date_/
+        order("salesmen.position_start_date #{ direction }")
+      when /^last_name_/
+        order("LOWER(salesmen.last_name) #{ direction }, LOWER(salesmen.first_name) #{ direction }")
+      when /^first_name_/
+        order("LOWER(salesmen.first_name) #{ direction }")
+      when /^site_/
+        order("LOWER(salesmen.site) #{ direction }")
+      else
+        raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+      end
+    }
+
+    def self.options_for_sorted_by
+      [
+        ['First Name (a-z)', 'first_name_asc'],
+        ['Last Name (a-z)', 'last_name_asc'],
+        ['Hire date (newest first)', 'created_at_desc'],
+        ['Hire date (oldest first)', 'created_at_asc'],
+      ]
+    end
+
+  def self.search(column)
+    unless search[:column] == ''
+      where("#{search[:column]} LIKE ?", "%#{search}")
+    else
+      scoped
+    end
+  end
 
   def api_path
     "https://pdb-services.nipr.com/pdb-xml-reports/entityinfo_xml.cgi?customer_number=dcortez&pin_number=p3anutpingpong&report_type=1&id_entity=#{self.npn}"
@@ -148,11 +227,47 @@ class Salesman < ApplicationRecord
     self.save_csv_data(data_hash_array)
   end
 
-  def self.as
-    #This is a command line method that runs the current method needed for debugging, short to speed up dev time
-    # binding.pry
-    self.get_employee_data_and_save
-    # binding.pry
+  def self.get_data_from_sandbox_reporting
+    self.connect_to_sandbox_reporting
+    stag_adp = StagAdpEmployeeinfo.all.as_json
+    appointment_data = StagAgentAppointed.all.as_json
+    ActiveRecord::Base.establish_connection(:development)
+    stag_adp.each do |employee|
+      e = self.find_by(npn: employee[:npn])
+      if e.present?
+        e.update!(employee)
+      else
+        e.create!(employee)
+        e.update_states_licensing_info
+      end
+    end
+    self.save_aetna_appointment_data(appointment_data)
+  end
+
+  def self.save_aetna_appointment_data(a_data)
+    a_data.each do |agent|
+      s = Salesman.find_or_create_by(npn: agent[:npn])
+      agent.keys.each do |k|
+        if k.to_s.length == 2
+          Salesman.states.find_or_create_by(name: k).update(appointment_date: k)
+        end
+      end
+    end
+  end
+
+  def self.connect_to_sandbox_reporting
+    @hostname = "10.0.35.34"
+    @username = "diorg"
+    @password = "SuperHappy123!"
+    # 10.0.35.34
+    ActiveRecord::Base.establish_connection(
+      :adapter => 'mysql2',
+      :database => 'Sandbox_Reporting',
+      # :database => 'CXP_ODS',
+      :host => @hostname,
+      :username => @username,
+      :password => @password
+    )
   end
 
   def self.get_csv_and_save_data
@@ -186,7 +301,7 @@ class Salesman < ApplicationRecord
   end
 
   def get_needed_states
-    states_needed_per_site[agent_site.titleize] - states.all.map(&:name)
+    all_states_names - states.all.map(&:name)
   end
 
   def states_needed_per_site
@@ -253,13 +368,52 @@ class Salesman < ApplicationRecord
     "WY"]
   end
 
+  def jit_states
+    ["AK",
+     "AR",
+     "CA",
+     "CT",
+     "DE",
+     "DC",
+     "FL",
+     "GA",
+     "HI",
+     "ID",
+     "IA",
+     "KS",
+     "ME",
+     "MD",
+     "MA",
+     "MI",
+     "MN",
+     "MS",
+     "MO",
+     "NE",
+     "NV",
+     "NH",
+     "NJ",
+     "NM",
+     "NY",
+     "NC",
+     "ND",
+     "OK",
+     "SC",
+     "SD",
+     "TN",
+     "TX",
+     "VA",
+     "WV",
+     "WY"]
+  end
+
+
   def sites_with_just_in_time_states
-    {"Provo" =>  ["CA","NV", "VA", "WY"],
-      "Sunrise" => ["GA", "MS", "NC", "SC", "TN"],
-      "Sandy" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
-      "Memphis" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"],
-      "San Antonio" => ["IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sawgrass" => ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV", "WY"]}
+    { "Provo" =>  jit_states,
+      "Sunrise" => jit_states,
+      "Sandy" => jit_states,
+      "Memphis" => jit_states,
+      "San Antonio" => jit_states,
+      "Sawgrass" => jit_states}
   end
 
   # def self.add_appointed_data_to_agent

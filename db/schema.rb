@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901064304) do
+ActiveRecord::Schema.define(version: 20170927221416) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
@@ -212,10 +212,11 @@ ActiveRecord::Schema.define(version: 20170901064304) do
 
   create_table "states", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "salesman_id"
     t.integer  "adp_employee_id"
+    t.string   "appointment_date"
     t.index ["adp_employee_id"], name: "index_states_on_adp_employee_id", using: :btree
     t.index ["salesman_id"], name: "index_states_on_salesman_id", using: :btree
   end

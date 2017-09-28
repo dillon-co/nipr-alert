@@ -1,7 +1,7 @@
 <% if admin_signed_in?  %>
   <h1>Agents</h1>
-  <div class="row">
-    <div class="col-md-8 ">
+  <!-- <div class="row">
+    <div class="col-md-10 ">
       <input type="text" name="NPN" value="" onkeyup='textSearch(0)' placeholder="Search First Name" id='npnField0'>
       <input type="text" name="NPN" value="" onkeyup='textSearch(1)' placeholder="Search Last Name" id='npnField1'>
       <input type="text" name="NPN" value="" onkeyup='textSearch(2)' placeholder="Search Superviser" id='npnField2'>
@@ -14,65 +14,40 @@
       <input type="radio" name="dateSearchRadio" value="After" id='radioAfter'>After
       <button type="button" class='btn btn-primary' name="button" onclick='dateSearch()'>Search Date</button>
     </div>
+  </div> -->
+  <%= form_for_filterrific @filterrific do |f| %>
+  <div class='col-md-3'>
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed'
+    ) %><br>
+    first name, last name, supervisor, site or npn
   </div>
-
-<%= will_paginate @salesmen, class: "digg_pagination" %>
-
-  <table id='myTable'>
-      <thead>
-        <tr>
-          <th class='sortable'><h5>First Name</h5></th>
-          <th class='sortable'><h5>Last Name</h5></th>
-          <th class='sortable'><h5>Superviser</h5></th>
-          <th class='sortable'><h5>Site</h5></th>
-          <th class='sortable'><h5>Start Date</h5></th>
-          <th class='sortable'> <h5>Active</h5> </th>
-          <th class='sortable'><h5>NPN</h5></th>
-          <th class='sortable'><h5>Liscenses</h5></th>
-          <th class='sortable'><h5>Expired Liscenses</h5></th>
-          <th class='sortable'><h5>JIT Appointed??</h5></th>
-          <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-      </form>
-        <% @salesmen.each do |salesman| %>
-          <tr>
-            <%= link_to salesman do %>
-              <td><%= salesman.first_name %></td>
-              <td> <%= salesman.last_name %> </td>
-              <td> <%= salesman.agent_supervisor %> </td>
-              <td> <%= salesman.agent_site %> </td>
-              <td> <%= salesman.position_start_date %> </td>
-              <td> <%= salesman.deleted == 0 ? "Active" : "Terminated" %> </td>
-              <% if salesman.npn.present? %>
-                <td> <%= salesman.npn %> </td>
-                <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'yes').references(:licenses).count %></td>
-                <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'no').references(:licenses).count %></td>
-                <% if salesman.jit_sites_not_appointed_in == ""  %>
-                  <td><i class="jit-done material-icons done">done</i></td>
-                <% else %>
-                  <td><i class="jit-not-done material-icons clear">clear</i></td>
-                <% end %>
-              <td> <%= link_to "View Agent", salesman, class:'btn btn-warning' %></td>
-              <% else %>
-                <%= form_for salesman, url: "update_npn_and_licensing_info/#{salesman.id}" do |f| %>
-                  <td> <%= f.text_field :npn %> </td>
-                  <td>Add NPN</td>
-                  <td>To See Data</td>
-                  <td></td>
-                  <td> <%= f.submit "Add NPN And View", class: 'btn btn-warning' %> </td>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class='col-md-3'>
+    Hired after
+    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %>
   </div>
-  <%= will_paginate @salesmen, class: "digg_pagination" %>
+  <div class='col-md-3'>
+    Sorted by
+    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  </div>
+  <div class='col-md-3'>
+    <%= link_to(
+      'Reset filters',
+      reset_filterrific_url,
+    ) %>
+  </div>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <%= render_filterrific_spinner %>
+<% end %>
 
+
+<%= render(
+  partial: 'salesmen/salesman_list',
+  locals: { salesmen: @salesmen }
+) %>
 <br>
 <br>
 <br><br>
@@ -201,5 +176,11 @@ $(document).ready(function () {
                     $('td').removeClass('sorted').filter(':nth-child(' + (column + 1) + ')').addClass('sorted');
                 });
             });
+        });
+
+        $('.js-datepicker').datepicker();
+        $('#overlayTrigger').click(function(event) {
+          event.preventDefault();
+          $('body').chardinJs('start');
         });
 </script>
