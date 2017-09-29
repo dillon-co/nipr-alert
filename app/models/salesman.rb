@@ -33,7 +33,10 @@
 
 
 require 'csv'
+require 'roo'
+require 'roo-xls'
 require 'net/ssh'
+require 'open-uri'
 
 class Salesman < ApplicationRecord
   has_many :states
@@ -135,7 +138,6 @@ class Salesman < ApplicationRecord
     data = grab_info
     update_name_if_nil(data)
     all_states = data["PDB"]['PRODUCER']['INDIVIDUAL']["PRODUCER_LICENSING"]["LICENSE_INFORMATION"]["STATE"]
-    binding.pry
     all_states.each do |state_info|
       db_state = self.states.find_or_create_by(name: state_info["name"])
       db_state.save!
@@ -226,12 +228,21 @@ class Salesman < ApplicationRecord
   end
 
   def self.get_data_from_sandbox_reporting
-    self.connect_to_sandbox_reporting
+    @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
     sql = "Select * from stag_adp_employeeinfo"
-    # stag_adp = StagAdpEmployeeinfo.all.as_json
-    stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
-    appointment_data = StagAgentAppointed.all.as_json
+    sql2 = "Select * from stag_agent_appointed"
+    Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
+     stag_adp = ssh.exec!("#{sql}")
+     appointment_data = ssh.exec!("#{sql2}")
+    end
     ActiveRecord::Base.establish_connection(:development)
+    self.save_stag_adp_employeeinfo(stag_adp)
+    self.save_aetna_appointment_data(appointment_data)
+  end
+
+  # stag_adp = external_db.execute(sql).as_json
+  # appointment_data = external_db.execute(sql2).as_json
+  def self.save_stag_adp_employeeinfo(stag_adp)
     stag_adp.each do |employee|
       e = self.find_by(npn: employee[:npn])
       if e.present?
@@ -241,7 +252,6 @@ class Salesman < ApplicationRecord
         e.update_states_licensing_info
       end
     end
-    self.save_aetna_appointment_data(appointment_data)
   end
 
   def self.save_aetna_appointment_data(a_data)
@@ -267,6 +277,29 @@ class Salesman < ApplicationRecord
       :username => @username,
       :password => @password
     )
+  end
+
+  def self.connect_to_localhost
+    @hostname = "localhost"
+    @username = "dilloncortez"
+    @password = "slop3styl3"
+    sql = "Select * from Video"
+    # 10.0.35.34
+    ActiveRecord::Base.establish_connection(
+      :adapter => 'postgresql',
+      :database => 'velvi_videos_development',
+      :host => @hostname,
+      :username => @username,
+      :password => @password
+    )
+    # ActiveRecord::Base.connection.tables.each do |table|
+    #   next if table.match(/\Aschema_migrations\Z/)
+    #   klass = table.singularize.camelize.constantize
+    #   puts "#{klass.name} has #{klass.count} records"
+    # end
+  end
+
+  def get_table_data
   end
 
   def self.get_csv_and_save_data
@@ -415,55 +448,21 @@ class Salesman < ApplicationRecord
       "Sawgrass" => jit_states}
   end
 
-  # def self.add_appointed_data_to_agent
-  #   appointed_states = 'AK, AR, AZ, CA, CO, CT, DC, DE, FL, GA, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, MT, NC, ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VA, VT, WA, WI, WV, WY'
-  #   the_npn = "17319593"
-  #   state_liscense_data = "20181031,NULL,20171008,20191031,20180930,20171031,20171008,20181031,20190228,99991231,20181031,20181016,20191031,20181031,20181031,20181031,20181008,20181031,29991231,20181008,99991231,20181031,99991231,20171031,20171031,20180913,20181031,NULL,99991231,20181031,20181031,20171031,20181031,99991231,20191001,20181008,20181031,20181031,NULL,20181031,20181031,NULL,20181031,99991231,20171031,20181031,20181008,20181031,99991231,20190331,20171008,20181031,20181031,20181031"
-  #   #This is crappy code
-  # end
+  def self.update_npns_from_spread_sheet
+    xl = Roo::Spreadsheet.open("#{Rails.root}/npn_numbers.xls", extension: :xls)
+    sheet = xl.sheet(0).to_a
+    sheet.shift
+    sheet.each do |row|
+      unless row[3] == ""
+        sman = self.find_or_create_by(npn: row[3])
+        sman.update_states_licensing_info
+      end
+    end
+    # binding.pry
+  end
 
+  def self.as
+    self.update_npns_from_spread_sheet
+  end
 
-
-#################################################################################
-  # def find_all_the_values
-  #   needed_attributes = ["effective_date",
-  #     "expiration_date",
-  #     "renewal_submitted_date",
-  #     "renewal_confirmed_date",
-  #     "appointed_submitted_date",
-  #     "appointed_approved_date",
-  #     "location_description",
-  #     "job_title_description",
-  #     "appont_renewal_date",
-  #     "active",
-  #     "authority_issue_date"]
-  #   needed_attributes.map! {|atr| atr.upcase}
-  #   puts needed_attributes
-  #   values = ga
-  #   vals = []
-  #   search_hash_for_values(values, needed_attributes, vals)
-  #   puts '================='
-  #   puts vals.uniq
-  # end
-  #
-  #
-  # def search_hash_for_values(h, words, found_words)
-  #   fw = found_words
-  #   h.keys.each do |k|
-  #     # puts "~~~>#{k}<~~~"
-  #     if words.include?(k)
-  #       puts "#{k} => #{h[k]}"
-  #       # puts "\n\nFound #{k}\n\n=================\n#{h[k]}"
-  #       fw << k
-  #     end
-  #     if h[k].is_a?(Hash)
-  #       # puts "Searching #{k}\n"
-  #       search_hash_for_values(h[k], words, fw)
-  #     elsif h[k].is_a?(Array)
-  #       h[k].each do |a|
-  #         search_hash_for_values(a, words, fw)
-  #       end
-  #     end
-  #   end
-  # end
 end
