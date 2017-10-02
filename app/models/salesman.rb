@@ -153,14 +153,16 @@ class Salesman < ApplicationRecord
 
   def save_licensing_info(state, state_info)
     s_info = downcased(state_info) unless s_info.is_a?(Array)
-    license_info = s_info.except("details")
-    license = state.licenses.find_or_create_by(license_num: s_info['license_info'], salesman_id: self.id)
-    license_info["date_updated"] = Date.strptime(license_info["date_updated"], "%m/%d/%Y") unless license_info["date_updated"] == nil
-    license_info["date_issue_license_orig"] = Date.strptime(license_info["date_issue_license_orig"], "%m/%d/%Y") unless license_info["date_issue_license_orig"] == nil
-    license_info["date_expire_license"] = Date.strptime(license_info["date_expire_license"], "%m/%d/%Y") unless license_info["date_expire_license"] == nil
-    license.update!(license_info)
-    license.save!
-    save_license_details(license, [s_info["details"]["DETAIL"]].flatten)
+    unless s_info == nil
+      license_info = s_info.except("details")
+      license = state.licenses.find_or_create_by(license_num: s_info['license_info'], salesman_id: self.id)
+      license_info["date_updated"] = Date.strptime(license_info["date_updated"], "%m/%d/%Y") unless license_info["date_updated"] == nil
+      license_info["date_issue_license_orig"] = Date.strptime(license_info["date_issue_license_orig"], "%m/%d/%Y") unless license_info["date_issue_license_orig"] == nil
+      license_info["date_expire_license"] = Date.strptime(license_info["date_expire_license"], "%m/%d/%Y") unless license_info["date_expire_license"] == nil
+      license.update!(license_info)
+      license.save!
+      save_license_details(license, [s_info["details"]["DETAIL"]].flatten)
+    end
   end
 
   def save_license_details(license, info)
@@ -190,7 +192,7 @@ class Salesman < ApplicationRecord
         new_hash[k.downcase] = data_hash[k]
       end
       new_hash
-    end  
+    end
   end
 
   def get_name_info(biographic_data)
