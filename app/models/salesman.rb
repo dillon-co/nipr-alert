@@ -251,7 +251,6 @@ class Salesman < ApplicationRecord
     #appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
     binding.pry
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-
      ssh.exec!("#{connect_to_db}")
      ssh.exec!("#{open_up_table}")
      stag_adp = ssh.exec!("#{sql}")
@@ -475,7 +474,7 @@ class Salesman < ApplicationRecord
     sheet = xl.sheet(0).to_a
     sheet.to_a.shift
     sheet.each do |row|
-      unless row[3] == ""
+      if row[3] != "" && row[2] =="Active"
         sman = self.find_or_create_by(npn: row[3])
         sman.update_states_licensing_info
       end
