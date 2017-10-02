@@ -151,7 +151,7 @@ class Salesman < ApplicationRecord
   end
 
   def save_licensing_info(state, state_info)
-    s_info = downcased(state_info)
+    s_info = downcased(state_info) unless s_info.is_a?(Array)
     license_info = s_info.except("details")
     license = state.licenses.find_or_create_by(license_num: s_info['license_info'], salesman_id: self.id)
     license_info["date_updated"] = Date.strptime(license_info["date_updated"], "%m/%d/%Y") unless license_info["date_updated"] == nil
@@ -164,9 +164,11 @@ class Salesman < ApplicationRecord
 
   def save_license_details(license, info)
     info.each do |i|
-      license_details = downcased(i)
-      deet = license.state_details.find_or_create_by(loa: license_details["loa"])
-      deet.update(license_details)
+      unless i.is_a?(Array)
+        license_details = downcased(i)
+        deet = license.state_details.find_or_create_by(loa: license_details["loa"])
+        deet.update(license_details)
+      end  
     end
   end
 
