@@ -242,11 +242,11 @@ class Salesman < ApplicationRecord
     @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
     connect_to_db = "mysql -u root"
     open_up_table = 'USE Sandbox_Reporting'
-    sql = "Select * from stag_adp_employeeinfo"
-    sql2 = "Select * from stag_agent_appointed"
+    sql = "select * from stag_adp_employeeinfo"
+    sql2 = "select * from stag_agent_appointed"
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-
      ssh.exec!("#{connect_to_db}")
+     ssh.exec!("#{open_up_table}")
      stag_adp = ssh.exec!("#{sql}")
      appointment_data = ssh.exec!("#{sql2}")
     end
