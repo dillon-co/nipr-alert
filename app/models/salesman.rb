@@ -231,22 +231,20 @@ class Salesman < ApplicationRecord
   def self.get_data_from_sandbox_reporting
     @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
     connect_to_db = "mysql -u root"
-    open_up_table = ''
+    open_up_table = 'USE Sandbox_Reporting'
     sql = "Select * from stag_adp_employeeinfo"
     sql2 = "Select * from stag_agent_appointed"
-<<<<<<< HEAD
     # stag_adp = StagAdpEmployeeinfo.all.as_json
-    stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
-    appointment_data = StagAgentAppointed.all.as_json
-    appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
-=======
+    #stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
+    #appointment_data = StagAgentAppointed.all.as_json
+    #appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
 
      ssh.exec!("#{connect_to_db}")
+     ssh.exec!("#{open_up_table}")
      stag_adp = ssh.exec!("#{sql}")
      appointment_data = ssh.exec!("#{sql2}")
     end
->>>>>>> d472f20818d6425198a319a1b8c7b3bdf948937e
     ActiveRecord::Base.establish_connection(:development)
     self.save_stag_adp_employeeinfo(stag_adp.as_josn)
     self.save_aetna_appointment_data(appointment_data.as_json)
@@ -292,25 +290,25 @@ class Salesman < ApplicationRecord
       binding.pry
   end
 
-  def self.connect_to_localhost
-    @hostname = "localhost"
-    @username = "dilloncortez"
-    @password = "slop3styl3"
-    sql = "Select * from Video"
-    # 10.0.35.34
-    ActiveRecord::Base.establish_connection(
-      :adapter => 'postgresql',
-      :database => 'velvi_videos_development',
-      :host => @hostname,
-      :username => @username,
-      :password => @password
-    )
-    # ActiveRecord::Base.connection.tables.each do |table|
-    #   next if table.match(/\Aschema_migrations\Z/)
-    #   klass = table.singularize.camelize.constantize
-    #   puts "#{klass.name} has #{klass.count} records"
-    # end
-  end
+  # def self.connect_to_localhost
+  #   @hostname = "localhost"
+  #   @username = "dilloncortez"
+  #   @password = "slop3styl3"
+  #   sql = "Select * from Video"
+  #   # 10.0.35.34
+  #   ActiveRecord::Base.establish_connection(
+  #     :adapter => 'postgresql',
+  #     :database => 'velvi_videos_development',
+  #     :host => @hostname,
+  #     :username => @username,
+  #     :password => @password
+  #   )
+  #   # ActiveRecord::Base.connection.tables.each do |table|
+  #   #   next if table.match(/\Aschema_migrations\Z/)
+  #   #   klass = table.singularize.camelize.constantize
+  #   #   puts "#{klass.name} has #{klass.count} records"
+  #   # end
+  # end
 
   def get_table_data
   end
