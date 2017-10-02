@@ -239,17 +239,19 @@ class Salesman < ApplicationRecord
   end
 
   def self.get_data_from_sandbox_reporting
-    @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
-    connect_to_db = "mysql -u root"
-    open_up_table = 'USE Sandbox_Reporting'
-    sql = "select * from stag_adp_employeeinfo"
-    sql2 = "select * from stag_agent_appointed"
-    Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-     ssh.exec!("#{connect_to_db}")
-     ssh.exec!("#{open_up_table}")
-     stag_adp = ssh.exec!("#{sql}")
-     appointment_data = ssh.exec!("#{sql2}")
-    end
+    # @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
+    # connect_to_db = "mysql -u root"
+    # open_up_table = 'USE Sandbox_Reporting'
+    # sql = "select * from stag_adp_employeeinfo"
+    # sql2 = "select * from stag_agent_appointed"
+    # Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
+    #  ssh.exec!("#{connect_to_db}")
+    #  ssh.exec!("#{open_up_table}")
+    #  stag_adp = ssh.exec!("#{sql}")
+    #  appointment_data = ssh.exec!("#{sql2}")
+    # end
+    self.connect_to_sandbox_reporting
+    binding.pry
     ActiveRecord::Base.establish_connection(:development)
     self.save_stag_adp_employeeinfo(stag_adp.as_josn)
     self.save_aetna_appointment_data(appointment_data.as_json)
@@ -285,12 +287,13 @@ class Salesman < ApplicationRecord
     @username = "sgautam"
     @password = "6N1J$rCFU(PxmU[I"
     # 10.0.35.34
-    ActiveRecord::Base.establish_connection(
+    establish_connection(
       :adapter => 'mysql2',
       :database => 'Sandbox_Reporting',
       :host => localhost,
       :username => @username,
       :password => @password
+      :port => '3306'
     )
   end
 
