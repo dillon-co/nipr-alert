@@ -140,9 +140,14 @@ class Salesman < ApplicationRecord
     update_name_if_nil(data)
     all_states = data["PDB"]['PRODUCER']['INDIVIDUAL']["PRODUCER_LICENSING"]["LICENSE_INFORMATION"]["STATE"]
     all_states.each do |state_info|
-      db_state = self.states.find_or_create_by(name: state_info["name"])
-      db_state.save!
-      save_states_data(db_state, state_info)
+      begin
+        db_state = self.states.find_or_create_by(name: state_info["name"])
+        db_state.save!
+        save_states_data(db_state, state_info)
+      rescue => e
+        puts e
+        next
+      end
     end
   end
 
