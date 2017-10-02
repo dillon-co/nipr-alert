@@ -229,15 +229,17 @@ class Salesman < ApplicationRecord
 
   def self.get_data_from_sandbox_reporting
     @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
+    connect_to_db = "mysql -u root"
     sql = "Select * from stag_adp_employeeinfo"
     sql2 = "Select * from stag_agent_appointed"
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
+      ssh.exec!("#{connect_to_db}")
      stag_adp = ssh.exec!("#{sql}")
      appointment_data = ssh.exec!("#{sql2}")
     end
     ActiveRecord::Base.establish_connection(:development)
-    self.save_stag_adp_employeeinfo(stag_adp)
-    self.save_aetna_appointment_data(appointment_data)
+    self.save_stag_adp_employeeinfo(stag_adp.as_josn)
+    self.save_aetna_appointment_data(appointment_data.as_json)
   end
 
   # stag_adp = external_db.execute(sql).as_json
@@ -438,7 +440,6 @@ class Salesman < ApplicationRecord
      "WY"]
   end
 
-
   def sites_with_just_in_time_states
     { "Provo" =>  jit_states,
       "Sunrise" => jit_states,
@@ -451,7 +452,7 @@ class Salesman < ApplicationRecord
   def self.update_npns_from_spread_sheet
     xl = Roo::Spreadsheet.open("#{Rails.root}/npn_numbers.xls", extension: :xls)
     sheet = xl.sheet(0).to_a
-    sheet.shift
+    sheet.to_a.shift
     sheet.each do |row|
       unless row[3] == ""
         sman = self.find_or_create_by(npn: row[3])
