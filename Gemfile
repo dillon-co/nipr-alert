@@ -40,12 +40,17 @@ gem 'redis-rails'
 gem 'rails_12factor', group: :production
 gem 'redis-namespace'
 
+gem "roo", "~> 2.7.0"
+gem 'roo-xls'
+
 gem 'filterrific'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'annotate'
+
+gem 'pg'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
