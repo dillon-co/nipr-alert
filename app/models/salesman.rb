@@ -230,10 +230,12 @@ class Salesman < ApplicationRecord
   def self.get_data_from_sandbox_reporting
     @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
     connect_to_db = "mysql -u root"
+    open_up_table = ''
     sql = "Select * from stag_adp_employeeinfo"
     sql2 = "Select * from stag_agent_appointed"
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-      ssh.exec!("#{connect_to_db}")
+
+     ssh.exec!("#{connect_to_db}")
      stag_adp = ssh.exec!("#{sql}")
      appointment_data = ssh.exec!("#{sql2}")
     end
