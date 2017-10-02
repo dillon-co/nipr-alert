@@ -230,7 +230,7 @@ class Salesman < ApplicationRecord
   def self.get_data_from_sandbox_reporting
     @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
     connect_to_db = "mysql -u root"
-    open_up_table = ''
+    open_up_table = 'USE Sandbox_Reporting'
     sql = "Select * from stag_adp_employeeinfo"
     sql2 = "Select * from stag_agent_appointed"
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
@@ -283,25 +283,25 @@ class Salesman < ApplicationRecord
     )
   end
 
-  def self.connect_to_localhost
-    @hostname = "localhost"
-    @username = "dilloncortez"
-    @password = "slop3styl3"
-    sql = "Select * from Video"
-    # 10.0.35.34
-    ActiveRecord::Base.establish_connection(
-      :adapter => 'postgresql',
-      :database => 'velvi_videos_development',
-      :host => @hostname,
-      :username => @username,
-      :password => @password
-    )
-    # ActiveRecord::Base.connection.tables.each do |table|
-    #   next if table.match(/\Aschema_migrations\Z/)
-    #   klass = table.singularize.camelize.constantize
-    #   puts "#{klass.name} has #{klass.count} records"
-    # end
-  end
+  # def self.connect_to_localhost
+  #   @hostname = "localhost"
+  #   @username = "dilloncortez"
+  #   @password = "slop3styl3"
+  #   sql = "Select * from Video"
+  #   # 10.0.35.34
+  #   ActiveRecord::Base.establish_connection(
+  #     :adapter => 'postgresql',
+  #     :database => 'velvi_videos_development',
+  #     :host => @hostname,
+  #     :username => @username,
+  #     :password => @password
+  #   )
+  #   # ActiveRecord::Base.connection.tables.each do |table|
+  #   #   next if table.match(/\Aschema_migrations\Z/)
+  #   #   klass = table.singularize.camelize.constantize
+  #   #   puts "#{klass.name} has #{klass.count} records"
+  #   # end
+  # end
 
   def get_table_data
   end
