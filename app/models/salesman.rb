@@ -240,20 +240,19 @@ class Salesman < ApplicationRecord
 
   def self.get_data_from_sandbox_reporting
     # @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
-    # connect_to_db = "mysql -u root"
     # open_up_table = 'USE Sandbox_Reporting'
     # sql = "select * from stag_adp_employeeinfo"
     # sql2 = "select * from stag_agent_appointed"
-    # Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-    #  ssh.exec!("#{connect_to_db}")
-    #  ssh.exec!("#{open_up_table}")
-    #  stag_adp = ssh.exec!("#{sql}")
-    #  appointment_data = ssh.exec!("#{sql2}")
-    # end
-    self.connect_to_sandbox_reporting
-    binding.pry
+    @connection = self.connect_to_sandbox_reporting
+    results = @connection.connection.execute("select * from stag_adp_employeeinfo")
+    r_fields = results.fields.map{|f| f.underscore }
+    stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
+    appointment_results =@connection.connection.execute("select * from stag_agent_appointed")
+    a_fields = appointment_results.fields.map{|f| f.underscore }
+    appointment_data = appoint_results.map {|a| Hash[a_fields.zip(a)]}
     ActiveRecord::Base.establish_connection(:development)
-    self.save_stag_adp_employeeinfo(stag_adp.as_josn)
+    # hashed_results.each {|b| Salesman.find_or_create_by(npn: b["npn"]).update(b)}
+    self.save_stag_adp_employeeinfo(stag_adp)
     self.save_aetna_appointment_data(appointment_data.as_json)
   end
 
@@ -261,7 +260,7 @@ class Salesman < ApplicationRecord
   # appointment_data = external_db.execute(sql2).as_json
   def self.save_stag_adp_employeeinfo(stag_adp)
     stag_adp.each do |employee|
-      e = self.find_by(npn: employee[:npn])
+      e = self.find_by(npn: employee["npn"])
       if e.present?
         e.update!(employee)
       else
@@ -273,7 +272,7 @@ class Salesman < ApplicationRecord
 
   def self.save_aetna_appointment_data(a_data)
     a_data.each do |agent|
-      s = Salesman.find_or_create_by(npn: agent[:npn])
+      s = Salesman.find_or_create_by(npn: agent["npn"])
       agent.keys.each do |k|
         if k.to_s.length == 2
           Salesman.states.find_or_create_by(name: k).update(appointment_date: k)
@@ -287,7 +286,7 @@ class Salesman < ApplicationRecord
     @username = "sgautam"
     @password = "6N1J$rCFU(PxmU[I"
     # 10.0.35.34
-    establish_connection(
+    @conection = establish_connection(
       :adapter => 'mysql2',
       :database => 'Sandbox_Reporting',
       :host => localhost,
@@ -296,6 +295,8 @@ class Salesman < ApplicationRecord
       :port => '3306'
     )
   end
+
+
 
   # def self.connect_to_localhost
   #   @hostname = "localhost"

@@ -1,0 +1,56 @@
+class AddNewCxpFieldsToSalesman < ActiveRecord::Migration[5.0]
+  def change
+    add_column :salesmen, :given_name, :string
+    add_column :salesmen, :family_name, :string
+    add_column :salesmen, :formatted_name, :string
+    add_column :salesmen, :gender, :string
+    add_column :salesmen, :primary_indicator, :string
+    add_column :salesmen, :addressline_one, :string
+    add_column :salesmen, :city, :string
+    add_column :salesmen, :country, :string
+    add_column :salesmen, :zipcode, :string
+    add_column :salesmen, :state, :string
+    add_column :salesmen, :home_work_location_city, :string
+    add_column :salesmen, :home_work_location_state, :string
+    add_column :salesmen, :home_work_location_zip, :string
+    add_column :salesmen, :home_work_location_address, :string
+    add_column :salesmen, :home_work_location_code, :string
+    add_column :salesmen, :department_value, :string
+    add_column :salesmen, :department_code, :string
+    add_column :salesmen, :business_unit, :string
+    add_column :salesmen, :n_number, :string
+    add_column :salesmen, :oiggsa, :string
+    add_column :salesmen, :agent_id, :string
+    add_column :salesmen, :siebel_id, :string
+    add_column :salesmen, :siebel_pin, :string
+    add_column :salesmen, :siebel_password, :string
+    add_column :salesmen, :temp_password, :string
+    add_column :salesmen, :temp_token, :string
+    add_column :salesmen, :training_start_date, :string
+    add_column :salesmen, :training_grad_date, :string
+    add_column :salesmen, :training_compliance_status, :string
+    add_column :salesmen, :cap_level, :string
+    add_column :salesmen, :cap_date, :string
+    add_column :salesmen, :nice_skill_team, :string
+    add_column :salesmen, :phone_number, :string
+    add_column :salesmen, :email1, :string
+    add_column :salesmen, :email2, :string
+    add_column :salesmen, :position_status_code, :string
+    add_column :salesmen, :positionstatus_value, :string
+    add_column :salesmen, :positionreason_code, :string
+    add_column :salesmen, :positionreason_value, :string
+    add_column :salesmen, :start_date, :string
+    add_column :salesmen, :termination_date, :string
+    add_column :salesmen, :position_oid, :string
+    add_column :salesmen, :group_code, :string
+    add_column :salesmen, :origional_hire_date, :string
+    add_column :salesmen, :origional_termination_date, :string
+    add_column :salesmen, :worker_status, :string
+    add_column :salesmen, :worker_type, :string
+    add_column :salesmen, :job_code, :string
+    add_column :salesmen, :job_value, :string
+    add_column :salesmen, :reports_to_oid, :string
+    add_column :salesmen, :reports_to_id, :string
+    add_column :salesmen, :reports_to_name, :string
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927221416) do
+ActiveRecord::Schema.define(version: 20171002204534) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
@@ -129,6 +129,58 @@ ActiveRecord::Schema.define(version: 20170927221416) do
     t.string   "username"
     t.string   "cxp_employee_id"
     t.string   "jit_sites_not_appointed_in"
+    t.string   "given_name"
+    t.string   "family_name"
+    t.string   "formatted_name"
+    t.string   "gender"
+    t.string   "primary_indicator"
+    t.string   "addressline_one"
+    t.string   "city"
+    t.string   "country"
+    t.string   "zipcode"
+    t.string   "state"
+    t.string   "home_work_location_city"
+    t.string   "home_work_location_state"
+    t.string   "home_work_location_zip"
+    t.string   "home_work_location_address"
+    t.string   "home_work_location_code"
+    t.string   "department_value"
+    t.string   "department_code"
+    t.string   "business_unit"
+    t.string   "n_number"
+    t.string   "oiggsa"
+    t.string   "agent_id"
+    t.string   "siebel_id"
+    t.string   "siebel_pin"
+    t.string   "siebel_password"
+    t.string   "temp_password"
+    t.string   "temp_token"
+    t.string   "training_start_date"
+    t.string   "training_grad_date"
+    t.string   "training_compliance_status"
+    t.string   "cap_level"
+    t.string   "cap_date"
+    t.string   "nice_skill_team"
+    t.string   "phone_number"
+    t.string   "email1"
+    t.string   "email2"
+    t.string   "position_status_code"
+    t.string   "positionstatus_value"
+    t.string   "positionreason_code"
+    t.string   "positionreason_value"
+    t.string   "start_date"
+    t.string   "termination_date"
+    t.string   "position_oid"
+    t.string   "group_code"
+    t.string   "origional_hire_date"
+    t.string   "origional_termination_date"
+    t.string   "worker_status"
+    t.string   "worker_type"
+    t.string   "job_code"
+    t.string   "job_value"
+    t.string   "reports_to_oid"
+    t.string   "reports_to_id"
+    t.string   "reports_to_name"
   end
 
   create_table "stag_adp_employeeinfos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
