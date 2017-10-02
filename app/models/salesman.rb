@@ -474,9 +474,13 @@ class Salesman < ApplicationRecord
     sheet = xl.sheet(0).to_a
     sheet.to_a.shift
     sheet.each do |row|
-      if row[3] != "" && row[2] =="Active"
-        sman = self.find_or_create_by(npn: row[3])
-        sman.update_states_licensing_info
+      begin
+        if row[2] == "Active" && row[3] != ""
+          sman = self.find_or_create_by(npn: row[3])
+          sman.update_states_licensing_info
+        end
+      rescue
+        next
       end
     end
     # binding.pry
