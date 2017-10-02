@@ -249,6 +249,7 @@ class Salesman < ApplicationRecord
     #stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
     #appointment_data = StagAgentAppointed.all.as_json
     #appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
+    binding.pry
     Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
 
      ssh.exec!("#{connect_to_db}")
