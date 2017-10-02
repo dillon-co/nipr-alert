@@ -168,7 +168,7 @@ class Salesman < ApplicationRecord
         license_details = downcased(i)
         deet = license.state_details.find_or_create_by(loa: license_details["loa"])
         deet.update(license_details)
-      end  
+      end
     end
   end
 
@@ -183,11 +183,13 @@ class Salesman < ApplicationRecord
   end
 
   def downcased(data_hash)
-    new_hash = {}
-    data_hash.keys.each do |k|
-      new_hash[k.downcase] = data_hash[k]
-    end
-    new_hash
+    unless data_hash.is_a?(Array)
+      new_hash = {}
+      data_hash.keys.each do |k|
+        new_hash[k.downcase] = data_hash[k]
+      end
+      new_hash
+    end  
   end
 
   def get_name_info(biographic_data)
