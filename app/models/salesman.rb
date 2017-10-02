@@ -229,9 +229,11 @@ class Salesman < ApplicationRecord
   def self.get_data_from_sandbox_reporting
     self.connect_to_sandbox_reporting
     sql = "Select * from stag_adp_employeeinfo"
+    sql2 = "Select * from stag_agent_appointed"
     # stag_adp = StagAdpEmployeeinfo.all.as_json
     stag_adp = ActiveRecord::Base.connection.execute(sql).as_json
     appointment_data = StagAgentAppointed.all.as_json
+    appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
     ActiveRecord::Base.establish_connection(:development)
     stag_adp.each do |employee|
       e = self.find_by(npn: employee[:npn])
