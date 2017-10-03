@@ -51,7 +51,7 @@ class Salesman < ApplicationRecord
 		:is_active,
                 :created_before_gte
               ]
-	
+
   scope :is_active, lambda { |flag|
       return nil if 0 == flag
       where(worker_status: "Active")
@@ -89,7 +89,7 @@ class Salesman < ApplicationRecord
     where('salesmen.start_date >= ?', ref_date)
     # where('salesmen.position_start_date BETWEEN ? AND ?', ref_date1, ref_date2)
   }
-  
+
   scope :created_before_gte, lambda { |ref_date|
      where('salesmen.start_date <= ?', ref_date)
   }
@@ -269,7 +269,7 @@ class Salesman < ApplicationRecord
       :username => @username,
       :password => @password,
       :port => '3306'
-    )	
+    )
     results = mr_c.connection.execute("select * from stag_adp_employeeinfo")
     r_fields = results.fields.map{|f| f.underscore }
     stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
@@ -375,7 +375,7 @@ class Salesman < ApplicationRecord
     end
     hashie
   end
- 	
+
   def update_agent_site
     site = self.home_work_location_city
     self.update(agent_site: site)
@@ -401,6 +401,7 @@ class Salesman < ApplicationRecord
       "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
       "Sawgrass" => all_states_names,
+      "Roy" => all_states_names,
       nil => all_states_names
     }
   end
