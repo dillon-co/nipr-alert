@@ -47,9 +47,15 @@ class Salesman < ApplicationRecord
               available_filters:[
                 :sorted_by,
                 :search_query,
-                :with_created_at_gte
+                :with_created_at_gte,
+		:is_active,
+                :created_before_gte
               ]
-
+	
+  scope :is_active, lambda { |flag|
+      return nil if 0 == flag
+      where(worker_status: "Active")
+  }
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
@@ -69,7 +75,7 @@ class Salesman < ApplicationRecord
         or_clauses = [
           "LOWER(salesmen.first_name) LIKE ?",
           "LOWER(salesmen.last_name) LIKE ?",
-          "LOWER(salesmen.agent_supervisor) LIKE ?",
+          "LOWER(salesmen.reports_to_name) LIKE ?",
           "LOWER(salesmen.agent_site) LIKE ?",
           "LOWER(salesmen.npn) LIKE ?"
         ].join(' OR ')
@@ -80,8 +86,12 @@ class Salesman < ApplicationRecord
   }
 
   scope :with_created_at_gte, lambda { |ref_date|
-    where('salesmen.position_start_date >= ?', ref_date)
+    where('salesmen.start_date >= ?', ref_date)
     # where('salesmen.position_start_date BETWEEN ? AND ?', ref_date1, ref_date2)
+  }
+  
+  scope :created_before_gte, lambda { |ref_date|
+     where('salesmen.start_date <= ?', ref_date)
   }
 
   scope :sorted_by, lambda { |sort_option|
@@ -245,40 +255,52 @@ class Salesman < ApplicationRecord
     #appointment_data = StagAgentAppointed.all.as_json
     #appointment_data = ActiveRecord::Base.connection.execute(sql2).as_json
     # @hostname, @username, @password  = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com", "sgautam", "6N1J$rCFU(PxmU[I"
-    # connect_to_db = "mysql -u root"
     # open_up_table = 'USE Sandbox_Reporting'
     # sql = "select * from stag_adp_employeeinfo"
     # sql2 = "select * from stag_agent_appointed"
-    # Net::SSH.start($hostname, $user_name, :password => $pass_word) do |ssh|
-    #  ssh.exec!("#{connect_to_db}")
-    #  ssh.exec!("#{open_up_table}")
-    #  stag_adp = ssh.exec!("#{sql}")
-    #  appointment_data = ssh.exec!("#{sql2}")
-    # end
-    self.connect_to_sandbox_reporting
+    @hostname = "aurora-ods.cluster-clc62ue6re4n.us-west-2.rds.amazonaws.com"
+    @username = "sgautam"
+    @password = "6N1J$rCFU(PxmU[I"
+    # 10.0.35.34
+    mr_c = establish_connection(
+      :adapter => 'mysql2',
+      :database => 'Sandbox_Reporting',
+      :host => @hostname,
+      :username => @username,
+      :password => @password,
+      :port => '3306'
+    )	
+    results = mr_c.connection.execute("select * from stag_adp_employeeinfo")
+    r_fields = results.fields.map{|f| f.underscore }
+    stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
+    # appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
+    #a_fields = appointment_results.fields.map{|f| f.underscore }
+    # appointment_data = appoint_results.map {|a| Hash[a_fields.zip(a)]}
     binding.pry
-    ActiveRecord::Base.establish_connection(:development)
-    self.save_stag_adp_employeeinfo(stag_adp.as_josn)
-    self.save_aetna_appointment_data(appointment_data.as_json)
+    establish_connection(:development)
+    # hashed_results.each {|b| Salesman.find_or_create_by(npn: b["npn"]).update(b)}
+    self.save_stag_adp_employeeinfo(stag_adp)
+    #self.save_aetna_appointment_data(appointment_data.as_json)
   end
 
   # stag_adp = external_db.execute(sql).as_json
   # appointment_data = external_db.execute(sql2).as_json
   def self.save_stag_adp_employeeinfo(stag_adp)
     stag_adp.each do |employee|
-      e = self.find_by(npn: employee[:npn])
+      e = self.find_by(npn: employee["npn"])
       if e.present?
         e.update!(employee)
       else
-        e.create!(employee)
-        e.update_states_licensing_info
+	  puts employee
+          n_e = self.create!(employee)
+          n_e.update_states_licensing_info
       end
     end
   end
 
   def self.save_aetna_appointment_data(a_data)
     a_data.each do |agent|
-      s = Salesman.find_or_create_by(npn: agent[:npn])
+      s = Salesman.find_or_create_by(npn: agent["npn"])
       agent.keys.each do |k|
         if k.to_s.length == 2
           Salesman.states.find_or_create_by(name: k).update(appointment_date: k)
@@ -292,7 +314,7 @@ class Salesman < ApplicationRecord
     @username = "sgautam"
     @password = "6N1J$rCFU(PxmU[I"
     # 10.0.35.34
-    @connection = establish_connection(
+    @conection = establish_connection(
       :adapter => 'mysql2',
       :database => 'Sandbox_Reporting',
       :host => @hostname,
@@ -300,8 +322,10 @@ class Salesman < ApplicationRecord
       :password => @password,
       :port => '3306'
     )
-      binding.pry
-  end
+    return @connection
+   end
+
+
 
   # def self.connect_to_localhost
   #   @hostname = "localhost"
@@ -351,22 +375,33 @@ class Salesman < ApplicationRecord
     end
     hashie
   end
+ 	
+  def update_agent_site
+    site = self.home_work_location_city
+    self.update(agent_site: site)
+  end
 
   def add_needed_states
     self.update(jit_sites_not_appointed_in: get_needed_states.join(", "))
   end
 
   def get_needed_states
-    all_states_names - states.all.map(&:name)
-  end
+    n_states = states_needed_per_site[agent_site]
+    if n_states != nil
+        states_needed_per_site[agent_site] - states.all.map(&:name)
+     else
+    	all_states_names - states.all.map(&:name)
+     end
+   end
 
   def states_needed_per_site
     {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
       "Sandy" => all_states_names,
       "Memphis" => all_states_names,
       "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sunrise" => ["AL", "LA"],
-      "Sawgrass" => all_states_names
+      "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
+      "Sawgrass" => all_states_names,
+      nil => all_states_names
     }
   end
 

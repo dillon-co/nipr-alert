@@ -3,7 +3,7 @@
 
 
   <h1> <%= "#{@salesman.first_name} #{@salesman.last_name}" %>
-      <% if @salesman.jit_sites_not_appointed_in == "" %>
+      <% if @check_or_naw == [] %>
         <i class="jit-done material-icons done">done</i>
       <% else %>
         <i class="jit-not-done material-icons clear">clear</i><br>
@@ -17,7 +17,7 @@
          <h3>Position ID: <%= @salesman.position_id %> </h3>
        </div>
        <div class="col-md-4">
-         <h4> NpN: <%= @salesman.npn %> </h4>
+         <h3> NpN: <%= @salesman.npn %> </h3>
        </div>
      </div>
   <% if admin_signed_in?  %>
@@ -29,7 +29,7 @@
     <div id="mapid"></div>
   <br>
   States Needed:
-  <%= @salesman.get_needed_states.join(', ') %>
+  <%= @check_or_naw.join(', ') %>
 
   <br><br>
 

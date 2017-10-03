@@ -1,5 +1,4 @@
 <div id="filterrific_results">
-  <%= will_paginate salesmen, class: "digg_pagination" %>
   <table id='myTable'>
       <thead>
         <tr>
@@ -25,15 +24,15 @@
             <td> <%= salesman.position_id %> </td>
               <td><%= salesman.first_name %></td>
               <td> <%= salesman.last_name %> </td>
-              <td> <%= salesman.agent_supervisor %> </td>
+              <td> <%= salesman.reports_to_name %> </td>
               <td> <%= salesman.agent_site %> </td>
-              <td> <%= salesman.position_start_date %> </td>
-              <td> <%= salesman.deleted == 0 ? "Active" : "Terminated" %> </td>
+              <td> <%= salesman.start_date %> </td>
+              <td> <%= salesman.worker_status %> </td>
               <% if salesman.npn.present? %>
                 <td> <%= salesman.npn %> </td>
                 <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'yes').references(:licenses).count %></td>
                 <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'no').references(:licenses).count %></td>
-                <% if salesman.jit_sites_not_appointed_in == ""  %>
+                <% if salesman.get_needed_states == []  %>
                   <td><i class="jit-done material-icons done">done</i></td>
                 <% else %>
                   <td><i class="jit-not-done material-icons clear">clear</i></td>

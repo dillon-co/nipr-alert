@@ -26,12 +26,18 @@
     first name, last name, supervisor, site or npn
   </div>
   <div class='col-md-3'>
-    Hired after
-    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %>
+    Hired After  
+    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %><br>
+    Hired Before
+    <%= f.text_field(:created_before_gte, class: 'js-datepicker') %>
   </div>
   <div class='col-md-3'>
     Sorted by
     <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  </div>
+  <div class='col-md-3'>
+     Show Only Active Agents
+     <%= f.check_box :is_active %>
   </div>
   <div class='col-md-3'>
     <%= link_to(

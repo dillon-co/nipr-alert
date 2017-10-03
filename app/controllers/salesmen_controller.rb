@@ -145,8 +145,8 @@ class SalesmenController < ApplicationController
   end
 
   def get_check_mark_for_agent(agent, states)
-    if agent.agent_site.present?
-        sites_with_just_in_time_states[agent.agent_site.titleize] - states
+    if agent.home_work_location_city.present?
+        sites_with_just_in_time_states[agent.home_work_location_city.titleize] - states
     else
         all_states_names - states
     end
@@ -157,7 +157,7 @@ class SalesmenController < ApplicationController
       "Sandy" => all_states_names,
       "Memphis" => all_states_names,
       "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sunrise" => ["AL", "LA"],
+      "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
       "Sawgrass" => all_states_names
     }
 
@@ -261,6 +261,7 @@ class SalesmenController < ApplicationController
       "Sandy" => jit_states,
       "Memphis" => jit_states,
       "San Antonio" => jit_states,
-      "Sawgrass" => jit_states}
+      "Sawgrass" => jit_states,
+       nil => jit_states}
   end
 end
