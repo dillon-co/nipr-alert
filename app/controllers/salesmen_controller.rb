@@ -146,7 +146,7 @@ class SalesmenController < ApplicationController
 
   def get_check_mark_for_agent(agent, states)
     if agent.home_work_location_city.present?
-        sites_with_just_in_time_states[agent.home_work_location_city.titleize] - states
+        states_needed_per_site[agent.home_work_location_city.titleize] - states
     else
         all_states_names - states
     end
