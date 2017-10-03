@@ -35,13 +35,13 @@ class SalesmenController < ApplicationController
     @check_or_naw = get_check_mark_for_agent(@salesman, @licensed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
-    @can_sell_states = [@appointed_states, @jit_states].flatten.uniq.compact.map(&:name)
-    @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @licensed_states_names = @licensed_states.map(&:name)
+    @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states_names.include?(s)}
+    @can_sell_states = [@appointed_states.map(&:name), @jit_states].flatten.uniq.compact
+    @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states[@salesman.agent_site] : @jit_states = []
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
     @appointed_states_names = @appointed_states.map(&:name)
-    @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states_names.include?(s)}
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
     @all_states_names = all_states_names
   end
