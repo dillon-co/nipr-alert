@@ -158,7 +158,7 @@ class SalesmenController < ApplicationController
       "Memphis" => all_states_names,
       "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-      "Sawgrass" => all_states_names
+      "Sawgrass" => all_states_names,
       "Roy" => all_states_names
     }
 
