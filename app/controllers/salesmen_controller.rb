@@ -33,7 +33,6 @@ class SalesmenController < ApplicationController
     @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
     @expired_states_names = @expired_states.map(&:name)
     @check_or_naw = get_check_mark_for_agent(@salesman, @licensed_states.map(&:name))
-    binding.pry
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
     @can_sell_states = [@appointed_states, @jit_states].flatten.uniq.compact.map(&:name)
@@ -155,7 +154,7 @@ class SalesmenController < ApplicationController
     {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
       "Sandy" => all_states_names,
       "Memphis" => all_states_names,
-      "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
+      "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
       "Sawgrass" => all_states_names,
       "Roy" => all_states_names
