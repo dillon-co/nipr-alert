@@ -12,7 +12,7 @@ class StatesController < ApplicationController
   def show
     @state = State.find(params[:id])
     @salesman = @state.salesman
-    @license = @state.licenses.last.attributes.except!("created_at", "updated_at", "state_id", "id", "salesman_id") if @state.license.present?
+    @license = @state.licenses.last.attributes.except!("created_at", "updated_at", "state_id", "id", "salesman_id") if @state.licenses.present?
     @appointments = @state.appointments.all
   end
 
