@@ -11,7 +11,6 @@ class SalesmenController < ApplicationController
       :select_options => {
         sorted_by: Salesman.options_for_sorted_by
       }
-
     ) or return
     @salesmen = @filterrific.find.page(params[:page])
 
@@ -45,7 +44,6 @@ class SalesmenController < ApplicationController
     @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states.include?(s)}
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
     @all_states_names = all_states_names
-
   end
 
   # GET /salesmen/new
