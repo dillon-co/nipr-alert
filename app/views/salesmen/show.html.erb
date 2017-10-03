@@ -237,13 +237,17 @@ function getColor(d) {
   for (var i = 0, len = canSellStates.length; i < len; i++){
      var x = canSellStates[i].replace(/&quot;/g, '')
      var y = x.replace(" ", '')
-     sellStates.push(y);
+     var q = y.replace("[", '')
+     var b = q.replace("]", '')
+     sellStates.push(b);
   };
   var expStates = []
   for (var i = 0, len = expiredStates.length; i < len; i++){
     var x = expiredStates[i].replace(/&quot;/g, '')
     var y = x.replace(" ", '')
-    expStates.push(y);
+    var q = y.replace("[", '')
+    var b = q.replace("]", '')
+    expStates.push(b);
   };
   console.log(sellStates)
   if ($.inArray(d, sellStates) >= 0){
