@@ -263,6 +263,7 @@ class SalesmenController < ApplicationController
       "Memphis" => jit_states,
       "San Antonio" => jit_states,
       "Sawgrass" => jit_states,
+      "Roy" => jit_states,
        nil => jit_states}
   end
 end
