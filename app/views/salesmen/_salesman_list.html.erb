@@ -22,8 +22,8 @@
           <tr>
             <%= link_to salesman do %>
             <td> <%= salesman.position_id %> </td>
-              <td><%= salesman.first_name.present?  salesman.first_name : salesman.given_name %></td>
-              <td> <%= salesman.last_name.present?  salesman.last_name : @salesman.family_name %> </td>
+              <td><%= salesman.first_name.present? ?  salesman.first_name : salesman.given_name %></td>
+              <td> <%= salesman.last_name.present? ? salesman.last_name : @salesman.family_name %> </td>
               <td> <%= salesman.reports_to_name %> </td>
               <td> <%= salesman.agent_site %> </td>
               <td> <%= salesman.start_date %> </td>
