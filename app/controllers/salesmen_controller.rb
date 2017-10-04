@@ -38,7 +38,8 @@ class SalesmenController < ApplicationController
     @non_licensed_states = all_states_names - @all_salesman_states
     @licensed_states_names = @licensed_states.map(&:name)
     @appointed_states_names = @appointed_states.map(&:name)
-    @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states_names.include?(s)}
+    @jit_states = []
+    sites_with_just_in_time_states[@salesman.agent_site].each { |s| @jit_states << s if @licensed_states_names.include?(s)}
     @can_sell_states = [@appointed_states_names, @jit_states].flatten.uniq.compact
     @check_or_naw = @needed_states - @can_sell_states
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
@@ -167,60 +168,6 @@ class SalesmenController < ApplicationController
   def sandy_states
     "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
   end
-
-  "AL
-AZ
-CO
-IL
-IN
-KY
-LA
-MT
-OH
-OR
-PA
-PR
-RI
-UT
-VT
-VI
-WA
-WI
-AK
-AR
-CA
-CT
-DE
-DC
-FL
-GA
-HI
-ID
-IA
-KS
-ME
-MD
-MA
-MI
-MN
-MS
-MO
-NE
-NV
-NH
-NJ
-NM
-NY
-NC
-ND
-OK
-SC
-SD
-TN
-TX
-VA
-WV
-WY"
 
 
   def all_states_names

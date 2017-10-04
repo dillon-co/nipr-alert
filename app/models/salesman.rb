@@ -172,15 +172,16 @@ class Salesman < ApplicationRecord
 
   def self.update_batch_agent_state_data(agent_data, agent)
     agent_data["License"].each do |state_license|
-      s = agent.states.find_or_create_by(name: state_license["State_Code"])
-      s.licenses.create(license_num: state_license["License_Number"],
-                            date_issue_license_orig: state_license["License_Issue_Date"],
-                            date_expire_license: state_license["License_Expiration_Date"],
-                            license_class: state_license["Class"],
-                            license_class_code: state_license["License_Class_Code"],
-                            residency_status: state_license["Resident_Indicator"],
-                            active: state_license["Active"])
-
+      if state_license 
+        s = agent.states.find_or_create_by(name: state_license["State_Code"])
+        s.licenses.create(license_num: state_license["License_Number"],
+                              date_issue_license_orig: state_license["License_Issue_Date"],
+                              date_expire_license: state_license["License_Expiration_Date"],
+                              license_class: state_license["Class"],
+                              license_class_code: state_license["License_Class_Code"],
+                              residency_status: state_license["Resident_Indicator"],
+                              active: state_license["Active"])
+      end
     end
     self.add_appointments_to_each_state(agent_data, agent)
   end
