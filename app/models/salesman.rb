@@ -69,12 +69,14 @@ class Salesman < ApplicationRecord
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you
     # change the number of OR conditions.
-    num_or_conditions = 5
+    num_or_conditions = 7
     where(
       terms.map {
         or_clauses = [
           "LOWER(salesmen.first_name) LIKE ?",
+          "LOWER(salesmen.given_name) LIKE ?",
           "LOWER(salesmen.last_name) LIKE ?",
+          "LOWER(salesmen.family_name) LIKE ?",
           "LOWER(salesmen.reports_to_name) LIKE ?",
           "LOWER(salesmen.agent_site) LIKE ?",
           "LOWER(salesmen.npn) LIKE ?"
@@ -172,7 +174,7 @@ class Salesman < ApplicationRecord
 
   def self.update_batch_agent_state_data(agent_data, agent)
     agent_data["License"].each do |state_license|
-      if state_license 
+      if state_license
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
