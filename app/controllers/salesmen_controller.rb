@@ -36,12 +36,12 @@ class SalesmenController < ApplicationController
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
     @licensed_states_names = @licensed_states.map(&:name)
+    @appointed_states_names = @appointed_states.map(&:name)
     @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states_names.include?(s)}
-    @can_sell_states = [@appointed_states.map(&:name), @jit_states].flatten.uniq.compact
+    @can_sell_states = [@appointed_states_names, @jit_states].flatten.uniq.compact
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states[@salesman.agent_site] : @jit_states = []
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
-    @appointed_states_names = @appointed_states.map(&:name)
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site[@salesman.agent_site] : @states_needed = all_states_names
     @all_states_names = all_states_names
   end
@@ -152,7 +152,7 @@ class SalesmenController < ApplicationController
 
   def states_needed_per_site
     {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-      "Sandy" => all_states_names,
+      "Sandy" => sandy_states,
       "Memphis" => all_states_names,
       "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
@@ -161,6 +161,63 @@ class SalesmenController < ApplicationController
     }
 
   end
+
+  def sandy_states
+    "AL
+    AZ
+    CO
+    IL
+    IN
+    KY
+    LA
+    MT
+    OH
+    OR
+    PA
+    PR
+    RI
+    UT
+    VT
+    VI
+    WA
+    WI
+    AK
+    AR
+    CA
+    CT
+    DE
+    DC
+    FL
+    GA
+    HI
+    ID
+    IA
+    KS
+    ME
+    MD
+    MA
+    MI
+    MN
+    MS
+    MO
+    NE
+    NV
+    NH
+    NJ
+    NM
+    NY
+    NC
+    ND
+    OK
+    SC
+    SD
+    TN
+    TX
+    VA
+    WV
+    WY".split("\n")
+  end
+
 
   def all_states_names
     ["AK",
