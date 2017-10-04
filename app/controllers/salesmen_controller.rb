@@ -164,59 +164,7 @@ class SalesmenController < ApplicationController
   end
 
   def sandy_states
-    "AL
-    AZ
-    CO
-    IL
-    IN
-    KY
-    LA
-    MT
-    OH
-    OR
-    PA
-    PR
-    RI
-    UT
-    VT
-    VI
-    WA
-    WI
-    AK
-    AR
-    CA
-    CT
-    DE
-    DC
-    FL
-    GA
-    HI
-    ID
-    IA
-    KS
-    ME
-    MD
-    MA
-    MI
-    MN
-    MS
-    MO
-    NE
-    NV
-    NH
-    NJ
-    NM
-    NY
-    NC
-    ND
-    OK
-    SC
-    SD
-    TN
-    TX
-    VA
-    WV
-    WY".split("\n")
+    "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT VI WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
   end
 
 
