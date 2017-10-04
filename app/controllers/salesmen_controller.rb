@@ -32,13 +32,15 @@ class SalesmenController < ApplicationController
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
     @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
     @expired_states_names = @expired_states.map(&:name)
-    @check_or_naw = get_check_mark_for_agent(@salesman, @appointed_states.map(&:name))
+    @needed_states = states_needed_per_site[@salesman.agent_site]
+    # @check_or_naw = get_check_mark_for_agent(@salesman, @appointed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
     @licensed_states_names = @licensed_states.map(&:name)
     @appointed_states_names = @appointed_states.map(&:name)
     @jit_states = sites_with_just_in_time_states[@salesman.agent_site].map { |s| s if @licensed_states_names.include?(s)}
     @can_sell_states = [@appointed_states_names, @jit_states].flatten.uniq.compact
+    @check_or_naw = @needed_states - @can_sell_states
     binding.pry
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states[@salesman.agent_site] : @jit_states = []
