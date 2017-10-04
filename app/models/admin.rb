@@ -24,6 +24,6 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   def self.add_admins
-    [{email: },]
+    # [{email: },]
   end
 end
