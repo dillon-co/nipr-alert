@@ -159,10 +159,10 @@ class Salesman < ApplicationRecord
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       agent = self.find_by(npn: a["National_Producer_Number"])
       if agent.present?
-        agent.update(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
-                    last_name: agent_data["Name_Birth"]["First_Name"].titleize,
-                    agent_site: agent_data["Address"].first["City"].titleize,
-                    home_work_location_city: agent_data["Address"].first["City"].titleize)
+        agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
+                    last_name: a["Name_Birth"]["First_Name"].titleize,
+                    agent_site: a["Address"].first["City"].titleize,
+                    home_work_location_city: a["Address"].first["City"].titleize)
         self.update_batch_agent_state_data(a, agent)
       else
          self.create_agent_with_data(a)
