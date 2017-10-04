@@ -68,7 +68,7 @@
             <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
            <% end %>
 
-          <% if @appointed_states_names.include?(state) || @jit_states.include?(state) %>
+          <% if @can_sell_states.includes?(state) %>
             <td>
               <i class="jit-done material-icons done">done</i> - Yes
             </td>
