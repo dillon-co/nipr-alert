@@ -86,12 +86,18 @@ class Salesman < ApplicationRecord
   }
 
   scope :with_created_at_gte, lambda { |ref_date|
-    where('salesmen.start_date > ?', ref_date.to_date)
+    date_arr = ref_date.split('/')
+    year = date_arr.pop
+    new_date = date_arr.unshift(year).join("-").to_date
+    where('salesmen.start_date > ?', new_date)
     # where('salesmen.position_start_date BETWEEN ? AND ?', ref_date1, ref_date2)
   }
 
   scope :created_before_gte, lambda { |ref_date|
-     where('salesmen.start_date < ?', ref_date.to_date)
+    date_arr = ref_date.split('/')
+    year = date_arr.pop
+    new_date = date_arr.unshift(year).join("-").to_date
+     where('salesmen.start_date < ?', new_date)
   }
 
   scope :sorted_by, lambda { |sort_option|
