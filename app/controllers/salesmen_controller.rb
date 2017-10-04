@@ -27,6 +27,8 @@ class SalesmenController < ApplicationController
   # GET /salesmen/1.json
   def show
     @salesman = Salesman.find(params[:id])
+    @salesman_first = @salesman.first_name.present?  @salesman.first_name : @salesman.given_name
+    @salesman_last = @salesman.last_name.present?  @salesman.last_name : @salesman.family_name 
     @licensed_states = @salesman.states.all.compact
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
