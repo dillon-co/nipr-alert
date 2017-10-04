@@ -151,6 +151,66 @@ class Salesman < ApplicationRecord
     update_states_licensing_info
   end
 
+  def self.update_licensing_info_from_batch
+    ##Read XML as array,
+    doc = File.open("#{Rails.root}/pdb_batch.xml") # do |f|
+    #    Nokogiri::XML(f)
+    doc_hash = Hash.from_xml(doc)
+    doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
+      agent = self.find_by(npn: a["National_Producer_Number"])
+      if agent?
+        agent.update(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                    last_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                    agent_site: agent_data["Address"].first["City"].titleize,
+                    home_work_location_city: agent_data["Address"].first["City"].titleize)
+        self.update_batch_agent_state_data(a, agent)
+      else
+         self.create_agent_with_data(a)
+      end
+    end
+  end
+
+  def self.update_batch_agent_state_data(agent_data, agent)
+    agent_data["License"].each do |state_license|
+      s = agent.states.find_or_create_by(name: state_license["State_Code"])
+      s.licenses.create(license_num: state_license["License_Number"],
+                            date_issue_license_orig: state_license["License_Issue_Date"],
+                            date_expire_license: state_license["License_Expiration_Date"],
+                            license_class: state_license["Class"],
+                            license_class_code: state_license["License_Class_Code"],
+                            residency_status: state_license["Resident_Indicator"],
+                            active: state_license["Active"])
+
+    end
+    self.add_appointments_to_each_state(agent_data, agent)
+  end
+
+  def self.add_appointments_to_each_state(agent_data, agent)
+    self.states.all.each do |s|
+      matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
+      matching_states.each do |appoint|
+        s.appointments.create(company_name: appoint["Company_Name"],
+                              fein: appoint["FEIN"],
+                              cocode: appoint["COCODE"],
+                              line_of_authority: appoint["Line_Of_Authority"],
+                              loa_code: appoint["LOA_Code"],
+                              status: appoint["Status"],
+                              termination_reason: appoint["Termination_Reason"],
+                              status_reason_date: appoint["Status_Reason_Date"],
+                              appont_renewal_date: appoint["Renewal_Date"]
+                              )
+      end
+    end
+  end
+
+  def create_agent_with_data(agent_data)
+    a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                 last_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                 agent_site: agent_data["Address"].first["City"].titleize,
+                 home_work_location_city: agent_data["Address"].first["City"].titleize)
+    self.update_batch_agent_state_data(agent_data, a)
+  end
+
   def update_states_licensing_info
     data = grab_info
     update_name_if_nil(data)
