@@ -26,7 +26,7 @@ class Admin < ApplicationRecord
   def self.add_admins
     # [{email: "dburgess@connexionpoint.com"},]
 
-   %w(dooneal@connexionpoint.com, dburgess@connexionpoint.com, aburgess@connexionpoint.com, calvarado@connexionpoint.com, chopkins@connexionpoint.com, sgautam@connexionpoint.com, bhunsaker@connexionpoint.com).each do |em|
+   %w(doneal@connexionpoint.com dburgess@connexionpoint.com aburgess@connexionpoint.com calvarado@connexionpoint.com chopkins@connexionpoint.com sgautam@connexionpoint.com bhunsaker@connexionpoint.com).each do |em|
      self.create(email: em, password: "Connexion212")
    end
   end
