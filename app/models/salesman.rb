@@ -452,6 +452,7 @@ class Salesman < ApplicationRecord
   end
 
   def get_needed_states
+      # @check_or_naw = @needed_states - @can_sell_states
     n_states = states_needed_per_site[agent_site]
     if n_states != nil
         states_needed_per_site[agent_site] - states.all.map(&:name)
@@ -460,17 +461,21 @@ class Salesman < ApplicationRecord
      end
    end
 
-  def states_needed_per_site
-    {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-      "Sandy" => all_states_names,
-      "Memphis" => all_states_names,
-      "San Antonio" => ["AR", "ND" "IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-      "Sawgrass" => all_states_names,
-      "Roy" => all_states_names,
-      nil => all_states_names
-    }
-  end
+   def states_needed_per_site
+     {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
+       "Sandy" => sandy_states,
+       "Memphis" => all_states_names,
+       "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
+       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
+       "Sawgrass" => all_states_names,
+       "Roy" => all_states_names
+     }
+
+   end
+
+   def sandy_states
+     "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
+   end
 
   def all_states_names
     ["AK",
