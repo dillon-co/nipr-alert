@@ -158,7 +158,7 @@ class Salesman < ApplicationRecord
     doc_hash = Hash.from_xml(doc)
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       agent = self.find_by(npn: a["National_Producer_Number"])
-      if agent?
+      if agent.present?
         agent.update(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                     last_name: agent_data["Name_Birth"]["First_Name"].titleize,
                     agent_site: agent_data["Address"].first["City"].titleize,
