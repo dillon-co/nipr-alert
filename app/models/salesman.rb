@@ -186,7 +186,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.add_appointments_to_each_state(agent_data, agent)
-    self.states.all.each do |s|
+    agent.states.all.each do |s|
       matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
       matching_states.each do |appoint|
         s.appointments.create(company_name: appoint["Company_Name"],
