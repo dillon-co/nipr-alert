@@ -466,16 +466,7 @@ class Salesman < ApplicationRecord
    end
 
    def states_needed_per_site
-     if self.client == "Aetna" || self.client == "Carefree"
-       {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-         "Sandy" => sandy_states,
-         "Memphis" => all_states_names,
-         "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
-         "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-         "Sawgrass" => all_states_names,
-         "Roy" => all_states_names
-       }
-     elsif self.client == "Anthem"
+     if self.client == "Anthem"
        {"Provo" => anthem_states,
          "Sandy" => anthem_states,
          "Memphis" => anthem_states,
@@ -483,6 +474,15 @@ class Salesman < ApplicationRecord
          "Sunrise" => anthem_states,
          "Sawgrass" => anthem_states,
          "Roy" => anthem_states
+       }
+     else
+       {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
+         "Sandy" => sandy_states,
+         "Memphis" => all_states_names,
+         "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
+         "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
+         "Sawgrass" => all_states_names,
+         "Roy" => all_states_names
        }
      end
    end
