@@ -476,12 +476,12 @@ class Salesman < ApplicationRecord
          "Roy" => all_states_names
        }
      elsif self.client == "Anthem"
-       {"Provo" => anthem_states
-         "Sandy" => anthem_states
-         "Memphis" => anthem_states
-         "San Antonio" => anthem_states
-         "Sunrise" => anthem_states
-         "Sawgrass" => anthem_states
+       {"Provo" => anthem_states,
+         "Sandy" => anthem_states,
+         "Memphis" => anthem_states,
+         "San Antonio" => anthem_states,
+         "Sunrise" => anthem_states,
+         "Sawgrass" => anthem_states,
          "Roy" => anthem_states
        }
      end

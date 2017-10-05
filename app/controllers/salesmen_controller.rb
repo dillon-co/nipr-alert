@@ -166,12 +166,12 @@ class SalesmenController < ApplicationController
         "Roy" => all_states_names
       }
     elsif self.client == "Anthem"
-      {"Provo" => anthem_states
-        "Sandy" => anthem_states
-        "Memphis" => anthem_states
-        "San Antonio" => anthem_states
-        "Sunrise" => anthem_states
-        "Sawgrass" => anthem_states
+      {"Provo" => anthem_states,
+        "Sandy" => anthem_states,
+        "Memphis" => anthem_states,
+        "San Antonio" => anthem_states,
+        "Sunrise" => anthem_states,
+        "Sawgrass" => anthem_states,
         "Roy" => anthem_states
       }
     end
@@ -180,7 +180,7 @@ class SalesmenController < ApplicationController
   def sandy_states
     "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
   end
-  
+
   def anthem_states
      %w(CA
         CO
