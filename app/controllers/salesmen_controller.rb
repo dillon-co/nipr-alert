@@ -28,7 +28,7 @@ class SalesmenController < ApplicationController
   def show
     @salesman = Salesman.find(params[:id])
     @salesman_first = @salesman.first_name.present? ? @salesman.first_name : @salesman.given_name
-    @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name 
+    @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name
     @licensed_states = @salesman.states.all.compact
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
@@ -156,19 +156,48 @@ class SalesmenController < ApplicationController
   end
 
   def states_needed_per_site
-    {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-      "Sandy" => sandy_states,
-      "Memphis" => all_states_names,
-      "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
-      "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-      "Sawgrass" => all_states_names,
-      "Roy" => all_states_names
-    }
-
+    if self.client == "Aetna" || self.client == "Carefree"
+      {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
+        "Sandy" => sandy_states,
+        "Memphis" => all_states_names,
+        "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
+        "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
+        "Sawgrass" => all_states_names,
+        "Roy" => all_states_names
+      }
+    elsif self.client == "Anthem"
+      {"Provo" => anthem_states
+        "Sandy" => anthem_states
+        "Memphis" => anthem_states
+        "San Antonio" => anthem_states
+        "Sunrise" => anthem_states
+        "Sawgrass" => anthem_states
+        "Roy" => anthem_states
+      }
+    end
   end
 
   def sandy_states
     "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
+  end
+  
+  def anthem_states
+     %w(CA
+        CO
+        CT
+        GA
+        IN
+        KS
+        KY
+        ME
+        MD
+        MO
+        NH
+        NV
+        NY
+        OH
+        VA
+        WI)
   end
 
 

@@ -69,7 +69,7 @@ class Salesman < ApplicationRecord
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you
     # change the number of OR conditions.
-    num_or_conditions = 7
+    num_or_conditions = 8
     where(
       terms.map {
         or_clauses = [
@@ -79,7 +79,8 @@ class Salesman < ApplicationRecord
           "LOWER(salesmen.family_name) LIKE ?",
           "LOWER(salesmen.reports_to_name) LIKE ?",
           "LOWER(salesmen.agent_site) LIKE ?",
-          "LOWER(salesmen.npn) LIKE ?"
+          "LOWER(salesmen.npn) LIKE ?",
+          "LOWER(salesmen.client) LIKE ?"
         ].join(' OR ')
         "(#{ or_clauses })"
       }.join(' AND '),
@@ -465,15 +466,25 @@ class Salesman < ApplicationRecord
    end
 
    def states_needed_per_site
-     {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-       "Sandy" => sandy_states,
-       "Memphis" => all_states_names,
-       "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
-       "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-       "Sawgrass" => all_states_names,
-       "Roy" => all_states_names
-     }
-
+     if self.client == "Aetna" || self.client == "Carefree"
+       {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
+         "Sandy" => sandy_states,
+         "Memphis" => all_states_names,
+         "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
+         "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
+         "Sawgrass" => all_states_names,
+         "Roy" => all_states_names
+       }
+     elsif self.client == "Anthem"
+       {"Provo" => anthem_states
+         "Sandy" => anthem_states
+         "Memphis" => anthem_states
+         "San Antonio" => anthem_states
+         "Sunrise" => anthem_states
+         "Sawgrass" => anthem_states
+         "Roy" => anthem_states
+       }
+     end
    end
 
    def sandy_states
@@ -612,5 +623,24 @@ class Salesman < ApplicationRecord
     elsif split_clients.include?("Anthem")
       self.update(client: "Anthem")
     end
+  end
+
+  def anthem_states
+     %w(CA
+        CO
+        CT
+        GA
+        IN
+        KS
+        KY
+        ME
+        MD
+        MO
+        NH
+        NV
+        NY
+        OH
+        VA
+        WI)
   end
 end

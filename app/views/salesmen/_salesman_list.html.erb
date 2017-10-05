@@ -8,6 +8,7 @@
 
           <th class='sortable'><h5>Superviser</h5></th>
           <th class='sortable'><h5>Site</h5></th>
+          <th class='sortable'><h5>Clilent</h5></th>
           <th class='sortable'><h5>Start Date</h5></th>
           <th class='sortable'> <h5>Active</h5> </th>
           <th class='sortable'><h5>NPN</h5></th>
@@ -26,6 +27,7 @@
               <td> <%= salesman.last_name.present? ? salesman.last_name : salesman.family_name %> </td>
               <td> <%= salesman.reports_to_name %> </td>
               <td> <%= salesman.agent_site %> </td>
+              <td> <%= salesman.client %> </td>
               <td> <%= salesman.start_date %> </td>
               <td> <%= salesman.worker_status %> </td>
               <% if salesman.npn.present? %>
