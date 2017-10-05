@@ -602,4 +602,8 @@ class Salesman < ApplicationRecord
     self.update_npns_from_spread_sheet
   end
 
+  def get_client
+    cli_arr = self.states.includes(:appointments).all.map { |s| s.appointments.all.map {|apt| apt.client} }.flatten.uniq
+
+  end
 end
