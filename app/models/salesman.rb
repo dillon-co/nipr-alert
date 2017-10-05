@@ -603,7 +603,6 @@ class Salesman < ApplicationRecord
   end
 
   def get_client
-    cli_arr = self.states.includes(:appointments).all.map { |s| s.appointments.all.map {|apt| apt.client} }.flatten.uniq
-
+    cli_arr = self.states.includes(:appointments).all.map { |s| s.appointments.all.map {|apt| apt.company_name} }.flatten.uniq
   end
 end
