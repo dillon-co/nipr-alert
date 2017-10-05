@@ -604,5 +604,13 @@ class Salesman < ApplicationRecord
 
   def get_client
     cli_arr = self.states.includes(:appointments).all.map { |s| s.appointments.all.map {|apt| apt.company_name} }.flatten.uniq
+    split_clients = cli_arr.join(" ").split(" ")
+    if split_clients.include?("Aetna") && split_clients.include?("Anthem")
+      self.update(client: "Carefree")
+    elsif split_clients.include("Aetna")
+      self.update(client: "Aetna")
+    elsif split_clients.include("Anthem")
+      self.update(client: "Anthem")
+    end
   end
 end
