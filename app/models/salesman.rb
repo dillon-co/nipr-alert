@@ -607,9 +607,9 @@ class Salesman < ApplicationRecord
     split_clients = cli_arr.join(" ").split(" ")
     if split_clients.include?("Aetna") && split_clients.include?("Anthem")
       self.update(client: "Carefree")
-    elsif split_clients.include("Aetna")
+    elsif split_clients.include?("Aetna")
       self.update(client: "Aetna")
-    elsif split_clients.include("Anthem")
+    elsif split_clients.include?("Anthem")
       self.update(client: "Anthem")
     end
   end
