@@ -24,7 +24,7 @@ class Appointment < ApplicationRecord
 
   def self.get_clients
     cli = self.all.map do |apt|
-      appointment.company_name
+      apt.company_name
     end
     cli.compact.uniq
   end
