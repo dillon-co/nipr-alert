@@ -34,7 +34,7 @@ class SalesmenController < ApplicationController
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
     @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
     @expired_states_names = @expired_states.map(&:name)
-    @needed_states = states_needed_per_site(salesman)[@salesman.agent_site]
+    @needed_states = states_needed_per_site(@salesman)[@salesman.agent_site]
     # @check_or_naw = get_check_mark_for_agent(@salesman, @appointed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
