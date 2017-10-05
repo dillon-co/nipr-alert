@@ -21,4 +21,11 @@
 
 class Appointment < ApplicationRecord
   belongs_to :state
+
+  def self.get_clients
+    cli = self.all.map do |apt|
+      appointment.company_name
+    end
+    cli.compact.uniq
+  end
 end
