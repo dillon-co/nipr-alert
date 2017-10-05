@@ -643,4 +643,11 @@ class Salesman < ApplicationRecord
         VA
         WI)
   end
+
+  def self.update_clients
+    self.all.each do |s|
+      d_v = s.department_value.split(": ").last.split(" ").first
+      s.update(client: d_v)
+    end
+  end
 end
