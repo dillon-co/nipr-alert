@@ -196,19 +196,21 @@ class Salesman < ApplicationRecord
 
   def self.add_appointments_to_each_state(agent_data, agent)
     agent.states.all.each do |s|
-      matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
-      matching_states.each do |appoint|
-        s.appointments.create(company_name: appoint["Company_Name"],
-                              fein: appoint["FEIN"],
-                              cocode: appoint["COCODE"],
-                              line_of_authority: appoint["Line_Of_Authority"],
-                              loa_code: appoint["LOA_Code"],
-                              status: appoint["Status"],
-                              termination_reason: appoint["Termination_Reason"],
-                              status_reason_date: appoint["Status_Reason_Date"],
-                              appont_renewal_date: appoint["Renewal_Date"]
-                              )
-      end
+      if agent_data["Appointment"] != nil
+        matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
+        matching_states.each do |appoint|
+          s.appointments.create(company_name: appoint["Company_Name"],
+                                fein: appoint["FEIN"],
+                                cocode: appoint["COCODE"],
+                                line_of_authority: appoint["Line_Of_Authority"],
+                                loa_code: appoint["LOA_Code"],
+                                status: appoint["Status"],
+                                termination_reason: appoint["Termination_Reason"],
+                                status_reason_date: appoint["Status_Reason_Date"],
+                                appont_renewal_date: appoint["Renewal_Date"]
+                                )
+        end
+      end  
     end
   end
 
