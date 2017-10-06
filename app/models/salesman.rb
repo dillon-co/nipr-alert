@@ -166,7 +166,6 @@ class Salesman < ApplicationRecord
                     last_name: a["Name_Birth"]["First_Name"].titleize,
                     agent_site: a["Address"].first["City"].titleize,
                     home_work_location_city: a["Address"].first["City"].titleize)
-                    binding.pry
         self.update_batch_agent_state_data(a, agent)
       else
          self.create_agent_with_data(a)
@@ -175,7 +174,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.update_batch_agent_state_data(agent_data, agent)
-    license_data = agent_date["License"].map {|l| l.compact != [] ?  l : nil }.compact
+    license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
         state_license = state_license.to_h if state_license.is_a?(Array)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
