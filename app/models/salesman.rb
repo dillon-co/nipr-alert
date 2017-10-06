@@ -177,7 +177,7 @@ class Salesman < ApplicationRecord
   def self.update_batch_agent_state_data(agent_data, agent)
     license_data = agent_date["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
-      state_license = state_license.to_h if state_license.is_a?(Array)
+        state_license = state_license.to_h if state_license.is_a?(Array)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
@@ -186,7 +186,6 @@ class Salesman < ApplicationRecord
                               license_class_code: state_license["License_Class_Code"],
                               residency_status: state_license["Resident_Indicator"],
                               active: state_license["Active"])
-      end
     end
     self.add_appointments_to_each_state(agent_data, agent)
   end
