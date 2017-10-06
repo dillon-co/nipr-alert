@@ -175,7 +175,7 @@ class Salesman < ApplicationRecord
 
   def self.update_batch_agent_state_data(agent_data, agent)
     agent_data["License"].each do |state_license|
-      if state_license
+      if state_license.is_a(Hash)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
@@ -649,7 +649,7 @@ class Salesman < ApplicationRecord
       if s.department_value.present?
         d_v = s.department_value.split(": ").last.split(" ").first
         s.update(client: d_v)
-      end  
+      end
     end
   end
 end
