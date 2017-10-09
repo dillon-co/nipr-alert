@@ -41,11 +41,11 @@ class SalesmenController < ApplicationController
     @licensed_states_names = @licensed_states.map(&:name)
     @appointed_states_names = @appointed_states.map(&:name)
     @jit_states = []
-    sites_with_just_in_time_states[@salesman.agent_site].each { |s| @jit_states << s if @licensed_states_names.include?(s)}
+    sites_with_just_in_time_states.each { |s| @jit_states << s if @licensed_states_names.include?(s)}
     @can_sell_states = [@appointed_states_names, @jit_states].flatten.uniq.compact
     @check_or_naw = @needed_states - @can_sell_states
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
-    @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states[@salesman.agent_site] : @jit_states = []
+    @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states : @jit_states = []
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman)[@salesman.agent_site] : @states_needed = all_states_names
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman)[@salesman.agent_site] : @states_needed = all_states_names
     @all_states_names = all_states_names
@@ -294,13 +294,6 @@ class SalesmenController < ApplicationController
   end
 
   def sites_with_just_in_time_states
-    {"Provo" =>  jit_states,
-      "Sunrise" => jit_states,
-      "Sandy" => jit_states,
-      "Memphis" => jit_states,
-      "San Antonio" => jit_states,
-      "Sawgrass" => jit_states,
-      "Roy" => jit_states,
-       nil => jit_states}
+    jit_states
   end
 end
