@@ -204,10 +204,10 @@ class Salesman < ApplicationRecord
       if state_license.count > 1
         state_l = state_license.first
       else
-        state_l = state_license.to_h 
+        state_l = state_license.to_h
       end
     end
-    return state_license
+    return state_l
   end
 
   def self.add_appointments_to_each_state(agent_data, agent)
