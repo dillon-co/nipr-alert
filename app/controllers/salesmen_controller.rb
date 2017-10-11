@@ -163,7 +163,8 @@ class SalesmenController < ApplicationController
         "San Antonio" => anthem_states,
         "Sunrise" => anthem_states,
         "Sawgrass" => anthem_states,
-        "Roy" => anthem_states
+        "Roy" => anthem_states,
+        nil => anthem_states
       }
     else
       {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
@@ -172,7 +173,8 @@ class SalesmenController < ApplicationController
         "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
         "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
         "Sawgrass" => all_states_names,
-        "Roy" => all_states_names
+        "Roy" => all_states_names,
+        nil => all_states_names
       }
     end
   end

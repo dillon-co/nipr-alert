@@ -161,6 +161,7 @@ class Salesman < ApplicationRecord
     doc_hash = Hash.from_xml(doc)
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       begin
+        agent.is_a?(Array) ? agent = agent.first : agent = agent
         agent = self.find_by(npn: a["National_Producer_Number"])
         if agent.present?
           agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
@@ -181,7 +182,7 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
       begin
-        state_license = state_license.to_h if state_license.is_a?(Array)
+        state_license = reformat_license(state_license)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
@@ -196,6 +197,17 @@ class Salesman < ApplicationRecord
       end
     end
     self.add_appointments_to_each_state(agent_data, agent)
+  end
+
+  def reformat_license(state_license)
+    if state_license.is_a?(Array)
+      if state_license.count > 1
+        state_l = state_license.first
+      else
+        state_l = state_license.to_h 
+      end
+    end
+    return state_license
   end
 
   def self.add_appointments_to_each_state(agent_data, agent)
