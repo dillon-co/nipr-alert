@@ -159,10 +159,9 @@ class Salesman < ApplicationRecord
     doc = File.open("#{Rails.root}/pdb_batch.xml") # do |f|
     #    Nokogiri::XML(f)
     doc_hash = Hash.from_xml(doc)
-    binding.pry
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       agent = self.find_by(npn: a["National_Producer_Number"])
-      agent.is_a?(Array) ? agent = agent.first : agent = agent
+      agent = self.turn_array_to_hash(agent)
       if agent.present?
         agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
                     last_name: a["Name_Birth"]["First_Name"].titleize,
@@ -178,7 +177,7 @@ class Salesman < ApplicationRecord
   def self.update_batch_agent_state_data(agent_data, agent)
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
-        state_license = turn_array_to_hash(state_license)
+        state_license = self.turn_array_to_hash(state_license)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
@@ -192,15 +191,15 @@ class Salesman < ApplicationRecord
     self.add_appointments_to_each_state(agent_data, agent)
   end
 
-  def turn_array_to_hash(state_license)
+  def self.turn_array_to_hash(state_license)
     if state_license.is_a?(Array)
       if state_license.count > 1
-        state_l = state_license.first
+        state_license = state_license.first
       else
-        state_l = state_license.to_h
+        state_license = state_license.to_h
       end
     end
-    return state_l
+    return state_license
   end
 
   def self.add_appointments_to_each_state(agent_data, agent)
