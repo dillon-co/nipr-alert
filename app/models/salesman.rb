@@ -159,21 +159,18 @@ class Salesman < ApplicationRecord
     doc = File.open("#{Rails.root}/pdb_batch.xml") # do |f|
     #    Nokogiri::XML(f)
     doc_hash = Hash.from_xml(doc)
+    binding.pry
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
-      begin
-        agent.is_a?(Array) ? agent = agent.first : agent = agent
-        agent = self.find_by(npn: a["National_Producer_Number"])
-        if agent.present?
-          agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
-                      last_name: a["Name_Birth"]["First_Name"].titleize,
-                      agent_site: a["Address"].first["City"].titleize,
-                      home_work_location_city: a["Address"].first["City"].titleize)
-          self.update_batch_agent_state_data(a, agent)
-        else
-           self.create_agent_with_data(a)
-        end
-      rescue => e
-        next
+      agent.is_a?(Array) ? agent = agent.first : agent = agent
+      agent = self.find_by(npn: a["National_Producer_Number"])
+      if agent.present?
+        agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
+                    last_name: a["Name_Birth"]["First_Name"].titleize,
+                    agent_site: a["Address"].first["City"].titleize,
+                    home_work_location_city: a["Address"].first["City"].titleize)
+        self.update_batch_agent_state_data(a, agent)
+      else
+         self.create_agent_with_data(a)
       end
     end
   end
@@ -181,8 +178,7 @@ class Salesman < ApplicationRecord
   def self.update_batch_agent_state_data(agent_data, agent)
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
-      begin
-        state_license = reformat_license(state_license)
+        state_license = turn_array_to_hash(state_license)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
                               date_issue_license_orig: state_license["License_Issue_Date"],
@@ -191,15 +187,12 @@ class Salesman < ApplicationRecord
                               license_class_code: state_license["License_Class_Code"],
                               residency_status: state_license["Resident_Indicator"],
                               active: state_license["Active"])
-      rescue => e
-        puts e
-        next
-      end
+
     end
     self.add_appointments_to_each_state(agent_data, agent)
   end
 
-  def reformat_license(state_license)
+  def turn_array_to_hash(state_license)
     if state_license.is_a?(Array)
       if state_license.count > 1
         state_l = state_license.first
