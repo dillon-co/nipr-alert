@@ -203,9 +203,11 @@ class Salesman < ApplicationRecord
   end
 
   def self.add_appointments_to_each_state(agent_data, agent)
+    agent_data = self.turn_array_to_hash(agent_data)
     agent.states.all.each do |s|
       if agent_data["Appointment"] != nil
         matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
+        matching_states = matching_states.first
         matching_states.each do |appoint|
           s.appointments.create(company_name: appoint["Company_Name"],
                                 fein: appoint["FEIN"],
