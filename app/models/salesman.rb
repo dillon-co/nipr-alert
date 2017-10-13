@@ -159,7 +159,6 @@ class Salesman < ApplicationRecord
     doc = File.open("#{Rails.root}/pdb_batch.xml") # do |f|
     #    Nokogiri::XML(f)
     doc_hash = Hash.from_xml(doc)
-    binding.pry
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       agent = self.find_by(npn: a["National_Producer_Number"])
       agent = self.turn_array_to_hash(agent)
