@@ -50,7 +50,7 @@
     <tbody>
       <% @all_states_names.each do |state| %>
       <% s = @salesman.states.find_by(name: state) %>
-      <% (@salesman.states.map(&:name).include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
+      <% (@licensed_states_names.include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
       <tr>
           <% if @all_salesman_states.include?(state) %>
             <td><%= link_to state, state_path(s)  %></td>
