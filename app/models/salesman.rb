@@ -186,7 +186,7 @@ class Salesman < ApplicationRecord
                           license_class_code: state_license["License_Class_Code"],
                           residency_status: state_license["Resident_Indicator"],
                           active: state_license["Active"])
-        l.save                  
+        l.save
 
     end
     self.add_appointments_to_each_state(agent_data, agent)
@@ -473,9 +473,9 @@ class Salesman < ApplicationRecord
 
   def get_needed_states
       # @check_or_naw = @needed_states - @can_sell_states
-    n_states = states_needed_per_site[agent_site]
+    n_states = states_needed_per_site
     if n_states != nil
-        states_needed_per_site[agent_site] - states.all.map(&:name)
+        states_needed_per_site - states.all.map(&:name)
      else
     	all_states_names - states.all.map(&:name)
      end
@@ -483,23 +483,25 @@ class Salesman < ApplicationRecord
 
    def states_needed_per_site
      if self.client == "Anthem"
-       {"Provo" => anthem_states,
-         "Sandy" => anthem_states,
-         "Memphis" => anthem_states,
-         "San Antonio" => anthem_states,
-         "Sunrise" => anthem_states,
-         "Sawgrass" => anthem_states,
-         "Roy" => anthem_states
-       }
+       anthem_states
      else
-       {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-         "Sandy" => sandy_states,
-         "Memphis" => all_states_names,
-         "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
-         "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-         "Sawgrass" => all_states_names,
-         "Roy" => all_states_names
-       }
+       case self.agent_site
+       when"Provo"
+         ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
+       when "Sandy"
+         sandy_states
+       when "Memphis"
+         all_states_names
+       when "San Antonio"
+         ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"]
+       when "Sunrise"
+         ["AL","LA","GA","MS","NC","SC","TN"]
+       when "Sawgrass"
+         all_states_names
+       when "Roy"
+         all_states_names
+       else
+         all_states_names
      end
    end
 

@@ -36,7 +36,7 @@ class SalesmenController < ApplicationController
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
     @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
     @expired_states_names = @expired_states.map(&:name)
-    @needed_states = states_needed_per_site(@salesman)[@salesman.agent_site]
+    @needed_states = states_needed_per_site(@salesman)
     # @check_or_naw = get_check_mark_for_agent(@salesman, @appointed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
     @non_licensed_states = all_states_names - @all_salesman_states
@@ -48,8 +48,8 @@ class SalesmenController < ApplicationController
     @check_or_naw = @needed_states - @can_sell_states
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states : @jit_states = []
-    @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman)[@salesman.agent_site] : @states_needed = all_states_names
-    @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman)[@salesman.agent_site] : @states_needed = all_states_names
+    @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman) : @states_needed = all_states_names
+    @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman) : @states_needed = all_states_names
     @all_states_names = all_states_names
   end
 
@@ -151,7 +151,7 @@ class SalesmenController < ApplicationController
 
   def get_check_mark_for_agent(agent, states)
     if agent.home_work_location_city.present?
-        states_needed_per_site[agent.home_work_location_city.titleize] - states
+        states_needed_per_site(agent) - states
     else
         all_states_names - states
     end
@@ -159,25 +159,25 @@ class SalesmenController < ApplicationController
 
   def states_needed_per_site(salesman)
     if salesman.client == "Anthem"
-      {"Provo" => anthem_states,
-        "Sandy" => anthem_states,
-        "Memphis" => anthem_states,
-        "San Antonio" => anthem_states,
-        "Sunrise" => anthem_states,
-        "Sawgrass" => anthem_states,
-        "Roy" => anthem_states,
-        nil => anthem_states
-      }
+      anthem_states
     else
-      {"Provo" => ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"],
-        "Sandy" => sandy_states,
-        "Memphis" => all_states_names,
-        "San Antonio" => ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"],
-        "Sunrise" => ["AL","LA","GA","MS","NC","SC","TN"],
-        "Sawgrass" => all_states_names,
-        "Roy" => all_states_names,
-        nil => all_states_names
-      }
+      case self.agent_site
+      when"Provo"
+        ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
+      when "Sandy"
+        sandy_states
+      when "Memphis"
+        all_states_names
+      when "San Antonio"
+        ["AR", "ND", "IA", "KS", "NE", "OK", "SD", "TX"]
+      when "Sunrise"
+        ["AL","LA","GA","MS","NC","SC","TN"]
+      when "Sawgrass"
+        all_states_names
+      when "Roy"
+        all_states_names
+      else
+        all_states_names
     end
   end
 
