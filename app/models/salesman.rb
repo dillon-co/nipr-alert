@@ -502,6 +502,7 @@ class Salesman < ApplicationRecord
          all_states_names
        else
          all_states_names
+       end   
      end
    end
 
