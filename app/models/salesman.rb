@@ -164,7 +164,7 @@ class Salesman < ApplicationRecord
       agent = self.turn_array_to_hash(agent)
       if agent.present?
         agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
-                    last_name: a["Name_Birth"]["First_Name"].titleize,
+                    last_name: a["Name_Birth"]["Last_Name"].titleize,
                     agent_site: a["Address"].first["City"].titleize,
                     home_work_location_city: a["Address"].first["City"].titleize)
         self.update_batch_agent_state_data(a, agent)
@@ -180,12 +180,12 @@ class Salesman < ApplicationRecord
         state_license = self.turn_array_to_hash(state_license)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
         s.licenses.create(license_num: state_license["License_Number"],
-                              date_issue_license_orig: state_license["License_Issue_Date"],
-                              date_expire_license: state_license["License_Expiration_Date"],
-                              license_class: state_license["Class"],
-                              license_class_code: state_license["License_Class_Code"],
-                              residency_status: state_license["Resident_Indicator"],
-                              active: state_license["Active"])
+                          date_issue_license_orig: Date.strptime(state_license["License_Issue_Date"], "%m/%d/%Y"),
+                          date_expire_license: Date.strptime(state_license["License_Expiration_Date"], "%m/%d/%Y"),
+                          license_class: state_license["Class"],
+                          license_class_code: state_license["License_Class_Code"],
+                          residency_status: state_license["Resident_Indicator"],
+                          active: state_license["Active"])
 
     end
     self.add_appointments_to_each_state(agent_data, agent)
@@ -360,14 +360,12 @@ class Salesman < ApplicationRecord
     results = mr_c.connection.execute("select * from stag_adp_employeeinfo")
     r_fields = results.fields.map{|f| f.underscore }
     stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
-    # appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
-    #a_fields = appointment_results.fields.map{|f| f.underscore }
-    # appointment_data = appoint_results.map {|a| Hash[a_fields.zip(a)]}
-    binding.pry
+    appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
+    a_fields = appointment_results.fields.map{|f| f.underscore }
+    appointment_data = appoint_results.map {|a| Hash[a_fields.zip(a)]}
     establish_connection(:development)
-    # hashed_results.each {|b| Salesman.find_or_create_by(npn: b["npn"]).update(b)}
     self.save_stag_adp_employeeinfo(stag_adp)
-    #self.save_aetna_appointment_data(appointment_data.as_json)
+    self.save_aetna_appointment_data(appointment_data)
   end
 
   # stag_adp = external_db.execute(sql).as_json
@@ -378,9 +376,9 @@ class Salesman < ApplicationRecord
       if e.present?
         e.update!(employee)
       else
-	  puts employee
-          n_e = self.create!(employee)
-          n_e.update_states_licensing_info
+	      puts employee
+        n_e = self.create!(employee)
+        # n_e.update_states_licensing_info
       end
     end
   end
