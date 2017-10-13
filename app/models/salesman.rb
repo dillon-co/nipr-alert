@@ -179,13 +179,14 @@ class Salesman < ApplicationRecord
     license_data.each do |state_license|
         state_license = self.turn_array_to_hash(state_license)
         s = agent.states.find_or_create_by(name: state_license["State_Code"])
-        s.licenses.create(license_num: state_license["License_Number"],
+        l = s.licenses.create(license_num: state_license["License_Number"],
                           date_issue_license_orig: Date.strptime(state_license["License_Issue_Date"], "%m/%d/%Y"),
                           date_expire_license: Date.strptime(state_license["License_Expiration_Date"], "%m/%d/%Y"),
                           license_class: state_license["Class"],
                           license_class_code: state_license["License_Class_Code"],
                           residency_status: state_license["Resident_Indicator"],
                           active: state_license["Active"])
+        l.save                  
 
     end
     self.add_appointments_to_each_state(agent_data, agent)
