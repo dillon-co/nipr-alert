@@ -227,7 +227,7 @@ class Salesman < ApplicationRecord
 
   def self.create_agent_with_data(agent_data)
     a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
-                 last_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                 last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
                  agent_site: agent_data["Address"].first["City"].titleize,
                  home_work_location_city: agent_data["Address"].first["City"].titleize)
     self.update_batch_agent_state_data(agent_data, a)
@@ -502,7 +502,7 @@ class Salesman < ApplicationRecord
          all_states_names
        else
          all_states_names
-       end   
+       end
      end
    end
 
