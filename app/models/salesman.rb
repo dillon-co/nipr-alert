@@ -179,8 +179,8 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
         state_license = self.turn_array_to_hash(state_license)
-        s = agent.states.find_or_create_by(name: state_license["State_Code"])
-        l = s.licenses.create(license_num: state_license["License_Number"],
+        sta = agent.states.find_or_create_by(name: state_license["State_Code"])
+        l = sta.licenses.create(license_num: state_license["License_Number"],
                           date_issue_license_orig: state_license["License_Issue_Date"],
                           date_expire_license: state_license["License_Expiration_Date"],
                           license_class: state_license["Class"],
