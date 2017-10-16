@@ -161,13 +161,13 @@ class Salesman < ApplicationRecord
     doc_hash = Hash.from_xml(doc)
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       # agent = self.turn_array_to_hash(agent)
-      agent = self.find_or_create_by!(npn: a["National_Producer_Number"])
-      agent.update!(first_name: a["Name_Birth"]["First_Name"].titleize,
+      agent = self.create!(npn: a["National_Producer_Number"],
+                    first_name: a["Name_Birth"]["First_Name"].titleize,
                     last_name: a["Name_Birth"]["Last_Name"].titleize,
                     agent_site: a["Address"].first["City"].titleize,
                     home_work_location_city: a["Address"].first["City"].titleize)
-      agent.save!
-      self.update_batch_agent_state_data(a, agent)
+      aa = agent.save!
+      self.update_batch_agent_state_data(a, aa)
       # else
       #  self.create_agent_with_data(a)
       # end
@@ -407,7 +407,7 @@ class Salesman < ApplicationRecord
       s = Salesman.find_or_create_by(npn: agent["npn"])
       agent.keys.each do |k|
         if k.to_s.length == 2
-          Salesman.states.find_or_create_by(name: k).update(appointment_date: k)
+          s.states.find_or_create_by(name: k).update(appointment_date: k)
         end
       end
     end
