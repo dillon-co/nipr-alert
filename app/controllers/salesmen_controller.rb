@@ -161,7 +161,7 @@ class SalesmenController < ApplicationController
     if salesman.client == "Anthem"
       anthem_states
     else
-      case self.agent_site
+      case salesman.agent_site
       when"Provo"
         ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
       when "Sandy"
