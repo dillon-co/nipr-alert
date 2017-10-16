@@ -169,7 +169,7 @@ class Salesman < ApplicationRecord
       aa = agent.save!
       if agent.persisted?
         self.update_batch_agent_state_data(a, agent)
-      end  
+      end
       # else
       #  self.create_agent_with_data(a)
       # end
@@ -181,7 +181,8 @@ class Salesman < ApplicationRecord
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
       # self.create_licenses_from_batch_with_state(state_license, agent)
-      st = State.create!(name: state_license["State_Code"], salesman_id: agent.id)
+      st = agent.states.new(name: state_license["State_Code"], salesman_id: agent.id)
+      st.save!
       st.licenses.create!(license_num: state_license["License_Number"],
       date_issue_license_orig: state_license["License_Issue_Date"],
       date_expire_license: state_license["License_Expiration_Date"],
