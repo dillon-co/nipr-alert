@@ -161,7 +161,7 @@ class Salesman < ApplicationRecord
     doc_hash = Hash.from_xml(doc)
     doc_hash.first.last["SCB_Report_Body"]["SCB_Producer"].each do |a|
       # agent = self.turn_array_to_hash(agent)
-      agent = self.create!(npn: a["National_Producer_Number"],
+      agent = Salesman.create!(npn: a["National_Producer_Number"],
                     first_name: a["Name_Birth"]["First_Name"].titleize,
                     last_name: a["Name_Birth"]["Last_Name"].titleize,
                     agent_site: a["Address"].first["City"].titleize,
