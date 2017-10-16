@@ -184,7 +184,8 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_licenses_from_batch_with_state(state_license, agent)
-    l = self.find(agent.id).states.create!(name: state_license["State_Code"]).licenses.create!(license_num: state_license["License_Number"],
+    st = State.create!(name: state_license["State_Code"], salesman_id: agent.id)
+    st.licenses.create!(license_num: state_license["License_Number"],
       date_issue_license_orig: state_license["License_Issue_Date"],
       date_expire_license: state_license["License_Expiration_Date"],
       license_class: state_license["Class"],
