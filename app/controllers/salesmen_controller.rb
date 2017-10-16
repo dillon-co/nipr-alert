@@ -88,6 +88,12 @@ class SalesmenController < ApplicationController
 
   end
 
+  def xlsheet_data_path
+    Salesman.update_npns_from_spread_sheet
+    Salesman.get_data_from_sandbox_reporting
+    redirect_to root_path
+  end
+
   def agent
     agent = Salesman.find_by(npn: params[:npn])
     if agent.present?

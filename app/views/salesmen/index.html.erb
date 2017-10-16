@@ -1,4 +1,5 @@
 <% if admin_signed_in?  %>
+  <%= link_to "Pull from xcel sheet", xlsheet_data_path, class: 'btn btn-danger' %>
   <h1>Agents</h1>
   <!-- <div class="row">
     <div class="col-md-10 ">
@@ -26,7 +27,7 @@
     first name, last name, supervisor, site or npn
   </div>
   <div class='col-md-3'>
-    Hired After  
+    Hired After
     <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %><br>
     Hired Before
     <%= f.text_field(:created_before_gte, class: 'js-datepicker') %>
