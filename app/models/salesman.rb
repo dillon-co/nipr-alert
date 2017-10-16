@@ -482,7 +482,7 @@ class Salesman < ApplicationRecord
     can_sell_states = [active_states.map(&:name), jit_states].flatten.uniq.compact
     n_states = states_needed_per_site
     if n_states != nil
-        states_needed_per_site - states.includes(:licenses).where()map(&:name)
+        states_needed_per_site - can_sell_states
      else
     	all_states_names - states.all.map(&:name)
      end
