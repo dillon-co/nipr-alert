@@ -178,21 +178,21 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
-      self.create_licenses_from_batch_with_state(state_license, agent)
-    end
-    self.add_appointments_to_each_state(agent_data, agent)
-  end
-
-  def self.create_licenses_from_batch_with_state(state_license, agent)
-    st = State.create!(name: state_license["State_Code"], salesman_id: agent.id)
-    st.licenses.create!(license_num: state_license["License_Number"],
+      # self.create_licenses_from_batch_with_state(state_license, agent)
+      st = State.create!(name: state_license["State_Code"], salesman_id: agent.id)
+      st.licenses.create!(license_num: state_license["License_Number"],
       date_issue_license_orig: state_license["License_Issue_Date"],
       date_expire_license: state_license["License_Expiration_Date"],
       license_class: state_license["Class"],
       license_class_code: state_license["License_Class_Code"],
       residency_status: state_license["Resident_Indicator"],
       active: state_license["Active"])
-    l.save
+      l.save
+    end
+    self.add_appointments_to_each_state(agent_data, agent)
+  end
+
+  def self.create_licenses_from_batch_with_state(state_license, agent)
   end
 
   def self.turn_array_to_hash(state_license)
