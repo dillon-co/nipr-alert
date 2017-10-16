@@ -209,19 +209,21 @@ class Salesman < ApplicationRecord
       if agent_data["Appointment"] != nil
         matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
         matching_states = matching_states.first
-        matching_states.each do |appoint|
-          appoint = self.turn_array_to_hash(appoint)
-          s.appointments.create(company_name: appoint["Company_Name"],
-                                fein: appoint["FEIN"],
-                                cocode: appoint["COCODE"],
-                                line_of_authority: appoint["Line_Of_Authority"],
-                                loa_code: appoint["LOA_Code"],
-                                status: appoint["Status"],
-                                termination_reason: appoint["Termination_Reason"],
-                                status_reason_date: appoint["Status_Reason_Date"],
-                                appont_renewal_date: appoint["Renewal_Date"]
-                                )
-        end
+        if matching_states
+          matching_states.each do |appoint|
+            appoint = self.turn_array_to_hash(appoint)
+            s.appointments.create(company_name: appoint["Company_Name"],
+                                  fein: appoint["FEIN"],
+                                  cocode: appoint["COCODE"],
+                                  line_of_authority: appoint["Line_Of_Authority"],
+                                  loa_code: appoint["LOA_Code"],
+                                  status: appoint["Status"],
+                                  termination_reason: appoint["Termination_Reason"],
+                                  status_reason_date: appoint["Status_Reason_Date"],
+                                  appont_renewal_date: appoint["Renewal_Date"]
+                                  )
+          end
+        end  
       end
     end
   end
