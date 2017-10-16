@@ -223,12 +223,13 @@ class Salesman < ApplicationRecord
                                   appont_renewal_date: appoint["Renewal_Date"]
                                   )
           end
-        end  
+        end
       end
     end
   end
 
   def self.create_agent_with_data(agent_data)
+    self.turn_array_to_hash(agent_data)
     a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                  last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
                  agent_site: agent_data["Address"].first["City"].titleize,
