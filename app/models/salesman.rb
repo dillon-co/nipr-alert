@@ -240,14 +240,15 @@ class Salesman < ApplicationRecord
       a_site = false
     end
     if a_site
-      a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+      a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                    last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
                    agent_site: a_site,
                    home_work_location_city: a_site)
     else
-      a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+      a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
       last_name: agent_data["Name_Birth"]["Last_Name"].titleize)
     end
+    a.save!
     self.update_batch_agent_state_data(agent_data, a)
   end
 
