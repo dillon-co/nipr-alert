@@ -156,6 +156,7 @@ class Salesman < ApplicationRecord
 
   def self.update_licensing_info_from_batch
     ##Read XML as array,
+    establish_connection(:development)
     doc = File.open("#{Rails.root}/pdb_batch.xml") # do |f|
     #    Nokogiri::XML(f)
     doc_hash = Hash.from_xml(doc)
