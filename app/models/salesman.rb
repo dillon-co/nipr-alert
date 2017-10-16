@@ -379,12 +379,12 @@ class Salesman < ApplicationRecord
     results = mr_c.connection.execute("select * from stag_adp_employeeinfo")
     r_fields = results.fields.map{|f| f.underscore }
     stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
-    appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
-    a_fields = appointment_results.fields.map{|f| f.underscore }
-    appointment_data = appointment_results.map {|a| Hash[a_fields.zip(a)]}
+    # appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
+    # a_fields = appointment_results.fields.map{|f| f.underscore }
+    # appointment_data = appointment_results.map {|a| Hash[a_fields.zip(a)]}
     establish_connection(:development)
     self.save_stag_adp_employeeinfo(stag_adp)
-    self.save_aetna_appointment_data(appointment_data)
+    # self.save_aetna_appointment_data(appointment_data)
   end
 
   # stag_adp = external_db.execute(sql).as_json
