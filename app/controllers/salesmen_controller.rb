@@ -31,7 +31,7 @@ class SalesmenController < ApplicationController
     @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name
     @licensed_states = @salesman.states.all.compact
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Y')}
-    @active_licenses_states_names = @active_licenses.map {|l| l.state.name }
+    @active_licenses_states_names = @active_licenses != [] ? @active_licenses.map {|l| l.state.name } : @active_licenses = []
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
     @expired_states = @salesman.states.includes(:licenses).where('date_expire_license < ?', Time.now).references(:licenses)
