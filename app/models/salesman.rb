@@ -177,14 +177,10 @@ class Salesman < ApplicationRecord
   def self.update_batch_agent_state_data(agent_data, agent)
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
-        state_license = self.turn_array_to_hash(state_license)
-        sta = agent.states.find_by(name: state_license["State_Code"])
-        if sta.present?
-          create_licenses_from_batch_with_state(state_license, sta)
-        else
-          sta = agent.states.create(name: state_license["State_Code"])
-          create_licenses_from_batch_with_state(state_license, sta)
-        end
+      state_license = self.turn_array_to_hash(state_license)
+      sta = agent.states.find_or_create_by!(name: state_license["State_Code"]) do |st|
+        create_licenses_from_batch_with_state(state_license, st))
+      end
     end
     self.add_appointments_to_each_state(agent_data, agent)
   end
@@ -237,7 +233,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
-    if self.turn_array_to_hash(agent_data["Address"].first)
+    if self.turn_array_to_hash(agent_data["Address"].first)["City"] != nil
       a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
     else
       a_site = false
@@ -648,7 +644,6 @@ class Salesman < ApplicationRecord
         next
       end
     end
-    # binding.pry
   end
 
   def self.as
