@@ -167,7 +167,9 @@ class Salesman < ApplicationRecord
                     agent_site: a["Address"].first["City"].titleize,
                     home_work_location_city: a["Address"].first["City"].titleize)
       aa = agent.save!
-      self.update_batch_agent_state_data(a, agent)
+      if agent.persisted?
+        self.update_batch_agent_state_data(a, agent)
+      end  
       # else
       #  self.create_agent_with_data(a)
       # end
