@@ -210,7 +210,7 @@ class Salesman < ApplicationRecord
         matching_states = agent_data["Appointment"].select {|appt| appt["State_Code"] == s.name }
         matching_states = matching_states.first
         matching_states.each do |appoint|
-          appoint = self.turn_array_to_hash(appooint)
+          appoint = self.turn_array_to_hash(appoint)
           s.appointments.create(company_name: appoint["Company_Name"],
                                 fein: appoint["FEIN"],
                                 cocode: appoint["COCODE"],
