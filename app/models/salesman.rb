@@ -237,7 +237,11 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
-    a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
+    if agent_data["Address"].first["City"]
+      a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
+    else
+      a_site = false
+    end    
     if a_site
       a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                    last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
