@@ -249,7 +249,9 @@ class Salesman < ApplicationRecord
       last_name: agent_data["Name_Birth"]["Last_Name"].titleize)
     end
     a.save!
-    self.update_batch_agent_state_data(agent_data, a)
+    if a.present?
+      self.update_batch_agent_state_data(agent_data, a)
+    end  
   end
 
   def update_states_licensing_info
