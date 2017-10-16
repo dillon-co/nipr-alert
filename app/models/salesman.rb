@@ -163,10 +163,10 @@ class Salesman < ApplicationRecord
       # agent = self.turn_array_to_hash(agent)
       agent = self.find_or_create_by!(npn: a["National_Producer_Number"])
       agent.update!(first_name: a["Name_Birth"]["First_Name"].titleize,
-                  last_name: a["Name_Birth"]["Last_Name"].titleize,
-                  agent_site: a["Address"].first["City"].titleize,
-                  home_work_location_city: a["Address"].first["City"].titleize)
-      agent.save!              
+                    last_name: a["Name_Birth"]["Last_Name"].titleize,
+                    agent_site: a["Address"].first["City"].titleize,
+                    home_work_location_city: a["Address"].first["City"].titleize)
+      agent.save!
       self.update_batch_agent_state_data(a, agent)
       # else
       #  self.create_agent_with_data(a)
@@ -381,7 +381,7 @@ class Salesman < ApplicationRecord
     stag_adp = results.map {|a| Hash[r_fields.zip(a)] }
     appointment_results = mr_c.connection.execute("select * from stag_agent_appointed")
     a_fields = appointment_results.fields.map{|f| f.underscore }
-    appointment_data = appoint_results.map {|a| Hash[a_fields.zip(a)]}
+    appointment_data = appointment_results.map {|a| Hash[a_fields.zip(a)]}
     establish_connection(:development)
     self.save_stag_adp_employeeinfo(stag_adp)
     self.save_aetna_appointment_data(appointment_data)
