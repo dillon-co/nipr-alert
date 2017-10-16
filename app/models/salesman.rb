@@ -234,24 +234,24 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
-    if self.turn_array_to_hash(agent_data["Address"].first)["City"] != nil
-      a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
-    else
-      a_site = false
-    end
-    if a_site
-      a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
-                   last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
-                   agent_site: a_site,
-                   home_work_location_city: a_site)
-    else
-      a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
-      last_name: agent_data["Name_Birth"]["Last_Name"].titleize)
-    end
-    a.save!
-    if a.present?
-      self.update_batch_agent_state_data(agent_data, a)
-    end  
+    # if self.turn_array_to_hash(agent_data["Address"].first)["City"] != nil
+    #   a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
+    # else
+    #   a_site = false
+    # end
+    # if a_site
+    #   a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+    #                last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
+    #                agent_site: a_site,
+    #                home_work_location_city: a_site)
+    # else
+    #   a = self.create!(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+    #   last_name: agent_data["Name_Birth"]["Last_Name"].titleize)
+    # end
+    # a.save!
+    # if a.present?
+    #   self.update_batch_agent_state_data(agent_data, a)
+    # end
   end
 
   def update_states_licensing_info
