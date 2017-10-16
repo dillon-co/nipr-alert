@@ -179,9 +179,9 @@ class Salesman < ApplicationRecord
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
       sta = agent.states.find_or_create_by!(name: state_license["State_Code"]) do |st|
-        # st.save
-        create_licenses_from_batch_with_state(state_license, st)
+        st.save!
       end
+      create_licenses_from_batch_with_state(state_license, sta)
     end
     self.add_appointments_to_each_state(agent_data, agent)
   end
@@ -194,9 +194,7 @@ class Salesman < ApplicationRecord
       license_class_code: state_license["License_Class_Code"],
       residency_status: state_license["Resident_Indicator"],
       active: state_license["Active"])
-    state.save
     l.save
-
   end
 
   def self.turn_array_to_hash(state_license)
