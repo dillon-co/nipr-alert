@@ -636,7 +636,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.update_npns_from_spread_sheet
-    xl = Roo::Spreadsheet.open("#{Rails.root}/npn_numbers.xls", extension: :xls)
+    xl = Roo::Spreadsheet.open("#{Rails.root}/new_npn_numbers.xls", extension: :xls)
     sheet = xl.sheet(0).to_a
     sheet.to_a.shift
     sheet.each do |row|
