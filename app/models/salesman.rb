@@ -179,6 +179,7 @@ class Salesman < ApplicationRecord
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
       sta = agent.states.find_or_create_by!(name: state_license["State_Code"]) do |st|
+        st.save
         create_licenses_from_batch_with_state(state_license, st)
       end
     end
