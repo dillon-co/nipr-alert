@@ -178,8 +178,7 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
-      puts agent.id
-      sta = agent.states.find_or_create_by!(name: state_license["State_Code"])
+      sta = self.find(agent.id).states.find_or_create_by!(name: state_license["State_Code"])
       create_licenses_from_batch_with_state(state_license, sta)
     end
     self.add_appointments_to_each_state(agent_data, agent)
