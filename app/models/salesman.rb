@@ -237,12 +237,16 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
-    # binding.pry
-    self.turn_array_to_hash(agent_data)
-    a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
-                 last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
-                 agent_site: self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize,
-                 home_work_location_city: self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize)
+    a_site = self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize
+    if a_site
+      a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+                   last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
+                   agent_site: a_site,
+                   home_work_location_city: a_site)
+    else
+      a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
+      last_name: agent_data["Name_Birth"]["Last_Name"].titleize)
+    end
     self.update_batch_agent_state_data(agent_data, a)
   end
 
