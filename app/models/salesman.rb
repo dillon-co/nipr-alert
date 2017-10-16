@@ -180,10 +180,10 @@ class Salesman < ApplicationRecord
         state_license = self.turn_array_to_hash(state_license)
         sta = agent.states.find_by(name: state_license["State_Code"])
         if sta.present?
-          create_licenses_from_batch_with_state(state_license, state)
+          create_licenses_from_batch_with_state(state_license, sta)
         else
           sta = agent.states.create(name: state_license["State_Code"])
-          create_licenses_from_batch_with_state(state_license, state)
+          create_licenses_from_batch_with_state(state_license, sta)
         end
     end
     self.add_appointments_to_each_state(agent_data, agent)
