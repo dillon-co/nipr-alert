@@ -229,6 +229,7 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
+    binding.pry 
     self.turn_array_to_hash(agent_data)
     a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                  last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
