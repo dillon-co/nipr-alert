@@ -12,7 +12,7 @@
 
 require 'rubyXL'
 class State < ApplicationRecord
-  belongs_to :salesman
+  belongs_to :salesman, optional: true
   has_many :appointments
   has_many :licenses
 
