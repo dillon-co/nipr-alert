@@ -178,18 +178,26 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
         state_license = self.turn_array_to_hash(state_license)
-        sta = agent.states.find_or_create_by(name: state_license["State_Code"])
-        l = sta.licenses.create(license_num: state_license["License_Number"],
-                          date_issue_license_orig: state_license["License_Issue_Date"],
-                          date_expire_license: state_license["License_Expiration_Date"],
-                          license_class: state_license["Class"],
-                          license_class_code: state_license["License_Class_Code"],
-                          residency_status: state_license["Resident_Indicator"],
-                          active: state_license["Active"])
-        l.save
-
+        sta = agent.states.find_by(name: state_license["State_Code"])
+        if sta.present?
+          create_licenses_from_batch_with_state(state_license, state)
+        else
+          sta = agent.states.create(name: state_license["State_Code"])
+          create_licenses_from_batch_with_state(state_license, state)
+        end
     end
     self.add_appointments_to_each_state(agent_data, agent)
+  end
+
+  def self.create_licenses_from_batch_with_state(state_license, state)
+    l = state.licenses.create(license_num: state_license["License_Number"],
+    date_issue_license_orig: state_license["License_Issue_Date"],
+    date_expire_license: state_license["License_Expiration_Date"],
+    license_class: state_license["Class"],
+    license_class_code: state_license["License_Class_Code"],
+    residency_status: state_license["Resident_Indicator"],
+    active: state_license["Active"])
+    l.save
   end
 
   def self.turn_array_to_hash(state_license)
@@ -234,7 +242,7 @@ class Salesman < ApplicationRecord
     a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                  last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
                  agent_site: self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize,
-                 home_work_location_city: agent_data["Address"].first["City"].titleize)
+                 home_work_location_city: self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize)
     self.update_batch_agent_state_data(agent_data, a)
   end
 
