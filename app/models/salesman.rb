@@ -163,7 +163,7 @@ class Salesman < ApplicationRecord
       agent = self.find_by(npn: a["National_Producer_Number"])
       agent = self.turn_array_to_hash(agent)
       if agent.present?
-        agent.update(first_name: a["Name_Birth"]["First_Name"].titleize,
+        agent.update!(first_name: a["Name_Birth"]["First_Name"].titleize,
                     last_name: a["Name_Birth"]["Last_Name"].titleize,
                     agent_site: a["Address"].first["City"].titleize,
                     home_work_location_city: a["Address"].first["City"].titleize)
@@ -178,9 +178,7 @@ class Salesman < ApplicationRecord
     license_data = agent_data["License"].map {|l| l.compact != [] ?  l : nil }.compact
     license_data.each do |state_license|
       state_license = self.turn_array_to_hash(state_license)
-      sta = agent.states.find_or_create_by!(name: state_license["State_Code"]) do |st|
-        st.save!
-      end
+      sta = agent.states.find_or_create_by!(name: state_license["State_Code"])
       create_licenses_from_batch_with_state(state_license, sta)
     end
     self.add_appointments_to_each_state(agent_data, agent)
