@@ -88,7 +88,7 @@ class SalesmenController < ApplicationController
 
   end
 
-  def xlsheet_data_path
+  def xlsheet_data
     Salesman.update_npns_from_spread_sheet
     Salesman.get_data_from_sandbox_reporting
     redirect_to root_path
