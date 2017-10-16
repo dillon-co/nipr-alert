@@ -229,11 +229,11 @@ class Salesman < ApplicationRecord
   end
 
   def self.create_agent_with_data(agent_data)
-    binding.pry 
+    # binding.pry
     self.turn_array_to_hash(agent_data)
     a = self.create(first_name: agent_data["Name_Birth"]["First_Name"].titleize,
                  last_name: agent_data["Name_Birth"]["Last_Name"].titleize,
-                 agent_site: agent_data["Address"].first["City"].titleize,
+                 agent_site: self.turn_array_to_hash(agent_data["Address"].first)["City"].titleize,
                  home_work_location_city: agent_data["Address"].first["City"].titleize)
     self.update_batch_agent_state_data(agent_data, a)
   end
@@ -478,9 +478,11 @@ class Salesman < ApplicationRecord
 
   def get_needed_states
       # @check_or_naw = @needed_states - @can_sell_states
+    active_states = states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
+    can_sell_states = [active_states.map(&:name), jit_states].flatten.uniq.compact
     n_states = states_needed_per_site
     if n_states != nil
-        states_needed_per_site - states.all.map(&:name)
+        states_needed_per_site - states.includes(:licenses).where()map(&:name)
      else
     	all_states_names - states.all.map(&:name)
      end
