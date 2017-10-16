@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # patch 'update_npn_and_licensing_info/:salemsman_id' => 'salesmen#update_npn_and_licensing_info', as: :update_npn_and_licensing_info
   patch 'update_npn_and_licensing_info/:id' => 'salesmen#update_npn_and_licensing_info', as: :update_npn_and_licensing_info
-  patch 'xlsheet_data_path' => 'salesmen#xlsheet_data_path', as: :xlsheet_data
+  get 'xlsheet_data' => 'salesmen#xlsheet_data', as: :xlsheet_data
 
   get 'update_salesman_report/:id' => 'salesmen#update_salesman_report', as: :update_salesman_report
   get 'find_agent' => 'salesmen#find_agent', as: :find_agent
