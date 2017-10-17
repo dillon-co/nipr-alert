@@ -74,7 +74,7 @@ class SalesmenController < ApplicationController
 
   def update_npn_and_licensing_info
     salesman = Salesman.find(params[:id]).update_npn_and_get_data(params[:salesman][:npn])
-    redirect_to salesman_path
+    redirect_to salesman_path(salesman)
   end
 
   def find_agent
