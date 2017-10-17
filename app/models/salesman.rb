@@ -69,7 +69,7 @@ class Salesman < ApplicationRecord
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you
     # change the number of OR conditions.
-    num_or_conditions = 8
+    num_or_conditions = 9
     where(
       terms.map {
         or_clauses = [
@@ -80,7 +80,8 @@ class Salesman < ApplicationRecord
           "LOWER(salesmen.reports_to_name) LIKE ?",
           "LOWER(salesmen.agent_site) LIKE ?",
           "LOWER(salesmen.npn) LIKE ?",
-          "LOWER(salesmen.client) LIKE ?"
+          "LOWER(salesmen.client) LIKE ?",
+          "LOWER(salesmen.position_id) LIKE ?"
         ].join(' OR ')
         "(#{ or_clauses })"
       }.join(' AND '),
