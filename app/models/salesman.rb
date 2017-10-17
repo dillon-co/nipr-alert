@@ -260,7 +260,6 @@ class Salesman < ApplicationRecord
     data = grab_info
     update_name_if_nil(data)
     all_states = data["PDB"]['PRODUCER']['INDIVIDUAL']["PRODUCER_LICENSING"]["LICENSE_INFORMATION"]["STATE"]
-    binding.pry 
     all_states.each do |state_info|
       begin
         db_state = self.states.find_or_create_by(name: state_info["name"])
