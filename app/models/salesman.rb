@@ -505,6 +505,10 @@ class Salesman < ApplicationRecord
      end
    end
 
+   def array_of_states_needed
+     states_needed_per_site - self.states.all.map(&:name)
+   end
+
    def states_needed_per_site
      if self.client == "Anthem"
        anthem_states
