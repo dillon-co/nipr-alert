@@ -35,7 +35,7 @@ class SalesmenController < ApplicationController
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Yes')}
     @active_licenses_states_names = @active_licenses.count > 0 ? @active_licenses.flatten.map {|l| l.state.name } : @active_licenses = []
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
-    @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
+    @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact - @salesman.rts_jit_states
     @expired_states = @salesman.states.all.select {|s| s.licenses.count > 0 && s.licenses.last.active == 'No'}
     @expired_states_names = @expired_states.map(&:name)
     @needed_states = states_needed_per_site(@salesman)
