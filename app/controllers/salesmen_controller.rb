@@ -30,7 +30,7 @@ class SalesmenController < ApplicationController
     @salesman_first = @salesman.first_name.present? ? @salesman.first_name : @salesman.given_name
     @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name
 
-    @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
+    @check_or_naw = @salesman.array_of_states_needed - jit_states#@needed_states - @can_sell_states
     @licensed_states = @salesman.states.all.compact
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Yes')}
     @inactive_licenses = @licensed_states.map { |st| st.licenses.where(active: 'No')}
