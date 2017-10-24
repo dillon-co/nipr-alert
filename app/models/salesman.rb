@@ -516,6 +516,8 @@ class Salesman < ApplicationRecord
    def states_needed_per_site
      if self.client == "Anthem"
        anthem_states
+     elsif self.client == 'CareSource'
+       %w(OH KY IN UT)
      else
        case [self.agent_site, self.home_work_location_city].compact.uniq.first
        when"Provo"
