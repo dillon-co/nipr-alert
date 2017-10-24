@@ -516,8 +516,8 @@ class Salesman < ApplicationRecord
    def states_needed_per_site
      if self.client == "Anthem"
        anthem_states
-     else [self.agent_site, self.home_work_location_city].compact.uniq
-       case
+     else
+       case [self.agent_site, self.home_work_location_city].compact.uniq 
        when"Provo"
          ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
        when "Sandy"
