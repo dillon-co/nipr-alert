@@ -543,7 +543,7 @@ class Salesman < ApplicationRecord
    end
 
    def all_rts_states
-     active_states = states.all.select {|s| st.licenses.count > 0 && s.licenses.last.active == "Yes"}
+     active_states = states.all.select {|s| s.licenses.count > 0 && s.licenses.last.active == "Yes"}
      appointed_active_states = active_states.select {|s| s.appointments.count > 0}
      active_jit_states = active_states.select {|s| jit_states.include?(s.name)}
      return [appointed_active_states, active_jit_states].flatten.compact.uniq.map(&:name)
