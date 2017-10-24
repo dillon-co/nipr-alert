@@ -69,13 +69,13 @@
             <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
            <% end %>
 
-          <% if @can_sell_states.include?(state) %>
+           <% if @expired_states_names.include?(state) %>
+           <td>
+             <i class="jit-not-done material-icons clear">clear</i> - Expired
+           </td>
+          <% elsif @can_sell_states.include?(state) %>
             <td>
               <i class="jit-done material-icons done">done</i> - Yes
-            </td>
-          <% elsif @expired_states_names.include?(state) %>
-            <td>
-              <i class="jit-not-done material-icons clear">clear</i> - Expired
             </td>
           <% elsif @all_salesman_states.include?(state) %>
             <td>
