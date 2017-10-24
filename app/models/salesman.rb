@@ -512,8 +512,8 @@ class Salesman < ApplicationRecord
    def states_needed_per_site
      if self.client == "Anthem"
        anthem_states
-     else
-       case self.agent_site
+     else [self.agent_site, self.home_work_location_city].compact.uniq
+       case
        when"Provo"
          ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
        when "Sandy"
@@ -535,7 +535,7 @@ class Salesman < ApplicationRecord
    end
 
    def sandy_states
-     "AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY".split(" ")
+     %w(AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY)
    end
 
   def all_states_names

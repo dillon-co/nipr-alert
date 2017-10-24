@@ -30,6 +30,7 @@ class SalesmenController < ApplicationController
     @salesman_first = @salesman.first_name.present? ? @salesman.first_name : @salesman.given_name
     @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name
 
+    @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
     @licensed_states = @salesman.states.all.compact
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Y')}
     @active_licenses_states_names = @active_licenses.count > 0 ? @active_licenses.flatten.map {|l| l.state.name } : @active_licenses = []
@@ -44,7 +45,6 @@ class SalesmenController < ApplicationController
     @licensed_states_names = @licensed_states.map(&:name)
     @appointed_states_names = @appointed_states.map(&:name)
     @can_sell_states = [@appointed_states_names, @jit_states].flatten.uniq.compact
-    @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
     @non_sellable_states_names = [@expired_states.compact.map(&:name), @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states : @jit_states = []
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman) : @states_needed = all_states_names
