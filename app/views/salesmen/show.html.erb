@@ -226,10 +226,10 @@ function getColor(d) {
     expStates.push(b);
   };
   console.log(sellStates)
-  if ($.inArray(d, sellStates) >= 0){
-    return '#3C823A'
-  }else if ($.inArray(d, expStates) >= 0) {
+  if ($.inArray(d, expStates) >= 0){
     return '#823A61'
+  }else if ($.inArray(d,sellStates) >= 0) {
+    return '#3C823A'
   }else {
     return '#ffffff'
   }
