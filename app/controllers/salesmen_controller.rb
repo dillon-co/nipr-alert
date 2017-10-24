@@ -29,7 +29,6 @@ class SalesmenController < ApplicationController
     @salesman = Salesman.find(params[:id])
     @salesman_first = @salesman.first_name.present? ? @salesman.first_name : @salesman.given_name
     @salesman_last = @salesman.last_name.present? ? @salesman.last_name : @salesman.family_name
-    @jit_states = ["AK", "AR", "CA", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IA", "KS", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OK", "SC", "SD", "TN", "TX", "VA", "WV","WY"]#.select { |s| @licensed_states_names.include?(s)}
     @licensed_states = @salesman.states.all.compact
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Y')}
     @active_licenses_states_names = @active_licenses.count > 0 ? @active_licenses.flatten.map {|l| l.state.name } : @active_licenses = []

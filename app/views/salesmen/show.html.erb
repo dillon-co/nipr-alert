@@ -86,7 +86,7 @@
             <td><i class="jit-not-done material-icons clear">clear</i> - Not Licensed</td>
           <% end %>
 
-          <% if @jit_states.include?(state) %>
+          <% if @salesman.jit_states.include?(state) %>
             <td>Yes</td>
           <% else %>
             <td> No</td>
