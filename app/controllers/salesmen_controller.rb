@@ -167,7 +167,7 @@ class SalesmenController < ApplicationController
     if salesman.client == "Anthem"
       anthem_states
     else
-      case [salesman.agent_site salesman.home_work_location_city].compact.uniq
+      case [salesman.agent_site, salesman.home_work_location_city].compact.uniq
       when"Provo"
         ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
       when "Sandy"
