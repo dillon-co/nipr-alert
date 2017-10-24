@@ -78,7 +78,8 @@ class Salesman < ApplicationRecord
           "LOWER(salesmen.last_name) LIKE ?",
           "LOWER(salesmen.family_name) LIKE ?",
           "LOWER(salesmen.reports_to_name) LIKE ?",
-          "LOWER(salesmen.agent_site) LIKE ?",
+          "LOWER(salesmen.agent_site) LIKE ?",,
+          "LOWER(salesmen.home_work_location_city) LIKE ?",
           "LOWER(salesmen.npn) LIKE ?",
           "LOWER(salesmen.client) LIKE ?",
           "LOWER(salesmen.position_id) LIKE ?"
