@@ -542,6 +542,13 @@ class Salesman < ApplicationRecord
      states.all.select {|st| st.licenses.last.active == "Yes" }.map(&:name) - jit_states
    end
 
+   def all_rts_states
+     active_states = states.all.select {|s| s.licenses.last.active == "Yes"}
+     appointed_active_states = active_states.select {|s| s.appointments.count > 0}
+     active_jit_states = active_states.select {|s| jit_states.include?(s)}
+     return [appointed_active_states, active_jit_states].flatten.compact.uniq.map(&:name)
+   end
+
    def sandy_states
      %w(AL AZ CO IL IN KY LA MT OH OR PA PR RI UT VT WA WI AK AR CA CT DE DC FL GA HI ID IA KS ME MD MA MI MN MS MO NE NV NH NJ NM NY NC ND OK SC SD TN TX VA WV WY)
    end
