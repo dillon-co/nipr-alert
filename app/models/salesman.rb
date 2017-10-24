@@ -496,10 +496,9 @@ class Salesman < ApplicationRecord
 
   def get_needed_states
       # @check_or_naw = @needed_states - @can_sell_states
-    active_states = states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
+    active_states = states.includes(:appointments).select {|s| s.appointments.count > 0}.compact
     can_sell_states = [active_states.map(&:name), jit_states].flatten.uniq.compact
-    n_states = states_needed_per_site
-    if n_states != nil
+    if states_needed_per_site != nil
         states_needed_per_site - can_sell_states
      else
     	all_states_names - states.all.map(&:name)
