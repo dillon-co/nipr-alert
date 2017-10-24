@@ -33,13 +33,11 @@ class SalesmenController < ApplicationController
     @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
     @licensed_states = @salesman.states.all.compact
     @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Yes')}
-    @inactive_licenses = @licensed_states.map { |st| st.licenses.where(active: 'No')}
     @active_licenses_states_names = @active_licenses.count > 0 ? @active_licenses.flatten.map {|l| l.state.name } : @active_licenses = []
-    @inactive_licenses_states_names = @inactive_licenses.count > 0 ? @inactive_licenses.flatten.map {|l| l.state.name } : @inactive_licenses = []
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
-    # @expired_states = @salesman.states.select {|s| s.licenses.last.active == 'No'}
-    @expired_states_names = @inactive_licenses_states_names#@expired_states.map(&:name)
+    @expired_states = @salesman.states.all.select {|s| s.licenses.last.active == 'No'}
+    @expired_states_names = @expired_states.map(&:name)
     @needed_states = states_needed_per_site(@salesman)
     # @check_or_naw = get_check_mark_for_agent(@salesman, @appointed_states.map(&:name))
     @all_salesman_states = @salesman.states.all.map(&:name)
