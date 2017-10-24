@@ -78,7 +78,7 @@
             <td>
               <i class="jit-done material-icons done">done</i> - Yes
             </td>
-          <% elsif @salesman.jit_states.include?(state) && l %>
+          <% elsif @salesman.jit_states.include?(state) && l && l.date_expire_license < Date.today %>
             <td>
               <i class="jit-done material-icons done">done</i> - JIT state
             </td>
