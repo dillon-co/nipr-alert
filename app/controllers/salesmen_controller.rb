@@ -32,7 +32,7 @@ class SalesmenController < ApplicationController
 
     @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
     @licensed_states = @salesman.states.all.compact
-    @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Y')}
+    @active_licenses = @licensed_states.map { |st| st.licenses.where(active: 'Yes')}
     @active_licenses_states_names = @active_licenses.count > 0 ? @active_licenses.flatten.map {|l| l.state.name } : @active_licenses = []
     @appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count > 0 }.compact
     @non_appointed_states = @salesman.states.includes(:appointments).map{|s| s if s.appointments.count < 1 }.compact
