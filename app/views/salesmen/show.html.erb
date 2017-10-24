@@ -63,7 +63,7 @@
           <td> <%= l ? l.date_issue_license_orig : "N/A" %> </td>
           <td> <%= l ? l.date_expire_license : "N/A" %> </td>
 
-          <% if l %>
+          <% if l && l.date_expire_license < Date.today %>
             <td><i class="jit-done material-icons done">done</i> - Yes</td>
           <% else %>
             <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
