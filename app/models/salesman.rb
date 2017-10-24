@@ -647,7 +647,7 @@ class Salesman < ApplicationRecord
        "WV",
        "WY"]
      else
-       [] 
+       []
      end
   end
 
@@ -718,5 +718,14 @@ class Salesman < ApplicationRecord
         s.update(client: d_v)
       end
     end
+  end
+
+  def self.asdfg
+    appt_names = self.where(client: "Aetna").map do |agent|
+      agent.states.all.map do|state|
+        state.appointments.all.map(&:company_name)
+      end
+    end
+    appt_names.flatten.uniq
   end
 end
