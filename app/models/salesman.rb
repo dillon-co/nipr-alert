@@ -517,7 +517,7 @@ class Salesman < ApplicationRecord
      if self.client == "Anthem"
        anthem_states
      else
-       case [self.agent_site, self.home_work_location_city].compact.uniq.first 
+       case [self.agent_site, self.home_work_location_city].compact.uniq.first
        when"Provo"
          ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
        when "Sandy"
@@ -536,6 +536,10 @@ class Salesman < ApplicationRecord
          all_states_names
        end
      end
+   end
+
+   def rts_jit_states
+     states.all.select {|st| st.licenses.last.active == "Yes" }.map(&:name) - jit_states
    end
 
    def sandy_states

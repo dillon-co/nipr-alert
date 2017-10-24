@@ -44,7 +44,7 @@ class SalesmenController < ApplicationController
     @non_licensed_states = all_states_names - @all_salesman_states
     @licensed_states_names = @licensed_states.map(&:name)
     @appointed_states_names = @appointed_states.map(&:name)
-    @can_sell_states = [@appointed_states_names, @salesman.jit_states].flatten.uniq.compact
+    @can_sell_states = [@appointed_states_names, @salesman.rts_jit_states].flatten.uniq.compact
     @non_sellable_states_names = [@expired_states_names, @non_appointed_states.compact.map(&:name)]
     @salesman.agent_site.present? ? @jit_states = sites_with_just_in_time_states : @jit_states = []
     @salesman.agent_site.present? ? @states_needed = states_needed_per_site(@salesman) : @states_needed = all_states_names
