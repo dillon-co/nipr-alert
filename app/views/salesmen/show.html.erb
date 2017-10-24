@@ -11,7 +11,8 @@
      </h1>
      <div class="row">
        <div class="col-md-4">
-         <h3>Site: <%= @salesman.agent_site %> </h3>
+
+         <h3>Site: <%= @salesman.agent_site.present? ? @salesman.agent_site : @salesman.home_work_location_city %></h3>
        </div>
        <div class="col-md-4">
          <h3>Position ID: <%= @salesman.position_id %> </h3>

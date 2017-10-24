@@ -457,8 +457,6 @@ class Salesman < ApplicationRecord
   #   # end
   # end
 
-  def get_table_data
-  end
 
   def self.get_csv_and_save_data
     array_of_data = self.read_csv

@@ -156,7 +156,7 @@ class SalesmenController < ApplicationController
   end
 
   def get_check_mark_for_agent(agent, states)
-    if agent.home_work_location_city.present?
+    if agent.home_work_location_city.present? || agent.agent_site.present?
         states_needed_per_site(agent) - states
     else
         all_states_names - states
@@ -167,7 +167,7 @@ class SalesmenController < ApplicationController
     if salesman.client == "Anthem"
       anthem_states
     else
-      case salesman.agent_site
+      case [salesman.agent_site salesman.home_work_location_city].compact.uniq
       when"Provo"
         ["AK", "AZ", "CO", "HI", "ID", "MT", "NM", "OR", "UT", "WA", "CA", "NV", "VA", "WY"]
       when "Sandy"
