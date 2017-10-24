@@ -506,7 +506,7 @@ class Salesman < ApplicationRecord
    end
 
    def array_of_states_needed
-     states_needed_per_site - self.states.all.select {|s| s.licenses.last.active == 'Yes'}.map(&:name)
+     states_needed_per_site - self.states.all.select {|s| s.licenses.last.active == 'Yes' && s.appointment.count > 0}.map(&:name)
    end
 
    def states_needed_per_site
