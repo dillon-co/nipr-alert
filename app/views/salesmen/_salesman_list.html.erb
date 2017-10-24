@@ -32,8 +32,8 @@
               <td> <%= salesman.worker_status %> </td>
               <% if salesman.npn.present? %>
                 <td> <%= salesman.npn %> </td>
-                <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'yes').references(:licenses).count %></td>
-                <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'no').references(:licenses).count %></td>
+                <td>  <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'Yes').references(:licenses).count %></td>
+                <td> <%= salesman.states.includes(:licenses).where('licenses.active = ?', 'No').references(:licenses).count %></td>
                 <% if salesman.get_needed_states == []  %>
                   <td><i class="jit-done material-icons done">done</i></td>
                 <% else %>
