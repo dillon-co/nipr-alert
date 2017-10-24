@@ -69,7 +69,7 @@ class Salesman < ApplicationRecord
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you
     # change the number of OR conditions.
-    num_or_conditions = 9
+    num_or_conditions = 10
     where(
       terms.map {
         or_clauses = [
