@@ -48,7 +48,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @all_states_names.each do |state| %>
+      <% if admin_signed_in %>
+        <% @all_names.each do |state| %>
+      <% else %>
+        <% @salesman.rts_states.map(&:name).each do |state| %>
+      <% end %>
       <% s = @salesman.states.find_by(name: state) %>
       <% (@licensed_states_names.include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
       <tr>
