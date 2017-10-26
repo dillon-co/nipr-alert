@@ -15,6 +15,7 @@ class State < ApplicationRecord
   belongs_to :salesman, optional: true
   has_many :appointments
   has_many :licenses
+  after_create :decide_appointed_or_not
 
   def asdf
     workbook = RubyXL::Parser.parse("#{Rails.root}/../../Downloads/cxp_reporting.xlsx")
