@@ -103,7 +103,7 @@
       </tr>
       <% end %>
       <% else %>
-        <% @salesman.rts_states.map(&:name).each do |state| %>
+        <% @salesman.rts_jit_states.map(&:name).each do |state| %>
         <% s = @salesman.states.find_by(name: state) %>
         <% (@licensed_states_names.include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
         <tr>
