@@ -93,6 +93,7 @@ class State < ApplicationRecord
         end
       else
         self.update(licensed: true)
+      end  
     end
   end
 end
