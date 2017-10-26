@@ -31,6 +31,57 @@ class State < ApplicationRecord
   def gets_check
 
   end
+
+  def companies_needed
+    ["Aetna Life Ins Company",
+      "Coventry Health And Life Ins. Company",
+      "First Health Life & Health Insurance Company",
+      "Aetna Health And Life Insurance Company",
+      "Aetna Health Inc. (Pa)",
+      "Aetna Life Insurance Company",
+      "Aetna Health Inc.",
+      "Aetna Health Insurance Company",
+      "Coventry Health And Life Insurance Company",
+      "Aetna Health Inc (Pa)",
+      "Coventry Health & Life Insurance Company",
+      "Coventry Health Care Of Kansas",
+      "Coventry Health Care Of Missouri",
+      "Coventry Health Care Of Florida",
+      "Coventry Health Plan Of Florida",
+      "Coventry Health Care Of Georgia",
+      "Aetna Health Of Iowa Inc.",
+      "Coventry Health And Life Insurance Co",
+      "Coventry Health Care Of Missouri Inc",
+      "Aetna Health Inc. (A Pennsylvania Corporation)",
+      "Aetna Health Inc",
+      "Aetna Health Ins Co Of New York",
+      "Aetna Life Ins Co",
+      "Aetna Healthassurance Pennsylvania",
+      "Aetna Health Inc.",
+      "Dba Coventry Health Care Of The Carolinas",
+      "Aetna Health Of Utah Inc.",
+      "Coventry Health Care Of West Virginia",
+      "Aetna  Health  Insurance  Company",
+      "Aetna Health  Inc.",
+      "Coventry Health And Life Insurnce Company",
+      "Coventry Health Care Of Nebraska",
+      "Aetna Health Inc. (A Pa Corp)",
+      "Coventry Health & Life Ins Co",
+      "Aetna Dental Inc.",
+      "Coventry Health Care Of Texas",
+      "Coventry Health Care Of Virginia",
+      "Coventry Health Care Of De",
+      "Aetna Health Of Utah Inc",
+      "Coventry Health Care Of The Carolinas"]
+  end
+
+  def decide_appointed_or_not
+    appointments.all.each do |a|
+      if a.status == "Appointed" && companies_needed.include?(a.company_name)
+        self.update(appointed: true)
+      end
+    end
+  end
 end
 
 
