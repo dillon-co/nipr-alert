@@ -16,6 +16,7 @@ class State < ApplicationRecord
   has_many :appointments
   has_many :licenses
   after_create :decide_appointed_or_not
+  after_create :decide_licensed_or_not
 
   def asdf
     workbook = RubyXL::Parser.parse("#{Rails.root}/../../Downloads/cxp_reporting.xlsx")
@@ -85,8 +86,13 @@ class State < ApplicationRecord
   end
 
   def decide_licensed_or_not
-    if licenses.last.present? && licenses.last.date_expire_license > Date.today
-      self.update(licensed: true)
+    if licenses.last.present?
+      if licenses.last.date_expire_license.present?
+        if licenses.last.date_expire_license > Date.today
+          self.update(licensed: true)
+        end
+      else
+        self.update(licensed: true)
     end
   end
 end
