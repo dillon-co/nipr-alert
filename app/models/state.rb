@@ -83,6 +83,12 @@ class State < ApplicationRecord
       end
     end
   end
+
+  def decide_licensed_or_not
+    if licenses.last.present? && licenses.last.date_expire_license > Date.today
+      self.update(licensed: true)
+    end
+  end
 end
 
 
