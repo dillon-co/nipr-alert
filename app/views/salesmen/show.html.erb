@@ -104,6 +104,57 @@
       <% end %>
       <% else %>
         <% @salesman.rts_states.map(&:name).each do |state| %>
+        <% s = @salesman.states.find_by(name: state) %>
+        <% (@licensed_states_names.include?(state) && s.licenses.last.present?) ? l = s.licenses.last : l = nil %>
+        <tr>
+            <% if @all_salesman_states.include?(state) %>
+              <td><%= link_to state, state_path(s)  %></td>
+            <% else %>
+              <td> <%= state %> </td>
+            <% end %>
+
+            <td> <%= l ? l.license_num : "N/A" %> </td>
+            <td> <%= l ? l.date_issue_license_orig : "N/A" %> </td>
+            <td> <%= l ? l.date_expire_license : "N/A" %> </td>
+
+            <% if l  %>
+              <% if l.active == "Yes" %>
+                <td><i class="jit-done material-icons done">done</i> - Yes</td>
+              <% else %>
+                <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
+               <% end %>
+            <% else %>
+              <td><i class="jit-not-done material-icons clear">clear</i> - No</td>
+             <% end %>
+
+             <% if @expired_states_names.include?(state) %>
+             <td>
+               <i class="jit-not-done material-icons clear">clear</i> - Expired
+             </td>
+
+            <% elsif @can_sell_states.include?(state) %>
+              <td>
+                <i class="jit-done material-icons done">done</i> - Yes
+              </td>
+            <% elsif @salesman.jit_states.include?(state) && l && l.active == "Yes" %>
+              <td>
+                <i class="jit-done material-icons done">done</i> - JIT state
+              </td>
+            <% elsif @all_salesman_states.include?(state) %>
+              <td>
+                <i class="jit-not-done material-icons clear">clear</i> - No
+              </td>
+            <% else %>
+              <td><i class="jit-not-done material-icons clear">clear</i> - Not Licensed</td>
+            <% end %>
+
+            <% if @salesman.jit_states.include?(state) %>
+              <td>Yes</td>
+            <% else %>
+              <td> No</td>
+            <% end %>
+
+        </tr>
         <% end %>
       <% end %>
     </tbody>
