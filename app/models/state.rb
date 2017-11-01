@@ -86,7 +86,7 @@ class State < ApplicationRecord
   end
 
   def self.decide_appointed
-    self.all.each {|s| s.decide_appointed_appointed_or_not }
+    self.all.each {|s| s.decide_appointed_or_not }
   end
 
   def decide_licensed_or_not
