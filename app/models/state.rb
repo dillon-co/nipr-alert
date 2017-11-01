@@ -78,7 +78,7 @@ class State < ApplicationRecord
   end
 
   def decide_appointed_or_not
-    if self.salesman.jit_states.include?(self.name)
+    if self.jit_states.include?(self.name) && self.licensed == true
       self.update(appointed: true)
     else
       appointments.all.each do |a|
@@ -86,7 +86,7 @@ class State < ApplicationRecord
           self.update(appointed: true)
         end
       end
-    end  
+    end
   end
 
   def self.decide_appointed
@@ -104,6 +104,44 @@ class State < ApplicationRecord
       end
     end
   end
+
+  def jit_states
+    ["AK",
+      "AR",
+      "CA",
+      "CT",
+      "DE",
+      "DC",
+      "FL",
+      "GA",
+      "HI",
+      "ID",
+      "IA",
+      "KS",
+      "ME",
+      "MD",
+      "MA",
+      "MI",
+      "MN",
+      "MS",
+      "MO",
+      "NE",
+      "NV",
+      "NH",
+      "NJ",
+      "NM",
+      "NY",
+      "NC",
+      "ND",
+      "OK",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "VA",
+      "WV",
+      "WY"]
+    end
 end
 
 
