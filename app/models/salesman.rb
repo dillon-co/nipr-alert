@@ -720,11 +720,7 @@ class Salesman < ApplicationRecord
     end
   end
 
-  def self.get_needed_company_appointment_names
-    xl = Roo::Spreadsheet.open("#{Rails.root}/Client_Appointing_Names.xlsx")
-    sheet = xl.sheet(1).to_a
-    binding.pry
-  end
+
 
   def companies_needed
     ["Aetna Life Ins Company",
