@@ -32,7 +32,7 @@ class SalesmenController < ApplicationController
 
     @check_or_naw = @salesman.array_of_states_needed#@needed_states - @can_sell_states
     @licensed_states = @salesman.states.includes(:licenses).all.map do |s|
-      if s.licenses.last.present? && s.licenses.date_expire_license.present?
+      if s.licenses.last.present? && s.licenses.last.date_expire_license.present?
         unless s.licenses.last.date_expire_license < Date.today
           s
         end
