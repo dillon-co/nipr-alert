@@ -78,13 +78,12 @@ class State < ApplicationRecord
   end
 
   def decide_appointed_or_not
-      if self.jit_states.include?(self.name) && self.licensed == true
-        self.update(appointed: true)
-      else
-        appointments.all.each do |a|
-          if a.status == "Appointed" && companies_needed.include?(a.company_name)
-            self.update(appointed: true)
-          end
+    if self.jit_states.include?(self.name) && self.licensed == true
+      self.update(appointed: true)
+    else
+      appointments.all.each do |a|
+        if a.status == "Appointed" && companies_needed.include?(a.company_name)
+          self.update(appointed: true)
         end
       end
     end
