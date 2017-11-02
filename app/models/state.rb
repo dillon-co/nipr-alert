@@ -78,7 +78,7 @@ class State < ApplicationRecord
   end
 
   def decide_appointed_or_not
-    unless self.date_expire_license < Date.today
+    unless !(self.date_expire_license.present?) && self.date_expire_license < Date.today
       if self.jit_states.include?(self.name) && self.licensed == true
         self.update(appointed: true)
       else
@@ -99,7 +99,7 @@ class State < ApplicationRecord
   end
 
   def decide_licensed_or_not
-    unless self.date_expire_license < Date.today
+    unless !(self.date_expire_license.present?) && self.date_expire_license < Date.today
       if licenses.last.present?
         if licenses.last.date_expire_license.present?
           if licenses.last.date_expire_license > Date.today
